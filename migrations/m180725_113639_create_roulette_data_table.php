@@ -14,9 +14,9 @@ class m180725_113639_create_roulette_data_table extends Migration
     {
         $this->createTable('roulette_data', [
             'id' => $this->primaryKey(),
-            'roulette_id' => $this->integer(),
+            'roulette_id' => $this->integer(11)->notNull(),
             'measurement' => $this->integer(),
-            'date' => $this->date(),
+            'date' => $this->date()->notNull(),
         ]);
     }
 

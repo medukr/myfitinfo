@@ -14,10 +14,10 @@ class m180725_113247_create_disciplines_table extends Migration
     {
         $this->createTable('disciplines', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(),
+            'name' => $this->string(64)->notNull(),
             'description' => $this->text(),
             'image' => $this->string(),
-            'user_id' => $this->integer(6)
+            'user_id' => $this->integer(11)->notNull(),
         ]);
     }
 

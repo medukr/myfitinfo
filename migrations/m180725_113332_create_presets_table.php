@@ -14,10 +14,10 @@ class m180725_113332_create_presets_table extends Migration
     {
         $this->createTable('presets', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(),
-            'user_id' => $this->integer(6),
-            'create_at' => $this->timestamp(),
-            'update_at' => $this->timestamp()
+            'name' => $this->string(64)->notNull(),
+            'user_id' => $this->integer(11)->notNull(),
+            'create_at' => $this->dateTime()->notNull(),
+            'update_at' => $this->dateTime(),
         ]);
     }
 

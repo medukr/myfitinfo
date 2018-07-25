@@ -14,13 +14,13 @@ class m180725_111603_create_users_table extends Migration
     {
         $this->createTable('users', [
             'id' => $this->primaryKey(),
-            'email' => $this->string(),
-            'user_name' => $this->string(),
-            'password' => $this->string(),
+            'email' => $this->string()->notNull()->unique(),
+            'user_name' => $this->string(64)->unique(),
+            'password' => $this->string()->notNull(),
             'auth_key' => $this->string(),
-            'is_admin' => $this->integer(1),
-            'create_at' => $this->timestamp(),
-            'update_at' => $this->timestamp()
+            'is_admin' => $this->smallInteger(),
+            'create_at' => $this->dateTime()->notNull(),
+            'update_at' => $this->dateTime(),
         ]);
     }
 

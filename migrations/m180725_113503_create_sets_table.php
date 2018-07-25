@@ -14,9 +14,9 @@ class m180725_113503_create_sets_table extends Migration
     {
         $this->createTable('sets', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->integer(6),
-            'name' => $this->string(),
-            'date' => $this->date(),
+            'user_id' => $this->integer(11)->notNull(),
+            'name' => $this->string(64)->notNull(),
+            'date' => $this->dateTime()->notNull(),
         ]);
     }
 

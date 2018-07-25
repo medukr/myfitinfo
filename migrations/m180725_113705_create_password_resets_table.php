@@ -15,7 +15,7 @@ class m180725_113705_create_password_resets_table extends Migration
         $this->createTable('password_resets', [
             'id' => $this->primaryKey(),
             'email' => $this->string(),
-            'token' => $this->string()
+            'token' => $this->string(),
         ]);
     }
 

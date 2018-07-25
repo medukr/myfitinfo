@@ -14,10 +14,10 @@ class m180725_113529_create_working_table extends Migration
     {
         $this->createTable('working', [
             'id' => $this->primaryKey(),
-            'discipline_id' => $this->integer(),
-            'user_id' => $this->integer(6),
-            'set_id' => $this->integer(),
-            'date' => $this->date(),
+            'discipline_id' => $this->integer(11)->notNull(),
+            'user_id' => $this->integer(11)->notNull(),
+            'set_id' => $this->integer(11)->notNull(),
+            'date' => $this->date()->notNull(),
         ]);
     }
 

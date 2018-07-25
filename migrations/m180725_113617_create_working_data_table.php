@@ -14,7 +14,7 @@ class m180725_113617_create_working_data_table extends Migration
     {
         $this->createTable('working_data', [
             'id' => $this->primaryKey(),
-            'working_id' => $this->integer(),
+            'working_id' => $this->integer(11)->notNull(),
             'weight' => $this->integer(),
             'iteration' => $this->integer(),
         ]);

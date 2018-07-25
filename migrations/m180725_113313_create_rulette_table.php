@@ -14,8 +14,8 @@ class m180725_113313_create_rulette_table extends Migration
     {
         $this->createTable('rulette', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->integer(6),
-            'name' => $this->string()
+            'user_id' => $this->integer(11)->notNull(),
+            'name' => $this->string(64)->notNull(),
         ]);
     }
 
