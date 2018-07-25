@@ -34,3 +34,6 @@ tests/_support/_generated
 
 #шаблон
 /html
+
+#images
+/web/images/*

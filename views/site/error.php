@@ -9,12 +9,12 @@ use yii\helpers\Html;
 
 $this->title = $name;
 ?>
-<div class="site-error">
+<!--<div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?/*= Html::encode($this->title) */?></h1>
 
     <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+        <?/*= nl2br(Html::encode($message)) */?>
     </div>
 
     <p>
@@ -24,4 +24,16 @@ $this->title = $name;
         Please contact us if you think this is a server error. Thank you.
     </p>
 
+</div>-->
+<div class="error container">
+    <div class="error__content">
+        <h2><?= Html::encode($this->title) ?></h2>
+        <h3>Something went wrong!</h3>
+        <p><?= nl2br(Html::encode($message)) ?></p>
+        <button type="button" class="btn btn-accent btn-pill">&larr; Go Back</button>
+    </div>
+    <!-- / .error_content -->
 </div>
+<!-- / .error -->
+
+
