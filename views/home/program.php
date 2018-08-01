@@ -8,6 +8,7 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 
@@ -54,7 +55,7 @@ use yii\helpers\Html;
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?php $form = ActiveForm::begin(['action' => '/set/add-preset', 'method' => 'post']); ?>
+            <?php $form = ActiveForm::begin(['action' => Url::to('/preset/add'), 'method' => 'post']); ?>
             <div class="modal-body">
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             </div>

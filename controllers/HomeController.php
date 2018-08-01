@@ -3,36 +3,10 @@
 namespace app\controllers;
 
 use app\models\Disciplines;
-use app\models\LoginForm;
 use app\models\Presets;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use Yii;
 
-class HomeController extends \yii\web\Controller
+class HomeController extends AppController
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
 
     public function actionIndex()
     {

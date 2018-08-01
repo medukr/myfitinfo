@@ -47,4 +47,19 @@ class Sets extends \yii\db\ActiveRecord
             'date' => 'Date',
         ];
     }
+
+
+    public function getWorking()
+    {
+        return $this->hasMany(Working::className(), ['set_id' => 'id']);
+    }
+
+
+    public static function findWhereIdAndUser($id)
+    {
+        return self::find()
+            ->where(['id' => $id])
+            ->andWhere(['user_id' => Yii::$app->user->id])
+            ->one();
+    }
 }

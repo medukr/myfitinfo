@@ -5,6 +5,7 @@
  * Date: 01.08.18
  * Time: 10:58
  */
+use yii\helpers\Url;
 ?>
 
 <?php foreach ($presets as $preset): ?>
@@ -17,7 +18,7 @@
                     </h5>
                     <div class="row ml-auto">
                         <?php if ($preset->user_id === Yii::$app->user->id): ?>
-                        <a href="/set/edit/<?= $preset->id ?>" class="nav-link-icon mr-3 ml-auto"><i class="material-icons">edit</i></a>
+                        <a href="<?= Url::to(['/preset/edit', 'id' => $preset->id]) ?>" class="nav-link-icon mr-3 ml-auto"><i class="material-icons">edit</i></a>
                         <a href="" class="nav-link-icon mr-3 ml-auto delete-preset" data-id="<?= $preset->id ?>"><i class="material-icons">delete</i></a>
                         <?php else: ?>
                         <a href="" class="nav-link-icon mr-3 ml-auto" data-toggle="modal" data-target="#itemInfoModal<?= $preset->id?>" ><i class="material-icons">info</i></a>

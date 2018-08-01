@@ -8,6 +8,7 @@
 
 use \yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 
 <!-- Main Sidebar-->
@@ -62,7 +63,7 @@ use yii\helpers\Html;
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                <?php $form = ActiveForm::begin(['action' => '/set/update-preset-name']); ?>
+                <?php $form = ActiveForm::begin(['action' => Url::to('/preset/update-name')]); ?>
                 <div class="modal-body">
                     <?= $form->field($preset, 'name')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($preset, 'id')->hiddenInput()->label(false) ?>

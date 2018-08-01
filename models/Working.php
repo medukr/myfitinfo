@@ -35,6 +35,21 @@ class Working extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getSet()
+    {
+        return $this->hasOne(Sets::className(), ['id' => 'set_id']);
+    }
+
+    public function getDiscipline()
+    {
+        return $this->hasOne(Disciplines::className(), ['id' => 'discipline_id']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'user_id']);
+    }
+
     /**
      * {@inheritdoc}
      */
