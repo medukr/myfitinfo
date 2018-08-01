@@ -2,8 +2,38 @@
 
 namespace app\controllers;
 
+use app\models\Disciplines;
+use app\models\LoginForm;
+use app\models\Presets;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use Yii;
+
 class HomeController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -11,7 +41,9 @@ class HomeController extends \yii\web\Controller
 
     public function actionStart()
     {
-        return $this->render('start');
+        $presets = Presets::findWhereUserOrAdmin();
+
+        return $this->render('start', compact('presets'));
     }
 
     public function actionChart()
@@ -26,12 +58,21 @@ class HomeController extends \yii\web\Controller
 
     public function actionDiscipline()
     {
-        return $this->render('discipline');
+        $disciplines = Disciplines::findWhereUserOrAdmin();
+
+        return $this->render('discipline', compact('disciplines'));
     }
 
     public function actionProfile()
     {
         return $this->render('profile');
+    }
+
+    public function actionProgram()
+    {
+        $presets = Presets::findWhereUserOrAdmin();
+        $model = new Presets();
+        return $this->render('program', compact('presets', 'model'));
     }
 
 

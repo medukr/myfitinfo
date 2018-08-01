@@ -21,9 +21,11 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Users',
             'enableAutoLogin' => true,
+            'loginUrl' => '/login',
         ],
+
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -49,7 +51,12 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<action:\w+>' => 'home/<action>'
+                '/login' => 'site/login',
+                '/logout' => 'site/logout',
+                '/start/<id:\d+>' => 'set/start',
+                '/set/<action:\w+>' => 'set/<action>',
+                '/set/edit/<id:\d+>' => 'set/edit',
+                '/<action:\w+>' => 'home/<action>',
             ],
         ],
 

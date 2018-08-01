@@ -33,7 +33,7 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="/">
+                <a class="nav-link<?= (Yii::$app->controller->action->id == 'index') ? ' active' : ''?>" href="/">
                     <i class="material-icons">trending_up</i>
                     <span>Статистика</span>
                 </a>
@@ -51,13 +51,19 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link " href="/program">
+                    <i class="material-icons">assignment</i>
+                    <span>Программа</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link " href="/journal">
                     <i class="material-icons">list_alt</i>
                     <span>Журнал</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/discipline">
+                <a class="nav-link" href="/discipline">
                     <i class="material-icons">fitness_center</i>
                     <span>База упражнений</span>
                 </a>

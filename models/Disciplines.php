@@ -37,6 +37,20 @@ class Disciplines extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getImage()
+    {
+        return $this->image ? '/images/discipline/'.$this->image :'/images/no-image.png';
+    }
+
+
+    public static function findWhereUserOrAdmin()
+    {
+        return self::find()
+            ->where(['user_id' => Yii::$app->user->id])
+            ->orWhere(['user_id' => Users::ADMIN_ID ])
+            ->all();
+    }
+
     /**
      * {@inheritdoc}
      */

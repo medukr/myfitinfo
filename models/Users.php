@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "users".
@@ -16,8 +17,11 @@ use Yii;
  * @property string $create_at
  * @property string $update_at
  */
-class Users extends \yii\db\ActiveRecord
+class Users extends \yii\db\ActiveRecord implements IdentityInterface
 {
+
+    const ADMIN_ID = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -45,6 +49,55 @@ class Users extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+//        foreach (self::$users as $user) {
+//            if ($user['accessToken'] === $token) {
+//                return new static($user);
+//            }
+//        }
+//
+//        return null;
+    }
+
+    public static function findByUsername($username)
+    {
+        return static::findOne(['user_name' => $username]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->auth_key === $authKey;
+    }
+
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
+    }
+
+
     public function attributeLabels()
     {
         return [

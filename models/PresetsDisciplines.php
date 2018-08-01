@@ -32,6 +32,16 @@ class PresetsDisciplines extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getPresets()
+    {
+        return $this->hasOne(Presets::className(), ['id' => 'preset_id']);
+    }
+
+    public function getDisciplines()
+    {
+        return $this->hasOne(Disciplines::className(), ['id' => 'discipline_id']);
+    }
+
     /**
      * {@inheritdoc}
      */
