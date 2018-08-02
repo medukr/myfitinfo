@@ -30,7 +30,7 @@ $this->title = $name;
         <h2><?= Html::encode($this->title) ?></h2>
         <h3>Something went wrong!</h3>
         <p><?= nl2br(Html::encode($message)) ?></p>
-        <button type="button" class="btn btn-accent btn-pill">&larr; Go Back</button>
+        <a href="/" class="btn btn-accent btn-pill">&larr; Go Home</a>
     </div>
     <!-- / .error_content -->
 </div>

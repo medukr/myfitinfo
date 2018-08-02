@@ -9,14 +9,13 @@
 namespace app\controllers;
 
 
-use app\models\Disciplines;
 use app\models\Presets;
-use app\models\PresetsDisciplines;
 use app\models\Sets;
 use app\models\Working;
 use yii\helpers\Url;
 use Yii;
 use yii\web\HttpException;
+use yii\helpers\Html;
 
 
 class SetController extends AppController
@@ -24,9 +23,10 @@ class SetController extends AppController
 
     public function actionStart($id)
     {
-        $preset_id = Yii::$app->request->get('id');
+        $preset_id = $this->validateId(Yii::$app->request->get('id'));
 
         $preset = Presets::findWhereIdAndUser($preset_id);//находим пресет
+
         if ($preset){
             $set = new Sets(); //формируем по пресету сет
             $set->name = $preset->name;
@@ -44,22 +44,25 @@ class SetController extends AppController
                     }
                 }
 
-                return $this->redirect(Url::to(['/set/view', 'id' => $set->id]));
+                return $this->redirect(Url::to(['/set/training', 'id' => $set->id]));
             }
         }
 
-        throw new HttpException(404, 'The requested Item could not be found.');
+        $this->throwAppException();
     }
 
 
-    public function actionView($id)
+    public function actionTraining($id)
     {
-        $set_id = Yii::$app->request->get('id');
+        $set_id = $this->validateId(Yii::$app->request->get('id'));
 
         $set = Sets::findWhereIdAndUser($set_id);
+        if ($set) return $this->render('view', compact('set'));
 
-        return $this->render('view', compact('set'));
+        $this->throwAppException();
     }
+
+
 
 
 }

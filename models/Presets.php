@@ -78,8 +78,9 @@ class Presets extends ActiveRecord
     public static function findWhereIdAndUser($preset_id)
     {
         return self::find()
-            ->where(['id' => $preset_id])
-            ->andWhere(['user_id' => Yii::$app->user->id])
+            ->where('id = :id', [':id' => (int) $preset_id])
+            ->andWhere(['user_id'  => Yii::$app->user->id])
+            ->limit(1)
             ->one();
     }
 

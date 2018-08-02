@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\models\Disciplines;
 use app\models\Presets;
+use app\models\Sets;
+use Yii;
 
 class HomeController extends AppController
 {
@@ -27,7 +29,9 @@ class HomeController extends AppController
 
     public function actionJournal()
     {
-        return $this->render('journal');
+        $sets = Sets::findWhereUser();
+
+        return $this->render('journal', compact('sets'));
     }
 
     public function actionDiscipline()

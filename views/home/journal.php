@@ -1,0 +1,40 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: andrii
+ * Date: 02.08.18
+ * Time: 10:02
+ */
+use yii\helpers\Url;
+?>
+
+<!-- Main Sidebar-->
+<?= \app\components\MainSidebarWidget::widget() ?>
+<!-- End Main Sidebar-->
+<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+    <?= \app\components\MainNavbarWidget::widget() ?>
+    <div class="main-content-container container-fluid px-4">
+        <!-- Page Header -->
+        <div class="page-header row no-gutters py-4">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Журнал</span>
+                <h3 class="page-title">Журнал занятий</h3>
+            </div>
+        </div>
+        <!-- End Page Header -->
+        <?php foreach ($sets as $set): ?>
+            <div class="row">
+                <div class="col-lg col-sm-12 mb-2">
+                    <a href="<?= Url::to(['set/view', 'id' => $set->id]) ?>" class="card card-small card-post card-post--aside card-post--1">
+                        <div class="card-body d-flex">
+                            <h5 class="card-title">
+                                <span class="text-fiord-blue flex-column d-flex" ><?= $set->name ?></span>
+                            </h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</main>
+

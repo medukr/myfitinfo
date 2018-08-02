@@ -8,6 +8,8 @@
 
 namespace app\controllers;
 
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\HttpException;
 use app\models\Disciplines;
 use app\models\Presets;
@@ -20,44 +22,49 @@ class PresetController extends AppController
 
     public function actionAdd()
     {
+
         if (Yii::$app->request->post()){
             $model = new Presets();
             if ($model->load(Yii::$app->request->post())){
+
+                //нужно ли проводить дополнительную валидацию входных данных при использовании метода load()?
+
                 $model->user_id = Yii::$app->user->id;
                 if ($model->save()){
-                    return $this->redirect("/set/edit/$model->id");
+                    return $this->redirect(Url::to(['/preset/edit', 'id' => $model->id]));
                 }
             }
         }
 
-        return 'Что-то пошло не так';
+        $this->throwAppException();
     }
 
 
 
     public function actionEdit($id)
     {
-        //необходимо проверить входные данные
-        $preset_id = $id;
+
+        $preset_id = $this->validateId(Yii::$app->request->get('id'));
 
         $preset = Presets::findWhereIdAndUser($preset_id);
         if ($preset){
             $disciplines = Disciplines::findWhereUserOrAdmin();
-
             return $this->render('edit', compact('preset', 'disciplines'));
         }
 
-        throw new HttpException(404, 'The requested Item could not be found.');
+        $this->throwAppException();
 
     }
 
 
-
+    /**
+     * @return string
+     */
     public function actionAddItem()
     {
-        //проверить входные данные
-        $preset_id = Yii::$app->request->get('preset_id');
-        $discipline_id = Yii::$app->request->get('discipline_id');
+
+        $preset_id = $this->validateId(Yii::$app->request->get('preset_id'));
+        $discipline_id = $this->validateId(Yii::$app->request->get('discipline_id'));
 
         $preset = Presets::findWhereIdAndUser($preset_id);
 
@@ -73,6 +80,7 @@ class PresetController extends AppController
                 $pres_dis->discipline_id = $discipline_id;
                 $pres_dis->preset_id = $preset->id;
                 $pres_dis->save();
+
                 $preset = Presets::findWhereIdAndUser($preset_id);
             }
 
@@ -80,25 +88,23 @@ class PresetController extends AppController
             return $this->render('presetItemsList', compact('preset'));
         }
 
-        return 'Что-то пошло не так :\'(';
+        $this->throwAppException();
     }
-
-
 
 
     public function actionDeleteItem()
     {
         if (Yii::$app->request->post('discipline_id') && Yii::$app->request->post('preset_id')){
 
-            //необхзодимо проверить вхоодные данные
-            $discipline_id = Yii::$app->request->post('discipline_id');
-            $preset_id = Yii::$app->request->post('preset_id');
+                //необхзодимо проверить вхоодные данные
+            $discipline_id = $this->validateId(Yii::$app->request->post('discipline_id'));
+            $preset_id = $this->validateId(Yii::$app->request->post('preset_id'));
 
             $preset = Presets::findWhereIdAndUser($preset_id);
             if ($preset){
                 $model = PresetsDisciplines::find()
-                    ->where(['discipline_id' => $discipline_id])
-                    ->andWhere(['preset_id' => $preset_id])
+                    ->where('discipline_id = :discipline_id', [':discipline_id' => $discipline_id])
+                    ->andWhere(['preset_id' => $preset->id])
                     ->one();
                 $model->delete();
 
@@ -108,7 +114,7 @@ class PresetController extends AppController
 
         }
 
-        return 'Что-то пошло не так';
+        $this->throwAppException();
 
     }
 
@@ -118,33 +124,29 @@ class PresetController extends AppController
     public function actionUpdateName()
     {
 
-        if (Yii::$app->request->post()) {
+        if (Yii::$app->request->post('Presets')['id']) {
 
-            //необходимо проверить входные данные
-            $preset_id = Yii::$app->request->post('Presets')['id'];
+            $preset_id = $this->validateId(Yii::$app->request->post('Presets')['id']);
 
             $preset = Presets::findWhereIdAndUser($preset_id);
 
             if ($preset) {
                 if ($preset->load(Yii::$app->request->post()) && $preset->save()) {
-                    return $this->redirect("/set/edit/$preset->id");
+                    return $this->redirect(Url::to(['/preset/edit', 'id' => $preset->id]));
                 }
             }
         }
 
-        return 'Что-то пошло не так';
+        $this->throwAppException();
 
     }
-
-
 
 
     public function actionDelete()
     {
         if (Yii::$app->request->post('preset_id')){
 
-            //нужно проверять входящие данные
-            $preset_id = Yii::$app->request->post('preset_id');
+            $preset_id = $this->validateId(Yii::$app->request->post('preset_id'));
 
             $preset = Presets::findWhereIdAndUser($preset_id);
 
@@ -157,12 +159,13 @@ class PresetController extends AppController
                 }
                 $preset->delete();
 
-                $presets = $presets = Presets::findWhereUserOrAdmin();
+                $presets = Presets::findWhereUserOrAdmin();
                 $this->layout = false;
                 return $this->render('presetsList', compact('presets'));
             }
         }
 
-        return 'Что-то пошло не так';
+        $this->throwAppException();
+
     }
 }

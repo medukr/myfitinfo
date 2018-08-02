@@ -11,7 +11,10 @@ namespace app\controllers;
 
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 use yii\web\Controller;
+use Yii;
+use yii\web\HttpException;
 
 class AppController extends Controller
 {
@@ -35,5 +38,24 @@ class AppController extends Controller
                 ],
             ],
         ];
+    }
+
+    public static function isSidebarActive($controller, $action)
+    {
+        return (Yii::$app->controller->id == $controller && Yii::$app->controller->action->id == $action) ? ' active' : '';
+    }
+
+    public function throwAppException()
+    {
+        throw new HttpException(404, 'The requested Item could not be found.');
+    }
+
+    public function validateId($id)
+    {
+        $id = (int) Html::encode(trim($id));
+
+        if ($id >= 2) return $id;
+
+        $this->throwAppException();
     }
 }

@@ -58,8 +58,17 @@ class Sets extends \yii\db\ActiveRecord
     public static function findWhereIdAndUser($id)
     {
         return self::find()
-            ->where(['id' => $id])
+            ->where('id = :id',[':id' => (int) $id ])
             ->andWhere(['user_id' => Yii::$app->user->id])
+            ->limit(1)
             ->one();
+    }
+
+    public static function findWhereUser()
+    {
+        return self::find()
+            ->where(['user_id' => Yii::$app->user->id])
+            ->orderBy(['date' => SORT_DESC])
+            ->all();
     }
 }

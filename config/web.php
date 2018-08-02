@@ -55,7 +55,7 @@ $config = [
                 '/logout' => 'site/logout',
                 '/start/<id:\d+>' => 'set/start',
                 '/preset/edit/<id:\d+>' => 'preset/edit',
-                '/training/<id:\d+>' => 'set/view',
+                '/training/<id:\d+>' => 'set/training',
                 '/set/<action:\w+>' => 'set/<action>',
                 '/<action:\w+>' => 'home/<action>',
             ],
