@@ -23,42 +23,27 @@
         <!-- Small Stats Blocks -->
         <?php foreach ($disciplines as $discipline): ?>
         <div class="row">
-            <div class="col-lg col-sm-12 mb-2">
+            <div class="col-lg col-sm-12 mb-2 p-0">
                 <div class="card card-small card-post card-post--aside card-post--1">
                     <div class="card-post__image" style="background-image: url('<?= $discipline->getImage()?>');">
                     </div>
-                    <div class="card-body d-flex">
+                    <div class="card-body d-flex pl-2 pt-2 pb-2">
+                        <div class="col-lg p-0">
                         <h5 class="card-title">
                             <span class="text-fiord-blue flex-column d-flex" ><?= $discipline->name ?></span>
                         </h5>
+                            <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время, что-нибуть, норм смотрится</p>
+                        </div>
+                        <div class="row ml-auto">
                         <a href="" class="nav-link-icon mr-2 ml-auto" data-toggle="modal" data-target="#itemInfoModal<?= $discipline->id?>"><i class="material-icons">info</i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-            <!-- Modal item info-->
-            <div class="modal fade" id="itemInfoModal<?= $discipline->id?>" tabindex="-1" role="dialog" aria-labelledby="itemInfoModal<?= $discipline->id?>Title" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="itemInfoModal<?= $discipline->id?>Title">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <?= $discipline->description?>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end modal item info-->
+        <?= \app\components\ModalDisciplineInfoWidget::widget(compact('discipline')) ?>
         <?php endforeach; ?>
+
 <!--        <div class="row">-->
 <!--            <div class="col-lg col-sm-12 mb-4">-->
 <!--                <div class="card card-small card-post card-post--aside card-post--1">-->

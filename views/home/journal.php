@@ -5,7 +5,6 @@
  * Date: 02.08.18
  * Time: 10:02
  */
-use yii\helpers\Url;
 ?>
 
 <!-- Main Sidebar-->
@@ -22,19 +21,9 @@ use yii\helpers\Url;
             </div>
         </div>
         <!-- End Page Header -->
-        <?php foreach ($sets as $set): ?>
-            <div class="row">
-                <div class="col-lg col-sm-12 mb-2">
-                    <a href="<?= Url::to(['set/view', 'id' => $set->id]) ?>" class="card card-small card-post card-post--aside card-post--1">
-                        <div class="card-body d-flex">
-                            <h5 class="card-title">
-                                <span class="text-fiord-blue flex-column d-flex" ><?= $set->name ?></span>
-                            </h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        <?php endforeach; ?>
+        <div class="sets-list">
+            <?= \app\components\SetsListWidget::widget(['sets' => $sets]) ?>
+        </div>
     </div>
 </main>
 

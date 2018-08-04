@@ -50,6 +50,11 @@ class Working extends \yii\db\ActiveRecord
         return $this->hasOne(Users::className(), ['id' => 'user_id']);
     }
 
+    public function getWorkingData()
+    {
+        return $this->hasMany(WorkingData::className(), ['working_id' => 'id']);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -62,5 +67,19 @@ class Working extends \yii\db\ActiveRecord
             'set_id' => 'Set ID',
             'date' => 'Date',
         ];
+    }
+
+    public static function findWhereIdAndUser($id)
+    {
+        return self::find()
+            ->where('id = :id',[':id' => (int) $id ])
+            ->andWhere(['user_id' => Yii::$app->user->id])
+            ->limit(1)
+            ->one();
+    }
+
+    public function findLastData()
+    {
+        return WorkingData::findLastWhereWorkingId($this->id);
     }
 }

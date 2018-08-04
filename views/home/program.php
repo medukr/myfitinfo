@@ -32,7 +32,7 @@ use yii\helpers\Url;
             <?= \app\components\PresetsListWidget::widget(['presets' => $presets]) ?>
         </div>
         <div class="row">
-            <div class="col-lg col-sm-12 mb-4">
+            <div class="col-lg col-sm-12 mb-4 p-0">
                 <a href="" class="card card-small card-post card-post--aside card-post--1" data-toggle="modal" data-target="#addPresetModal">
                     <div class="card-body d-flex">
                         <h5 class="card-title">

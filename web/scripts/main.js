@@ -91,4 +91,60 @@ $('.delete-preset-item').click(function (e) {
         });
 });
 
+//удалние сета из журнала
+$('.delete-set').click(function (e) {
+
+    e.preventDefault();
+
+    if (!confirm('Are you sure?')) return false;
+
+    let set_id = $(this).data('id');
+
+    $.post('/set/delete', {set_id:set_id})
+        .done( function (data) {
+            alert('Тренировка удалена');
+            $('.sets-list').html(data)
+        })
+        .fail(function () {
+        alert('Error');
+    });
+
+});
+
+//добавление итерации в воркинг
+$('.add-iteration').click(function (e) {
+    e.preventDefault();
+
+    let id = $(this).data('id');
+    let weight = $('#weight-' + id).val();
+    let iteration = $('#iteration-' + id).val();
+
+    $.get('/working/add', {
+        id:id,
+        weight:weight,
+        iteration:iteration
+    }).done(function (data) {
+        $('.working-data-list-' + id).html(data);
+    }).fail(function () {
+        alert('Error');
+    })
+
+});
+
+
+//удаление итерации из воркинга
+$('.delete-iteration').click(function (e) {
+    e.preventDefault();
+
+    let id = $(this).data('id');
+
+    $.post('/working/delete', {
+        id:id
+    }).done(function (data) {
+        $('.working-data-list-' + id).html(data);
+    }).fail(function () {
+        alert('Error');
+    })
+
+});
 

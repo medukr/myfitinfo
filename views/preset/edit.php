@@ -29,12 +29,12 @@ use yii\helpers\Url;
         <div class="row">
             <div class="col-sm-12 col-md-12">
                 <form >
-                    <strong class="text-muted d-block mb-2">Название пресета</strong>
+                    <strong class="text-muted d-block mb-2">Название программы</strong>
                     <div class="row ml-auto">
                         <h3 class="page-title" id="preset-name" data-id="<?= $preset->id ?>"><?= $preset->name ?></h3>
                         <a href="" class="nav-link-icon ml-2" data-toggle="modal" data-target="#editName"><i class="material-icons">edit</i></a>
                     </div>
-                    <strong class="text-muted d-block mb-2">Выбор упражнения</strong>
+                    <strong class="text-muted d-block mb-2">Добавить упражнение</strong>
                     <div class="input-group mb-4">
                         <select id="inputState" class="form-control custom-select-lg choose-discipline">
                             <?php foreach ($disciplines as $discipline): ?>
@@ -42,7 +42,7 @@ use yii\helpers\Url;
                             <?php endforeach; ?>
                         </select>
                         <div class="input-group-append">
-                            <button type="button" id="add-to-preset" class="btn btn-primary mr-2">Добавить</button>
+                            <button type="button" id="add-to-preset" class="btn btn-primary">Добавить</button>
                         </div>
                     </div>
                 </form>

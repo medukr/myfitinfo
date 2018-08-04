@@ -51,15 +51,20 @@ class Sets extends \yii\db\ActiveRecord
 
     public function getWorking()
     {
-        return $this->hasMany(Working::className(), ['set_id' => 'id']);
+        return $this->hasMany(Working::className(), ['set_id' => 'id'])->with('discipline')->with('workingData');
+    }
+
+    public function getWorkingWithoutDiscipline()
+    {
+        return $this->hasMany(Working::className(), ['set_id' => 'id'])->with('workingData');
     }
 
 
     public static function findWhereIdAndUser($id)
     {
         return self::find()
-            ->where('id = :id',[':id' => (int) $id ])
-            ->andWhere(['user_id' => Yii::$app->user->id])
+            ->where('sets.id = :id',[':id' => (int) $id ])
+            ->andWhere(['sets.user_id' => Yii::$app->user->id])
             ->limit(1)
             ->one();
     }
@@ -70,5 +75,21 @@ class Sets extends \yii\db\ActiveRecord
             ->where(['user_id' => Yii::$app->user->id])
             ->orderBy(['date' => SORT_DESC])
             ->all();
+    }
+
+    public static function findLastSet($set)
+    {
+        return self::find()
+            ->where(['name' => $set->name])
+            ->andWhere('date < :date',[':date' => $set->date])
+            ->andWhere(['user_id' => Yii::$app->user->id])
+            ->orderBy(['date' => SORT_DESC])
+            ->limit(1)
+            ->one();
+    }
+
+    public static function findTwoLastWhereIdAndUser()
+    {
+
     }
 }

@@ -9,13 +9,16 @@
 
         <?php foreach ($preset->discipline as $discipline): ?>
             <div class="row" id="discipline-list">
-                <div class="col-lg col-sm-12 mb-2">
+                <div class="col-lg col-sm-12 mb-2 p-0">
                     <div class="card card-small card-post card-post--aside card-post--1">
                         <div class="card-post__image" style="background-image: url('<?= $discipline->getImage()?>');"></div>
-                        <div class="card-body d-flex">
-                            <h5 class="card-title">
-                                <span class="text-fiord-blue flex-column d-flex" ><?= $discipline->name ?></span>
-                            </h5>
+                        <div class="card-body d-flex pl-2 pt-2 pb-2">
+                            <div class="col-lg p-0">
+                                <h5 class="card-title">
+                                    <span class="text-fiord-blue flex-column d-flex" ><?= $discipline->name ?></span>
+                                </h5>
+                                <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время, что-нибуть, норм смотрится</p>
+                            </div>
                             <div class="row ml-auto">
                                 <a href="" class="nav-link-icon mr-3 ml-auto" data-toggle="modal" data-target="#itemInfoModal<?= $discipline->id?>" ><i class="material-icons">info</i></a>
                                 <a href="" class="nav-link-icon mr-3 ml-auto delete-preset-item" data-id="<?= $discipline->id ?>" data-preset-id="<?= $preset->id ?>" ><i class="material-icons">delete</i></a>
@@ -24,6 +27,9 @@
                     </div>
                 </div>
             </div>
+
+
+
             <!-- Modal item info-->
             <div class="modal fade" id="itemInfoModal<?= $discipline->id?>" tabindex="-1" role="dialog" aria-labelledby="itemInfoModal<?= $discipline->id?>Title" aria-hidden="true">
                 <div class="modal-dialog" role="document">

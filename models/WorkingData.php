@@ -45,4 +45,19 @@ class WorkingData extends \yii\db\ActiveRecord
             'iteration' => 'Iteration',
         ];
     }
+
+    public function getWorking()
+    {
+        return $this->hasOne(Working::className(), ['id' => 'working_id']);
+    }
+
+    public static function findLastWhereWorkingId($id)
+    {
+
+        return self::find()
+            ->where(['working_id' => (int) $id])
+            ->orderBy(['id' => SORT_DESC])
+            ->limit(1)
+            ->one();
+    }
 }

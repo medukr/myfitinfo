@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 
+use app\components\SetsListWidget;
 use app\models\Presets;
 use app\models\Sets;
 use app\models\Working;
@@ -57,12 +58,41 @@ class SetController extends AppController
         $set_id = $this->validateId(Yii::$app->request->get('id'));
 
         $set = Sets::findWhereIdAndUser($set_id);
-        if ($set) return $this->render('view', compact('set'));
+        $last_set = Sets::findLastSet($set);
+
+        if ($set)
+        {
+            return $this->render('training', compact('set', 'last_set'));
+        }
 
         $this->throwAppException();
     }
 
 
+    public function actionDelete()
+    {
+        $set_id = $this->validateId(Yii::$app->request->post('set_id'));
 
+        $set = Sets::findWhereIdAndUser($set_id);
+
+        if ($set){
+            if ($set->working){
+                foreach ($set->working as $working){
+                    if ($working->workingData){
+                        foreach ($working->workingData as $working_data){
+                            $working_data->delete();
+                        }
+                    }
+                    $working->delete();
+                }
+            }
+            $set->delete();
+
+            $sets = Sets::findWhereUser();
+
+            return SetsListWidget::widget(['sets'=> $sets]);
+        }
+        $this->throwAppException();
+    }
 
 }

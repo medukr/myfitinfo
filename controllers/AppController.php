@@ -58,4 +58,11 @@ class AppController extends Controller
 
         $this->throwAppException();
     }
+
+    public function validateWorkingData($work_data)
+    {
+        $work_data = (int) Html::encode(trim($work_data));
+
+        return $work_data;
+    }
 }
