@@ -20,10 +20,6 @@
 //     });
 // });
 
-function showCart(cart) {
-    $('#cart .modal-body').html(cart);
-    $('#cart').modal();
-}
 
 
 //Добавление упражнения в программу

@@ -6,6 +6,7 @@
  * Time: 17:03
  */
 use app\controllers\AppController;
+use yii\helpers\Url;
 ?>
 <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
     <div class="main-navbar">
@@ -34,43 +35,43 @@ use app\controllers\AppController;
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link<?= AppController::isSidebarActive('home', 'index')?>" href="/">
+                <a class="nav-link<?= AppController::isSidebarActive('home', 'index')?>" href="<?= Url::home() ?>">
                     <i class="material-icons">trending_up</i>
                     <span>Статистика</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link<?= AppController::isSidebarActive('home', 'start')?>" href="/start">
+                <a class="nav-link<?= AppController::isSidebarActive('home', 'start')?>" href="<?= Url::to(['home/start']) ?>">
                     <i class="material-icons">play_circle_filled</i>
                     <span>Начать тренировку</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link<?= AppController::isSidebarActive('home', 'chart')?>" href="/chart">
+                <a class="nav-link<?= AppController::isSidebarActive('home', 'chart')?>" href="<?= Url::to(['home/chart']) ?>">
                     <i class="material-icons">bar_chart</i>
                     <span>Замеры</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link<?= AppController::isSidebarActive('home', 'program')?>" href="/program">
+                <a class="nav-link<?= AppController::isSidebarActive('home', 'program')?>" href="<?= Url::to(['home/program']) ?>">
                     <i class="material-icons">assignment</i>
                     <span>Программа</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link<?= AppController::isSidebarActive('home', 'journal')?>" href="/journal">
+                <a class="nav-link<?= AppController::isSidebarActive('home', 'journal')?>" href="<?= Url::to(['home/journal']) ?>">
                     <i class="material-icons">list_alt</i>
                     <span>Журнал</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link<?= AppController::isSidebarActive('home', 'discipline')?>" href="/discipline">
+                <a class="nav-link<?= AppController::isSidebarActive('home', 'discipline')?>" href="<?= Url::to('home/discipline') ?>">
                     <i class="material-icons">fitness_center</i>
                     <span>База упражнений</span>
                 </a>
             </li>
             <li class="nav-item<?= AppController::isSidebarActive('home', 'profile')?>">
-                <a class="nav-link " href="/profile">
+                <a class="nav-link " href="<?= Url::to(['home/profile']) ?>">
                     <i class="material-icons">person</i>
                     <span>Профиль</span>
                 </a>

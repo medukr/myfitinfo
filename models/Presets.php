@@ -52,7 +52,8 @@ class Presets extends ActiveRecord
 //            [['name', 'user_id', 'create_at'], 'required'],
             [['user_id'], 'integer'],
             [['create_at', 'update_at'], 'safe'],
-            [['name'], 'string', 'max' => 64],
+            [['name'], 'string', 'max' => 64,],
+            [['name'], 'validateHtmlentities'],
         ];
     }
 
@@ -94,5 +95,10 @@ class Presets extends ActiveRecord
             'create_at' => 'Create At',
             'update_at' => 'Update At',
         ];
+    }
+
+    public function validateHtmlentities($attribute)
+    {
+        return $this->$attribute = htmlentities(trim($this->$attribute, ENT_QUOTES));
     }
 }

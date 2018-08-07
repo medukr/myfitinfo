@@ -42,8 +42,9 @@ class RouletteData extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'roulette_id' => 'Roulette ID',
-            'measurement' => 'Measurement',
+            'measurement' => 'Значение',
             'date' => 'Date',
         ];
     }
+
 }

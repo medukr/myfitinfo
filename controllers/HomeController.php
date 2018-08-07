@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\models\Disciplines;
 use app\models\Presets;
+use app\models\Roulette;
+use app\models\RouletteData;
 use app\models\Sets;
 use Yii;
 
@@ -24,7 +26,13 @@ class HomeController extends AppController
 
     public function actionChart()
     {
-        return $this->render('charts');
+
+        $model = new Roulette();
+        $data_model = new RouletteData();
+
+        $roulettes = Roulette::findWhereUser();
+
+        return $this->render('chart', compact('roulettes','model', 'data_model'));
     }
 
     public function actionJournal()

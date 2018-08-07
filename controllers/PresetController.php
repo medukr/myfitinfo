@@ -27,9 +27,8 @@ class PresetController extends AppController
             $model = new Presets();
             if ($model->load(Yii::$app->request->post())){
 
-                //нужно ли проводить дополнительную валидацию входных данных при использовании метода load()?
-
                 $model->user_id = Yii::$app->user->id;
+
                 if ($model->save()){
                     return $this->redirect(Url::to(['/preset/edit', 'id' => $model->id]));
                 }

@@ -19,8 +19,8 @@ class WorkingController extends AppController
     {
 
         $id = $this->validateId(Yii::$app->request->get('id'));
-        $weight = $this->validateWorkingData(Yii::$app->request->get('weight'));
-        $iteration = $this->validateWorkingData(Yii::$app->request->get('iteration'));
+        $weight = $this->validateIntegerData(Yii::$app->request->get('weight'));
+        $iteration = $this->validateIntegerData(Yii::$app->request->get('iteration'));
 
         $working = Working::findWhereIdAndUser($id);
 

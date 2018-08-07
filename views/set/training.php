@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <?php if ($last_set): ?>
-                        <?php if ($last_set->workingWithoutDiscipline[0]->workingData): ?>
+                        <?php if ($last_set->workingWithoutDiscipline[$k]->workingData): ?>
                         <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
                             <p class="card-text text-muted mb-0">В прошлый раз:</p>
                         </div>

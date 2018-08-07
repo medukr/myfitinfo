@@ -47,7 +47,8 @@ class AppController extends Controller
 
     public function throwAppException()
     {
-        throw new HttpException(404, 'The requested Item could not be found.');
+        throw new HttpException(404, 'Запрашиваемая страница не найдена.');
+
     }
 
     public function validateId($id)
@@ -56,13 +57,16 @@ class AppController extends Controller
 
         if ($id >= 2) return $id;
 
-        $this->throwAppException();
+        return null;
     }
 
-    public function validateWorkingData($work_data)
+    public function validateIntegerData($work_data)
     {
-        $work_data = (int) Html::encode(trim($work_data));
+        return (int) Html::encode(trim($work_data));
+    }
 
-        return $work_data;
+    public function validateInputData($data)
+    {
+        return htmlentities(trim($data), ENT_QUOTES);
     }
 }
