@@ -61,11 +61,13 @@
                     }
                 },
                 scales: {
+
                     xAxes: [{
                         gridLines: false,
                         scaleLabel: false,
                         ticks: {
                             display: false,
+
                         }
                     }],
                     yAxes: [{
@@ -86,7 +88,7 @@
 
         // Generate the small charts
         boSmallStatsDatasets.map(function (el, index) {
-            var chartOptions = boSmallStatsOptions(Math.max.apply(Math, el.data) + 7);
+            var chartOptions = boSmallStatsOptions(Math.max.apply(Math, el.data) + 1);
             var ctx = document.getElementsByClassName('blog-overview-stats-small-' + (index + 1));
             new Chart(ctx, {
                 type: 'line',

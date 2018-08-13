@@ -13,10 +13,9 @@ use app\components\SetsListWidget;
 use app\models\Presets;
 use app\models\Sets;
 use app\models\Working;
+use app\models\WorkingData;
 use yii\helpers\Url;
 use Yii;
-use yii\web\HttpException;
-use yii\helpers\Html;
 
 
 class SetController extends AppController
@@ -35,7 +34,7 @@ class SetController extends AppController
             $set->date = date("Y-m-d H:i:s",time());
             if ($set->save()){
                 foreach ($preset->discipline as $discipline){
-                    $work = new Working(); //формируем про дисциплинам из пресета ворки
+                    $work = new Working(); //формируем по дисциплинам из пресета ворки
                     $work->discipline_id = $discipline->id;
                     $work->user_id = $set->user_id;
                     $work->set_id = $set->id;
@@ -59,10 +58,10 @@ class SetController extends AppController
 
         $set = Sets::findWhereIdAndUser($set_id);
         $last_set = Sets::findLastSet($set);
+        $workingData = new WorkingData();
 
-        if ($set)
-        {
-            return $this->render('training', compact('set', 'last_set'));
+        if ($set){
+            return $this->render('training', compact('set', 'last_set', 'workingData'));
         }
 
         $this->throwAppException();
@@ -71,28 +70,42 @@ class SetController extends AppController
 
     public function actionDelete()
     {
-        $set_id = $this->validateId(Yii::$app->request->post('set_id'));
+        $set = new Sets();
 
-        $set = Sets::findWhereIdAndUser($set_id);
+        if ($set->load(Yii::$app->request->post())){
 
-        if ($set){
-            if ($set->working){
-                foreach ($set->working as $working){
-                    if ($working->workingData){
-                        foreach ($working->workingData as $working_data){
-                            $working_data->delete();
+            $set_id = $this->validateId(Yii::$app->request->post('Sets')['id']);
+
+            $set = Sets::findWhereIdAndUser($set_id);
+
+            if ($set){
+                if ($set->working){
+                    foreach ($set->working as $working){
+                        if ($working->workingData){
+                            foreach ($working->workingData as $working_data){
+                                $working_data->delete();
+                            }
                         }
+
+                        $working->delete();
                     }
-                    $working->delete();
                 }
+
+                $set->delete();
+
+                if (Yii::$app->request->post('submit')){
+                    return $this->redirect(['home/journal']);
+                }
+
+                $sets = Sets::findWhereUser();
+                return SetsListWidget::widget(['sets'=> $sets]);
             }
-            $set->delete();
 
-            $sets = Sets::findWhereUser();
-
-            return SetsListWidget::widget(['sets'=> $sets]);
         }
+
+
         $this->throwAppException();
+
     }
 
 }

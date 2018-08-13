@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use Codeception\Util\Debug;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\HttpException;
@@ -18,7 +19,6 @@ use Yii;
 
 class PresetController extends AppController
 {
-
 
     public function actionAdd()
     {
@@ -40,83 +40,24 @@ class PresetController extends AppController
 
 
 
-    public function actionEdit($id)
+    public function actionEdit()
     {
 
         $preset_id = $this->validateId(Yii::$app->request->get('id'));
 
         $preset = Presets::findWhereIdAndUser($preset_id);
+
         if ($preset){
+
             $disciplines = Disciplines::findWhereUserOrAdmin();
-            return $this->render('edit', compact('preset', 'disciplines'));
+            $preset_discipline = new PresetsDisciplines();
+
+            return $this->render('edit', compact('preset', 'disciplines', 'preset_discipline'));
         }
 
         $this->throwAppException();
 
     }
-
-
-    /**
-     * @return string
-     */
-    public function actionAddItem()
-    {
-
-        $preset_id = $this->validateId(Yii::$app->request->get('preset_id'));
-        $discipline_id = $this->validateId(Yii::$app->request->get('discipline_id'));
-
-        $preset = Presets::findWhereIdAndUser($preset_id);
-
-        if ($preset){
-
-            $count = 0;
-            foreach ($preset->discipline as $discipline) {
-                if ($discipline->id == $discipline_id ) $count++;
-            }
-
-            if ($count == 0){
-                $pres_dis = new PresetsDisciplines();
-                $pres_dis->discipline_id = $discipline_id;
-                $pres_dis->preset_id = $preset->id;
-                $pres_dis->save();
-
-                $preset = Presets::findWhereIdAndUser($preset_id);
-            }
-
-            $this->layout = false;
-            return $this->render('presetItemsList', compact('preset'));
-        }
-
-        $this->throwAppException();
-    }
-
-
-    public function actionDeleteItem()
-    {
-        if (Yii::$app->request->post('discipline_id') && Yii::$app->request->post('preset_id')){
-
-                //необхзодимо проверить вхоодные данные
-            $discipline_id = $this->validateId(Yii::$app->request->post('discipline_id'));
-            $preset_id = $this->validateId(Yii::$app->request->post('preset_id'));
-
-            $preset = Presets::findWhereIdAndUser($preset_id);
-            if ($preset){
-                $model = PresetsDisciplines::find()
-                    ->where('discipline_id = :discipline_id', [':discipline_id' => $discipline_id])
-                    ->andWhere(['preset_id' => $preset->id])
-                    ->one();
-                $model->delete();
-
-                $this->layout = false;
-                return $this->render('presetItemsList', compact('preset'));
-            }
-
-        }
-
-        $this->throwAppException();
-
-    }
-
 
 
 
@@ -141,27 +82,118 @@ class PresetController extends AppController
     }
 
 
-    public function actionDelete()
-    {
-        if (Yii::$app->request->post('preset_id')){
 
-            $preset_id = $this->validateId(Yii::$app->request->post('preset_id'));
+    public function actionAddItem()
+    {
+
+        $preset_discipline = new PresetsDisciplines();
+
+        if ($preset_discipline->load(Yii::$app->request->post())){
+
+            $preset_id = $this->validateId($preset_discipline->preset_id);
 
             $preset = Presets::findWhereIdAndUser($preset_id);
 
             if ($preset){
-                $model = PresetsDisciplines::find()->where(['preset_id' => $preset->id])->all();
-                if ($model) {
+
+                $discipline_id = $this->validateId($preset_discipline->discipline_id);
+
+                $model = PresetsDisciplines::find()
+                    ->where(['discipline_id' => $discipline_id])
+                    ->andWhere(['preset_id' => $preset->id])
+                    ->one();
+
+                if ($model === null && $preset_discipline->save()){
+                    $preset = Presets::findWhereIdAndUser($preset->id);
+                }
+
+                if (Yii::$app->request->post('submit')){
+                    return $this->redirect(['preset/edit', 'id' => $preset->id]);
+                }
+
+                $this->layout = false;
+                return $this->render('presetItemsList', compact('preset'));
+            }
+
+        }
+
+        $this->throwAppException();
+    }
+
+
+
+    public function actionDeleteItem()
+    {
+        $preset_discipline = new PresetsDisciplines();
+
+        if ($preset_discipline->load(Yii::$app->request->post())){
+
+            $preset_id = $this->validateId($preset_discipline->preset_id);
+
+            $preset = Presets::findWhereIdAndUser($preset_id);
+
+            if ($preset){
+
+                $discipline_id = $this->validateId($preset_discipline->discipline_id);
+
+                $model = PresetsDisciplines::find()
+                    ->where(['discipline_id' => $discipline_id])
+                    ->andWhere(['preset_id' => $preset->id])
+                    ->one();
+
+                if ($model){
+                    $model->delete();
+                }
+
+                if (Yii::$app->request->post('submit')){
+                    return $this->redirect(['preset/edit', 'id' => $preset->id]);
+                }
+
+                $this->layout = false;
+                return $this->render('presetItemsList', compact('preset'));
+
+            }
+        }
+
+        $this->throwAppException();
+
+    }
+
+
+
+    public function actionDelete()
+    {
+        $preset = new Presets();
+
+        if ($preset->load(Yii::$app->request->post())){
+
+            $preset_id = $this->validateId(Yii::$app->request->post('Presets')['id']);
+
+            $preset = Presets::findWhereIdAndUser($preset_id);
+
+            if ($preset){
+                $model = PresetsDisciplines::find()
+                    ->where(['preset_id' => $preset->id])
+                    ->all();
+
+                if ($model){
                     foreach ($model as $item) {
                         $item->delete();
                     }
                 }
-                $preset->delete();
 
-                $presets = Presets::findWhereUserOrAdmin();
-                $this->layout = false;
-                return $this->render('presetsList', compact('presets'));
+                if ($preset->delete()){
+                    $presets = Presets::findWhereUserOrAdmin();
+
+                    if (Yii::$app->request->post('submit')){
+                        return $this->redirect(['home/program']);
+                    }
+
+                    $this->layout = false;
+                    return $this->render('presetsList', compact('presets'));
+                }
             }
+
         }
 
         $this->throwAppException();

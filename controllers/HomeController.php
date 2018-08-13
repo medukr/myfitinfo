@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Disciplines;
 use app\models\Presets;
+use app\models\Profiles;
 use app\models\Roulette;
 use app\models\RouletteData;
 use app\models\Sets;
@@ -47,11 +48,6 @@ class HomeController extends AppController
         $disciplines = Disciplines::findWhereUserOrAdmin();
 
         return $this->render('discipline', compact('disciplines'));
-    }
-
-    public function actionProfile()
-    {
-        return $this->render('profile');
     }
 
     public function actionProgram()

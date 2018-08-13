@@ -11,7 +11,7 @@ use Yii;
  * @property string $email
  * @property string $token
  */
-class PasswordResets extends \yii\db\ActiveRecord
+class PasswordResets extends AppModel
 {
     /**
      * {@inheritdoc}

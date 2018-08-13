@@ -23,6 +23,13 @@ use yii\helpers\Url;
         </button>
         <i class="fa fa-info mx-2"></i>
         <strong><?php echo Yii::$app->session->getFlash('success');?></strong>
+
+        <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <i class="fa fa-check mx-2"></i>
+            <strong>Success!</strong> Your profile has been updated! </div>
     </div>
     <?php endif; ?>
     <div class="main-content-container container-fluid px-4">
@@ -37,8 +44,8 @@ use yii\helpers\Url;
         <?php if ($roulettes): ?>
         <?php $i = 1; ?>
             <?php foreach ($roulettes as $roulette): ?>
-                <div class="row">
-                    <div class="col-lg col-md-6 col-sm-6 mb-2 pl-1 pr-1">
+                <div class="row" >
+                    <div class="col-lg-6 col-md-6 col-sm-6 mb-2 pl-1 pr-1">
                         <div class="stats-small stats-small--1 card card-small">
                             <div class="card-body p-0 d-flex">
                                 <a href="<?= Url::to(['roulette/view', 'id' => $roulette->id]) ?>" class="d-flex flex-column m-auto">
@@ -50,9 +57,7 @@ use yii\helpers\Url;
                                         <?= $roulette->getDifferenceOfLast() ?>
                                     </div>
                                 </a>
-
-                                <canvas height="150" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
-
+                                <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
                                 <div class="row m-2">
                                     <a href="" class="nav-link-icon" data-toggle="modal" data-target="#addRouletteDataModal-<?= $roulette->id ?>"><i class="material-icons">edit</i></a>
                                 </div>
@@ -76,8 +81,11 @@ use yii\helpers\Url;
                                 <?= $form->field($roulette, 'id')->hiddenInput()->label(false) ?>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <?= Html::submitButton('Save', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                <?= Html::submitButton('Добавить',
+                                    [
+                                            'class' => 'btn btn-primary',
+                                    ]) ?>
                             </div>
                             <?php ActiveForm::end(); ?>
                         </div>
@@ -107,18 +115,21 @@ use yii\helpers\Url;
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Дабавить измерения</h5>
+                <h5 class="modal-title" id="addChartModalTitle">Дабавить измерение</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?php $form = ActiveForm::begin(['action' => Url::to('/roulette/add'), 'method' => 'post']); ?>
+            <?php $form = ActiveForm::begin(['action' => Url::to(['/roulette/add']), 'method' => 'post']); ?>
             <div class="modal-body">
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <?= Html::submitButton('Save', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <?= Html::submitButton('Добавить',
+                    [
+                            'class' => 'btn btn-primary'
+                    ]) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

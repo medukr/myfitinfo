@@ -5,6 +5,11 @@
  * Date: 01.08.18
  * Time: 17:03
  */
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+
 ?>
 <!-- Main Sidebar-->
 <?= \app\components\MainSidebarWidget::widget() ?>
@@ -33,9 +38,16 @@
                                 </h5>
                                 <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время, что-нибуть, норм смотрится</p>
                             </div>
-                            <div class="row ml-auto">
-                                <a href="" class="nav-link-icon mr-0 ml-auto" data-toggle="modal" data-target="#itemInfoModal<?= $working->discipline->id?>"><i class="material-icons">info</i></a>
-                            </div>
+                            <form>
+                                <div class="row ml-auto">
+                                    <?= Html::button('<i class="material-icons">info</i>',
+                                        [
+                                            'class' => 'nav-link-icon mr-0 mb-2 p-1 ml-auto btn',
+                                            'data-toggle' => 'modal',
+                                            'data-target' => '#itemInfoModal' . $working->discipline->id,
+                                        ]) ?>
+                                </div>
+                            </form>
                         </div>
                         <?php if ($last_set): ?>
                         <?php if ($last_set->workingWithoutDiscipline[$k]->workingData): ?>
@@ -55,29 +67,62 @@
                         </div>
                         <?php endif; ?>
                         <?php endif; ?>
+                        <?php $formAdd = ActiveForm::begin(['action' => Url::to(['working/add']), 'method' => 'post']) ?><?php ActiveForm::end() ?>
+                        <?php $formDelete = ActiveForm::begin(['action' => Url::to(['working/delete']), 'method' => 'delete']) ?><?php ActiveForm::end() ?>
                         <div class="card-footer border-top d-flex pl-2 pt-2 pb-2">
                             <div class="d-flex working-data-list-<?= $working->id ?>">
                                 <?= \app\components\WorkingDataListWidget::widget(compact('working')) ?>
                             </div>
                             <div class="form-group mb-1 ml-2">
-                                <select id="weight-<?= $working->id ?>" class="form-control custom-select-lg">
-                                    <option selected>0</option>
-                                    <?php for ($i = 1; $i <= 150; $i++): ?>
-                                    <option value="<?= $i ?>"><?= $i ?></option>
-                                    <?php endfor; ?>
-                                </select>
+                                <?= Html::hiddenInput('Working[id]', $working->id,
+                                    [
+                                        'form' => $formDelete->id
+                                    ]) ?>
+                                <?= Html::hiddenInput('WorkingData[working_id]', $working->id,
+                                    [
+                                        'form' => $formAdd->id
+                                    ]) ?>
+                                <?= Html::dropDownList('WorkingData[weight]',
+                                    0,
+                                    range(0, 350),
+                                    [
+                                        'class' => 'form-control custom-select-lg',
+                                        'form' => $formAdd->id
+                                    ]) ?>
                                 <hr style="width: 90%; color: black; height: 1px; margin-top: 0.5em; margin-bottom: 0.5em; background: black; " >
-                                <select id="iteration-<?= $working->id ?>" class="form-control custom-select-lg">
-                                    <option selected>0</option>
-                                    <?php for ($i = 1; $i <= 150; $i++): ?>
-                                        <option value="<?= $i ?>"><?= $i ?></option>
-                                    <?php endfor; ?>
-                                </select>
+                                <?= Html::dropDownList('WorkingData[iteration]',
+                                    0,
+                                    range(0, 150),
+                                    [
+                                        'class' => 'form-control custom-select-lg',
+                                        'form' => $formAdd->id
+                                    ]) ?>
+                            </div>
+                            <div class="form-group mb-1 ml-2">
+                                <div class="row ml-auto mt-1 mb-0">
+                                    <span class="nav-link-icon mr-0 mr-auto"><i class="material-icons">fitness_center</i></span>
+                                </div>
+                                <hr style="width: 0%; color: black; height: 1px; margin-top: 0.5em; margin-bottom: 0.5em; background: black; " >
+                                <div class="row ml-auto mt-2 mb-0">
+                                    <span class="nav-link-icon mr-0 mr-auto" ><i class="material-icons">refresh</i></span>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer p-2 border-top d-flex">
-                            <button type="button" class="btn btn-lg btn-secondary add-iteration" data-id="<?= $working->id ?>">Добавить</button>
-                            <button href="button" class="btn btn-sm mt-3 ml-auto delete-iteration" data-id="<?= $working->id ?>">Удалить послеедний</button>
+                            <?= Html::submitButton('Добавить',
+                                [
+                                    'class' => 'btn btn-lg btn-secondary add-iteration',
+                                    'name' => 'submit',
+                                    'value' => 1,
+                                    'form' => $formAdd->id
+                                ]) ?>
+                            <?= Html::submitButton('Удалить послеедний',
+                                [
+                                    'class' => 'btn btn-sm mt-3 ml-auto delete-iteration',
+                                    'name' => 'submit',
+                                    'value' => 1,
+                                    'form' => $formDelete->id
+                                ]) ?>
                         </div>
                     </div>
                 </div>

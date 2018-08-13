@@ -37,3 +37,6 @@ tests/_support/_generated
 
 #images
 /web/images/*
+
+#uploads
+/web/uploads/*

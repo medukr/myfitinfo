@@ -65,7 +65,7 @@ use yii\helpers\Url;
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link<?= AppController::isSidebarActive('home', 'discipline')?>" href="<?= Url::to('home/discipline') ?>">
+                <a class="nav-link<?= AppController::isSidebarActive('home', 'discipline')?>" href="<?= Url::to(['home/discipline']) ?>">
                     <i class="material-icons">fitness_center</i>
                     <span>База упражнений</span>
                 </a>

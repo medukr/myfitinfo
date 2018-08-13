@@ -12,7 +12,7 @@ use Yii;
  * @property string $name
  * @property string $date
  */
-class Sets extends \yii\db\ActiveRecord
+class Sets extends AppModel
 {
     /**
      * {@inheritdoc}

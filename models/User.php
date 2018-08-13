@@ -17,7 +17,7 @@ use yii\web\IdentityInterface;
  * @property string $create_at
  * @property string $update_at
  */
-class Users extends \yii\db\ActiveRecord implements IdentityInterface
+class User extends AppModel implements IdentityInterface
 {
 
     const ADMIN_ID = 1;
@@ -44,6 +44,12 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
             [['email'], 'unique'],
             [['user_name'], 'unique'],
         ];
+    }
+
+
+    public function getProfile()
+    {
+        return $this->hasOne(Profiles::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -103,8 +109,8 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
         return [
             'id' => 'ID',
             'email' => 'Email',
-            'user_name' => 'User Name',
-            'password' => 'Password',
+            'user_name' => 'Логин',
+            'password' => 'Пароль',
             'auth_key' => 'Auth Key',
             'is_admin' => 'Is Admin',
             'create_at' => 'Create At',

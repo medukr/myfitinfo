@@ -18,6 +18,7 @@ use yii\web\HttpException;
 
 class AppController extends Controller
 {
+
     public function behaviors()
     {
         return [

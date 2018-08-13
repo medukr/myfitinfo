@@ -28,24 +28,44 @@ use yii\helpers\Url;
 
         <div class="row">
             <div class="col-sm-12 col-md-12">
-                <form >
                     <strong class="text-muted d-block mb-2">Название программы</strong>
-                    <div class="row ml-auto">
-                        <h3 class="page-title" id="preset-name" data-id="<?= $preset->id ?>"><?= $preset->name ?></h3>
-                        <a href="" class="nav-link-icon ml-2" data-toggle="modal" data-target="#editName"><i class="material-icons">edit</i></a>
+                    <div class="row ml-auto" id="edit-name">
+                        <?php $form = ActiveForm::begin(['action' => Url::to('/preset/update-name')]); ?>
+                        <?= Html::hiddenInput('Presets[id]', $preset->id) ?>
+                        <div class="input-group">
+                            <?= Html::input('text', 'Presets[name]', $preset->name, ['class' => 'form-control input-lg']) ?>
+                            <div class="input-group-append">
+                                <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary']) ?>
+                            </div>
+                        </div>
+                        <?php ActiveForm::end() ?>
                     </div>
                     <strong class="text-muted d-block mb-2">Добавить упражнение</strong>
+                <?php $form = ActiveForm::begin([
+                        'action' => Url::to(['/preset/add-item']),
+                        'method' => 'post'
+                ]) ?>
                     <div class="input-group mb-4">
-                        <select id="inputState" class="form-control custom-select-lg choose-discipline">
+                        <?= $form->field($preset, 'id')->hiddenInput(['name' => 'PresetsDisciplines[preset_id]'])->label(false) ?>
+                        <select id="inputState" class="form-control custom-select-lg" name="PresetsDisciplines[discipline_id]">
                             <?php foreach ($disciplines as $discipline): ?>
-                                <option value="<?= $discipline->id ?>"><?= $discipline->name ?></option>
+                                <option value="<?= $discipline->id ?>"><?= Html::decode($discipline->name) ?></option>
                             <?php endforeach; ?>
                         </select>
                         <div class="input-group-append">
-                            <button type="button" id="add-to-preset" class="btn btn-primary">Добавить</button>
+                            <?= Html::submitButton('Добавить',
+                                [
+                                    'class' => 'btn btn-primary',
+                                    'name' => 'submit',
+                                    'id' => 'add-to-preset',
+                                    'value' => 1,
+                                    'data-form-id' => $form->id
+                                ]) ?>
                         </div>
+
+
                     </div>
-                </form>
+                <?php ActiveForm::end() ?>
             </div>
         </div>
         <div id="preset-items">
@@ -58,7 +78,7 @@ use yii\helpers\Url;
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="itemInfoModal<?= $discipline->id?>Title">Изменить назваине</h5>
+                <h5 class="modal-title" id="editNameTitle">Изменить назваине</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -69,8 +89,8 @@ use yii\helpers\Url;
                     <?= $form->field($preset, 'id')->hiddenInput()->label(false) ?>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <?= Html::submitButton('Save', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
+                    <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Отмена</button>
+                    <?= Html::submitButton('Изменить', ['class' => 'btn btn-lg btn-primary']) ?>
                 </div>
             <?php ActiveForm::end(); ?>
         </div>

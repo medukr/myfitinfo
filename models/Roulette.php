@@ -14,7 +14,7 @@ use yii\base\ViewRenderer;
  * @property string $name
  * @property object|array $rouletteData
  */
-class Roulette extends \yii\db\ActiveRecord
+class Roulette extends AppModel
 {
     /**
      * {@inheritdoc}

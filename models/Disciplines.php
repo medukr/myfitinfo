@@ -13,7 +13,7 @@ use Yii;
  * @property string $image
  * @property int $user_id
  */
-class Disciplines extends \yii\db\ActiveRecord
+class Disciplines extends AppModel
 {
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ class Disciplines extends \yii\db\ActiveRecord
     {
         return self::find()
             ->where(['user_id' => Yii::$app->user->id])
-            ->orWhere(['user_id' => Users::ADMIN_ID ])
+            ->orWhere(['user_id' => User::ADMIN_ID ])
             ->all();
     }
 

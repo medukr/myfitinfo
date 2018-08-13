@@ -1,84 +1,84 @@
-// $('div#preset-items').on('click', '#add-to-preset', function (e) {
-//     e.preventDefault();
-//     // var id = $('.id_new_item').val();
-//     // var orderId = $(this).data('order');
-//
-//     $.ajax({
-//         url: "/set/add-preset",
-//         // data: {id:id, orderId:orderId},
-//         type: 'GET',
-//         success: function(res){
-//             if (!res) alert('Error->.add-to-cart->Ajax:success');
-//             // showCart(res);
-//             $('div#preset-items').html(res);
-//
-//         },
-//         error: function () {
-//             alert ('Error->.add-to-cart->Ajax:error');
-//         }
-//
-//     });
-// });
 
+// Замена формы изменения имени кнопкой вызова модального окна
+$(document).ready(function () {
 
+    let name = $("div#edit-name input[name*='Presets[name]']").val()
 
-//Добавление упражнения в программу
-$('#add-to-preset').click(function () {
-    let preset_id = $('#preset-name').data('id');
-    let discipline_id = $('.choose-discipline').val();
+    let html = "<h3 class=\"page-title\">" + name + "</h3><a href=\"\" class=\"nav-link-icon ml-2\" data-toggle=\"modal\" data-target=\"#editName\"><i class=\"material-icons\">edit</i></a>";
 
-    $.ajax({
-        url: "/preset/add-item",
-        data: {preset_id:preset_id, discipline_id:discipline_id},
-        type: 'GET',
-        success: function (res) {
-            if (!res) alert('Error->Ajax:success');
-            $('div#preset-items').html(res);
-        },
-        error: function () {
-            alert('Error->Ajax:error');
-        },
-
-    });
+   $('#edit-name').html(html);
 });
 
+
+
+
+// Добавление упражнения в программу
+$('#add-to-preset').click(function (e) {
+    e.preventDefault();
+
+    let form_id = $(this).data('form-id');
+
+    let _csrf = $("form#" + form_id + " input[name*='_csrf']").val();
+    let preset_id = $("form#" + form_id + " input[name*='PresetsDisciplines[preset_id]']").val();
+    let discipline_id = $("form#" + form_id + " select[name*='PresetsDisciplines[discipline_id]']").val();
+
+    $.post('/preset/add-item', {
+        _csrf:_csrf,
+        "PresetsDisciplines[preset_id]": preset_id,
+        "PresetsDisciplines[discipline_id]": discipline_id,
+
+    }).done(function (data) {
+        $('div#preset-items').html(data);
+    }).fail(function () {
+        alert('Ошибка :(');
+    });
+
+});
+
+
+
+
 //удаление программы
-$('.delete-preset').click(function (e) {
+$('div#presets').on('click', 'button.delete-preset', function (e) {
+    e.preventDefault();
+    if (!confirm('Are you sure?')) return false;
 
-        let preset_id = $(this).data('id');
+    let form_id = $(this).data('form-id');
 
-        if (!confirm('Are you sure?')) return false;
+    let _csrf = $("form#" + form_id + " input[name*='_csrf']").val();
+    let preset_id = $("form#" + form_id + " input[name*='Presets[id]']").val();
 
-        $.post('/preset/delete',
-            {preset_id:preset_id}, function (data) {
-                $('.programs').html(data);
-            })
-            .done(function () {
-                alert('Success!');
-            })
-            .fail(function () {
+        $.post('/preset/delete', {
+            _csrf:_csrf,
+            "Presets[id]": preset_id,
+        }).done(function (data) {
+                $('#presets').html(data);
+        }).fail(function () {
                 alert('Error');
-            });
-        e.preventDefault();
+        });
 
     });
 
 
 
 
-//Удаление упражнения из программы
-// $('div.programs').on('click', '.delete-preset-item', function (e) {
-$('.delete-preset-item').click(function (e) {
-
+// Удаление упражнения из программы
+$('div#preset-items').on('click', 'button.delete-preset-item', function (e) {
     e.preventDefault();
 
-    let discipline_id = $(this).data('id');
-    let preset_id = $(this).data('preset-id');
+    let form_id = $(this).data('form-id');
+
+    let _csrf = $("form#" + form_id + " input[name*='_csrf']").val();
+    let preset_id = $("form#" + form_id + " input[name*='PresetsDisciplines[preset_id]']").val();
+    let discipline_id = $("form#" + form_id + " input[name*='PresetsDisciplines[discipline_id]']").val();
 
     if (!confirm('Are you sure?')) return false;
 
-    $.post('/preset/delete-item',
-        {discipline_id:discipline_id, preset_id:preset_id})
+    $.post('/preset/delete-item', {
+            _csrf: _csrf,
+            "PresetsDisciplines[preset_id]": preset_id,
+            "PresetsDisciplines[discipline_id]": discipline_id
+        })
         .done(function (result) {
             $('div#preset-items').html(result);
         })
@@ -87,40 +87,55 @@ $('.delete-preset-item').click(function (e) {
         });
 });
 
-//удалние сета из журнала
-$('.delete-set').click(function (e) {
 
+
+
+//удалние сета из журнала
+$('div#sets-list').on('click', 'button.delete-set', function (e) {
     e.preventDefault();
 
     if (!confirm('Are you sure?')) return false;
 
-    let set_id = $(this).data('id');
+    let form_id = $(this).data('form-id');
 
-    $.post('/set/delete', {set_id:set_id})
-        .done( function (data) {
-            alert('Тренировка удалена');
-            $('.sets-list').html(data)
-        })
-        .fail(function () {
-        alert('Error');
+    let _csrf = $("form#" + form_id + " input[name*='_csrf']").val();
+    let set_id = $("form#" + form_id + " input[name*='Sets[id]']").val();
+
+    $.post('/set/delete', {
+        _csrf: _csrf,
+        "Sets[id]": set_id,
+        }).done( function (data) {
+            $('div#sets-list').html(data)
+        }).fail(function () {
+            alert('Error');
     });
 
 });
 
-//добавление итерации в воркинг
+
+
+
+// добавление итерации в воркинг
+
 $('.add-iteration').click(function (e) {
     e.preventDefault();
 
-    let id = $(this).data('id');
-    let weight = $('#weight-' + id).val();
-    let iteration = $('#iteration-' + id).val();
+    let form_id = $(this).attr('form');
 
-    $.get('/working/add', {
-        id:id,
-        weight:weight,
-        iteration:iteration
+    let _csrf = $("form#" + form_id + " input[name*='_csrf']").val();
+
+    let working_id = $("input[name*='WorkingData[working_id]'][form*='" + form_id + "']").val();
+    let weight = $("select[name*='WorkingData[weight]'][form*='" + form_id + "']").val();
+    let iteration = $("select[name*='WorkingData[iteration]'][form*='" + form_id + "']").val();
+
+
+    $.post('/working/add', {
+        _csrf: _csrf,
+        "WorkingData[working_id]": working_id,
+        "WorkingData[weight]": weight,
+        "WorkingData[iteration]": iteration,
     }).done(function (data) {
-        $('.working-data-list-' + id).html(data);
+        $('.working-data-list-' + working_id).html(data);
     }).fail(function () {
         alert('Error');
     })
@@ -128,16 +143,23 @@ $('.add-iteration').click(function (e) {
 });
 
 
+
+
 //удаление итерации из воркинга
 $('.delete-iteration').click(function (e) {
     e.preventDefault();
+    e.preventDefault();
 
-    let id = $(this).data('id');
+    let form_id = $(this).attr('form');
+
+    let _csrf = $("form#" + form_id + " input[name*='_csrf']").val();
+    let working_id = $("input[name*='Working[id]'][form*='" + form_id + "']").val();
 
     $.post('/working/delete', {
-        id:id
+        _csrf: _csrf,
+        "Working[id]": working_id,
     }).done(function (data) {
-        $('.working-data-list-' + id).html(data);
+        $('.working-data-list-' + working_id).html(data);
     }).fail(function () {
         alert('Error');
     })

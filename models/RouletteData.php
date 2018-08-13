@@ -12,7 +12,7 @@ use Yii;
  * @property int $measurement
  * @property string $date
  */
-class RouletteData extends \yii\db\ActiveRecord
+class RouletteData extends AppModel
 {
     /**
      * {@inheritdoc}

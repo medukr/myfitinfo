@@ -9,12 +9,12 @@
 <?php ?>
 <script>
     function randColor(){
-        return Math.round(Math.random() * 240);
+        return Math.round(Math.random() * 180);
     }
     let boSmallStatsDatasets = [
         <?php foreach ($roulettes as $roulette):?>
         {
-            backgroundColor: 'rgba(' + randColor() + ', ' + randColor() + ', ' + randColor() + ', 0.2)',
+            backgroundColor: 'rgba(' + randColor() + ', ' + randColor() + ', ' + randColor() + ', 0.3)',
             borderColor: 'rgb(' + randColor() + ', ' + randColor() + ', ' + randColor() + ')',
             data: [<?php foreach ($roulette as $data) echo $data . ',';?>],
             labels: [<?php foreach ($roulette as $data) echo $data . ',';?>],

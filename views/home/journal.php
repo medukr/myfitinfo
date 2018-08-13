@@ -21,7 +21,7 @@
             </div>
         </div>
         <!-- End Page Header -->
-        <div class="sets-list">
+        <div id="sets-list">
             <?= \app\components\SetsListWidget::widget(['sets' => $sets]) ?>
         </div>
     </div>

@@ -15,35 +15,40 @@ use Yii;
 
 class WorkingController extends AppController
 {
-    public function actionAdd($id, $weight, $iteration)
+    public function actionAdd()
     {
 
-        $id = $this->validateId(Yii::$app->request->get('id'));
-        $weight = $this->validateIntegerData(Yii::$app->request->get('weight'));
-        $iteration = $this->validateIntegerData(Yii::$app->request->get('iteration'));
+        $working_data = new WorkingData();
 
-        $working = Working::findWhereIdAndUser($id);
+        if ($working_data->load(Yii::$app->request->post())) {
 
-        if ($working){
+            $working = Working::findWhereIdAndUser($working_data->working_id);
 
-            $working_data = new WorkingData();
-            $working_data->working_id = $working->id;
-            $working_data->weight = $weight;
-            $working_data->iteration = $iteration;
+            if ($working) {
+                if ($working_data->save()) {
 
-            if ($working_data->save()){
+                    if (Yii::$app->request->post('submit')) {
+                        return $this->redirect(['set/training', 'id' => $working->set_id]);
+                    }
 
-                return WorkingDataListWidget::widget(['working' => $working]);
+                    return WorkingDataListWidget::widget(['working' => $working]);
+
+                }
             }
         }
+
+        $this->throwAppException();
     }
 
 
     public function actionDelete()
     {
-        if (Yii::$app->request->post('id')) {
 
-            $id = $this->validateId(Yii::$app->request->post('id'));
+        $working = new Working();
+
+        if ($working->load(Yii::$app->request->post())){
+
+            $id = $this->validateId(Yii::$app->request->post('Working')['id']);
 
             $working = Working::findWhereIdAndUser($id);
 
@@ -53,10 +58,17 @@ class WorkingController extends AppController
 
                 if ($working_data && $working_data->delete()) {
 
+                    if (Yii::$app->request->post('submit')){
+                        return $this->redirect(['set/training', 'id' => $working->set_id]);
+                    }
+
                     return WorkingDataListWidget::widget(['working' => $working]);
                 }
             }
+
         }
+
+        $this->throwAppException();
 
     }
 }

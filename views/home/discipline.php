@@ -4,7 +4,9 @@
  * User: andrii
  * Date: 25.07.18
  * Time: 10:39
- */?>
+ */
+use yii\helpers\Html;
+?>
 <!-- Main Sidebar-->
 <?= \app\components\MainSidebarWidget::widget() ?>
 <!-- End Main Sidebar-->
@@ -34,9 +36,16 @@
                         </h5>
                             <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время, что-нибуть, норм смотрится</p>
                         </div>
-                        <div class="row ml-auto">
-                        <a href="" class="nav-link-icon mr-2 ml-auto" data-toggle="modal" data-target="#itemInfoModal<?= $discipline->id?>"><i class="material-icons">info</i></a>
-                        </div>
+                        <form>
+                            <div class="row ml-auto">
+                                <?= Html::button('<i class="material-icons">info</i>',
+                                    [
+                                        'class' => 'nav-link-icon mr-2 mb-2 p-1 ml-auto btn',
+                                        'data-toggle' => 'modal',
+                                        'data-target' => '#itemInfoModal' . $discipline->id,
+                                    ]) ?>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

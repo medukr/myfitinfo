@@ -16,7 +16,7 @@ use yii\db\Expression;
  * @property string $create_at
  * @property string $update_at
  */
-class Presets extends ActiveRecord
+class Presets extends AppModel
 {
     /**
      * {@inheritdoc}
@@ -72,7 +72,7 @@ class Presets extends ActiveRecord
     {
         return self::find()
             ->where(['user_id' => Yii::$app->user->id])
-            ->orWhere(['user_id' => Users::ADMIN_ID ])
+            ->orWhere(['user_id' => User::ADMIN_ID ])
             ->all();
     }
 
@@ -90,15 +90,12 @@ class Presets extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Название',
             'user_id' => 'User ID',
             'create_at' => 'Create At',
             'update_at' => 'Update At',
         ];
     }
 
-    public function validateHtmlentities($attribute)
-    {
-        return $this->$attribute = htmlentities(trim($this->$attribute, ENT_QUOTES));
-    }
+
 }

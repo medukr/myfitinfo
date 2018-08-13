@@ -11,7 +11,7 @@ use Yii;
  * @property int $preset_id
  * @property int $discipline_id
  */
-class PresetsDisciplines extends \yii\db\ActiveRecord
+class PresetsDisciplines extends AppModel
 {
     /**
      * {@inheritdoc}

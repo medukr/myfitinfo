@@ -28,7 +28,7 @@ use yii\helpers\Url;
         </div>
         <!-- End Page Header -->
         <!-- Small Stats Blocks -->
-        <div class="programs">
+        <div id="presets">
             <?= \app\components\PresetsListWidget::widget(['presets' => $presets]) ?>
         </div>
         <div class="row">
@@ -50,18 +50,18 @@ use yii\helpers\Url;
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Назовите новую программу</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?php $form = ActiveForm::begin(['action' => Url::to('/preset/add'), 'method' => 'post']); ?>
+            <?php $form = ActiveForm::begin(['action' => Url::to(['/preset/add']), 'method' => 'post']); ?>
             <div class="modal-body">
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <?= Html::submitButton('Save', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
+                <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Отмена</button>
+                <?= Html::submitButton('Добавить', ['class' => 'btn btn-lg btn-primary']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>
