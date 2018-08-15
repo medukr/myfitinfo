@@ -38,7 +38,7 @@ class Profiles extends AppModel
             [['user_id'], 'required'],
             [['user_id', 'height', 'age'], 'integer'],
             [['name', 'surname'], 'string', 'max' => 64],
-//            [['name', 'surname'], 'validateHtmlentities'],
+            [['name', 'surname'], 'validateHtmlentities'],
             [['image'], 'file', 'extensions' => 'png, jpg'],
             [['user_id'], 'unique'],
         ];

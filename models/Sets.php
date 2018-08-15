@@ -59,6 +59,11 @@ class Sets extends AppModel
         return $this->hasMany(Working::className(), ['set_id' => 'id'])->with('workingData');
     }
 
+    public function getLastWorking()
+    {
+        return;
+    }
+
 
     public static function findWhereIdAndUser($id)
     {
@@ -88,8 +93,26 @@ class Sets extends AppModel
             ->one();
     }
 
-    public static function findTwoLastWhereIdAndUser()
+    public static function findGroupUserSets()
+    {
+        return self::find()
+            ->select(['name', 'max(date) as d'])
+            ->where(['user_id' => Yii::$app->user->id])
+            ->groupBy('name')
+            ->orderBy(['d' => SORT_DESC])
+            ->all();
+    }
+
+
+
+    public function getDate()
     {
 
+        $date = Yii::$app->formatter->asDate($this->date, 'd MMM yyyy, EEEE');
+
+        $relative_time = Yii::$app->formatter->asRelativeTime($this->date);
+
+        return $date . ' | ' . $relative_time;
     }
+
 }

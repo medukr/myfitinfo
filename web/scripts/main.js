@@ -1,15 +1,13 @@
 
 // Замена формы изменения имени кнопкой вызова модального окна
-$(document).ready(function () {
+(function (){
 
     let name = $("div#edit-name input[name*='Presets[name]']").val()
 
     let html = "<h3 class=\"page-title\">" + name + "</h3><a href=\"\" class=\"nav-link-icon ml-2\" data-toggle=\"modal\" data-target=\"#editName\"><i class=\"material-icons\">edit</i></a>";
 
-   $('#edit-name').html(html);
-});
-
-
+    $('#edit-name').html(html);
+}(jQuery));
 
 
 // Добавление упражнения в программу

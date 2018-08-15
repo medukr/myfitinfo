@@ -20,8 +20,7 @@ use yii\widgets\ActiveForm;
                         <h5 class="card-title">
                             <?= $preset->name ?>
                         </h5>
-                        <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время, что-нибуть, норм
-                            смотрится</p>
+                        <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время и т.д.</p>
                     </div>
                         <?php if ($preset->user_id === Yii::$app->user->id): ?>
                             <?php $form = ActiveForm::begin(['action' => Url::to(['/preset/delete']), 'method' => 'delete']) ?>

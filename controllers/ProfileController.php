@@ -10,23 +10,10 @@ namespace app\controllers;
 
 
 use app\models\Profiles;
-use app\models\User;
-use yii\filters\VerbFilter;
 use Yii;
 
 class ProfileController extends AppController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     public function actionUpdate()
     {
@@ -38,6 +25,7 @@ class ProfileController extends AppController
 
             if ($profile->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
                 if ($profile->updateProfile() && $user->save()) {
+                    Yii::$app->session->setFlash('success', 'Профиль успешно обновлен :)');
                     return $this->refresh();
                 }
             }

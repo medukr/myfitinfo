@@ -57,8 +57,9 @@ class AppAsset extends AssetBundle
 
             if (Yii::$app->controller->action->id == 'index' ) {
                 $this->js[] = "scripts/shards.min.js";
-                $this->js[] = "scripts/app/app-blog-overview.1.0.0.js";
-                $this->js[] = "scripts/app/app-components-overview.1.0.0.js";
+                $this->js[] = "scripts/chart/small-stats.js";
+//                $this->js[] = "scripts/app/app-blog-overview.1.0.0.js";
+//                $this->js[] = "scripts/app/app-components-overview.1.0.0.js";
             }
 
             if (Yii::$app->controller->action->id == 'chart'){

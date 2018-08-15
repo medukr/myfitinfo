@@ -16,11 +16,11 @@ use yii\widgets\ActiveForm;
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
     <?= \app\components\MainNavbarWidget::widget() ?>
     <?php if(Yii::$app->session->hasFlash('success')): ?>
-        <div class="alert alert-accent alert-dismissible fade show mb-0" role="alert">
+        <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
-            <i class="fa fa-info mx-2"></i>
+            <i class="fa fa-check mx-2"></i>
             <strong><?php echo Yii::$app->session->getFlash('success');?></strong>
         </div>
     <?php endif; ?>
@@ -42,6 +42,7 @@ use yii\widgets\ActiveForm;
                         <h4 class="mb-0"><?= ucfirst($profile->name) ?></h4>
                         <span class="text-muted d-block mb-2"><?= $profile->age ?> см</span>
                     </div>
+                    <div class="card-footer"></div>
                 </div>
             </div>
             <div class="col-lg-8 p-1">

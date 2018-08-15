@@ -71,7 +71,7 @@ use yii\helpers\Url;
                 </a>
             </li>
             <li class="nav-item<?= AppController::isSidebarActive('home', 'profile')?>">
-                <a class="nav-link " href="<?= Url::to(['home/profile']) ?>">
+                <a class="nav-link " href="<?= Url::to(['profile/update']) ?>">
                     <i class="material-icons">person</i>
                     <span>Профиль</span>
                 </a>

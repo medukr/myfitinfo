@@ -2,11 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: andrii
- * Date: 06.08.18
- * Time: 12:00
- */
-?>
-
+ * Date: 14.08.18
+ * Time: 14:58
+ */?>
 <!-- Main Sidebar-->
 <?= \app\components\MainSidebarWidget::widget() ?>
 <!-- End Main Sidebar-->
@@ -16,11 +14,13 @@
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">Мои измерения</span>
-                <h3 class="page-title"><?= $roulette->name ?></h3>
+                <span class="text-uppercase page-subtitle">Статистика</span>
+                <h3 class="page-title">Моя Статистика</h3>
             </div>
         </div>
         <!-- End Page Header -->
-        <h3>Более детальный график, но пожже (:</h3>
+        <?php foreach ($sets as $set): ?>
+
+        <?php endforeach; ?>
     </div>
 </main>

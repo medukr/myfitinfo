@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
                 <div class="card-body d-flex pl-2 pt-2 pb-2">
                     <div class="col-lg p-0">
                         <h5 class="card-title"><?= Html::decode($set->name) ?></h5>
-                        <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время, что-нибуть, норм смотрится</p>
+                        <p class="card-text text-muted mb-0"><?= $set->getDate() ?></p>
                     </div>
                     <?php $form = ActiveForm::begin(['action' => Url::to(['set/delete']), 'method' => 'delete']) ?>
                     <?= Html::hiddenInput('Sets[id]', $set->id) ?>

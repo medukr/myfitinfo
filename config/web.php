@@ -14,6 +14,13 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'defaultRoute' => 'home/index',
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\AdminModule',
+            'layout' => 'admin',
+            'defaultRoute' => 'default/index',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -26,6 +33,11 @@ $config = [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
             'loginUrl' => '/login',
+        ],
+
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'locale' => 'ru-RU',
         ],
 
         'errorHandler' => [
@@ -61,7 +73,8 @@ $config = [
                 '/program/<id:\d+>' => 'preset/edit',
                 '/chart/<id:\d+>' => 'roulette/view',
                 '/profile' => 'profile/update',
-                '/<action:\w+>' => 'home/<action>',
+                '/stats/<name:(\w+\s?)+>' => 'stats/view',
+                '/<action:index|start|chart|program|journal|discipline?>' => 'home/<action>',
             ],
         ],
 

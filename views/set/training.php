@@ -36,7 +36,7 @@ use yii\widgets\ActiveForm;
                                 <h5 class="card-title">
                                     <span class="text-fiord-blue flex-column d-flex" ><?= $working->discipline->name ?></span>
                                 </h5>
-                                <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время, что-нибуть, норм смотрится</p>
+                                <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время и т.д</p>
                             </div>
                             <form>
                                 <div class="row ml-auto">
@@ -51,6 +51,11 @@ use yii\widgets\ActiveForm;
                         </div>
                         <?php if ($last_set): ?>
                         <?php if ($last_set->workingWithoutDiscipline[$k]->workingData): ?>
+                                <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
+                                    <p class="card-text text-muted mb-0">Может сюда еще график запилить?</p>
+                                    <p class="card-text text-muted mb-0">График последних 15 выполненых таких упражнений</p>
+
+                                </div>
                         <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
                             <p class="card-text text-muted mb-0">В прошлый раз:</p>
                         </div>

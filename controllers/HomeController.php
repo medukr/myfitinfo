@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use app\models\Disciplines;
 use app\models\Presets;
-use app\models\Profiles;
 use app\models\Roulette;
 use app\models\RouletteData;
 use app\models\Sets;
@@ -15,8 +14,12 @@ class HomeController extends AppController
 
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $sets = Sets::findGroupUserSets();
+
+        return $this->render('index', compact('sets'));
     }
+
 
     public function actionStart()
     {
