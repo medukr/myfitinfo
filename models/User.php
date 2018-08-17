@@ -21,6 +21,7 @@ class User extends AppModel implements IdentityInterface
 {
 
     const ADMIN_ID = 1;
+    const IS_ADMIN = 1;
 
     /**
      * {@inheritdoc}
@@ -112,9 +113,9 @@ class User extends AppModel implements IdentityInterface
             'user_name' => 'Логин',
             'password' => 'Пароль',
             'auth_key' => 'Auth Key',
-            'is_admin' => 'Is Admin',
-            'create_at' => 'Create At',
-            'update_at' => 'Update At',
+            'is_admin' => 'Администратор',
+            'create_at' => 'Создано',
+            'update_at' => 'Обновлено',
         ];
     }
 }

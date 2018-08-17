@@ -3,7 +3,7 @@
 namespace app\modules\admin;
 
 
-use app\models\User;
+use app\modules\admin\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\HttpException;
@@ -39,7 +39,7 @@ class AdminModule extends \yii\base\Module
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             $user = Yii::$app->user->identity['is_admin'];
-                            if ($user === User::ADMIN_ID) return true;
+                            if ($user === User::IS_ADMIN) return true;
 
                             throw new HttpException(404, 'The requested Item could not be found.');
 

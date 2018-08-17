@@ -31,10 +31,7 @@ class AppAsset extends AssetBundle
         "scripts/popper.min.js",
         "scripts/bootstrap.min.js",
         "scripts/Chart.min.js",
-//        "scripts/shards.min.js",
         "scripts/shards-dashboards.1.0.0.min.js",
-//        "scripts/app/app-blog-overview.1.0.0.js",
-//        "scripts/app/app-components-overview.1.0.0.js",
         "scripts/main.js",
     ];
 

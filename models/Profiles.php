@@ -51,7 +51,7 @@ class Profiles extends AppModel
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
+            'user_id' => 'ID Пользователя',
             'height' => 'Рост',
             'age' => 'Возраст',
             'name' => 'Имя',
@@ -88,7 +88,7 @@ class Profiles extends AppModel
     {
         $image = UploadedFile::getInstance($this, 'image');
 
-        $user_profile = static::findUserProfile();
+        $user_profile = static::find()->where(['id' => $this->id])->limit(1)->one();
 
         $this->image = $user_profile->image;
 
@@ -122,6 +122,5 @@ class Profiles extends AppModel
         }
 
         return false;
-
     }
 }

@@ -65,10 +65,10 @@ use yii\widgets\ActiveForm;
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <?= $form->field($profile->user, 'email')->textInput(['maxlenth' => true, 'type' => 'email', 'placeholder' => $profile->user->getAttributeLAbel('email')]) ?>
+                                                <?= $form->field($profile->user, 'email')->textInput(['maxlenth' => true, 'type' => 'email', 'placeholder' => $profile->user->getAttributeLabel('email')]) ?>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <?= $form->field($profile->user, 'user_name')->textInput(['maxlenth' => true, 'placeholder' => $profile->user->getAttributeLAbel('user_name')]) ?>
+                                                <?= $form->field($profile->user, 'user_name')->textInput(['maxlenth' => true, 'placeholder' => $profile->user->getAttributeLabel('user_name')]) ?>
                                             </div>
                                         </div>
                                         <div class="form-row">

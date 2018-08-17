@@ -74,7 +74,10 @@ $config = [
                 '/chart/<id:\d+>' => 'roulette/view',
                 '/profile' => 'profile/update',
                 '/stats/<name:(\w+\s?)+>' => 'stats/view',
-                '/<action:index|start|chart|program|journal|discipline?>' => 'home/<action>',
+                '/<action:index|start|chart|program|journal|discipline>' => 'home/<action>',
+
+                /*---------Admin Module---------*/
+                '/admin' => 'admin/default/index',
             ],
         ],
 

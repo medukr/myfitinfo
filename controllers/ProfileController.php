@@ -19,7 +19,7 @@ class ProfileController extends AppController
     {
         $profile = Profiles::findUserProfile();
 
-        if (Yii::$app->request->post()) {
+        if ($profile && Yii::$app->request->post()) {
 
             $user = $profile->user;
 
@@ -30,6 +30,12 @@ class ProfileController extends AppController
                 }
             }
 
+        }
+
+        if (!$profile) {
+            $profile = new Profiles();
+            $profile->user_id = Yii::$app->user->id;
+            $profile->save();
         }
 
         return $this->render('update', compact('profile'));
