@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\Disciplines;
 use app\modules\admin\models\DisciplinesSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,13 +37,35 @@ class DisciplineController extends Controller
     public function actionIndex()
     {
         $searchModel = new DisciplinesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Disciplines::find(),
+            'pagination' => [
+                'pageSize' => 25,
+            ],
+        ]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
+
+    public function actionSearch()
+    {
+        $searchModel = new DisciplinesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
 
     /**
      * Displays a single Disciplines model.
@@ -66,7 +89,7 @@ class DisciplineController extends Controller
     {
         $model = new Disciplines();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->updateDiscipline()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -86,7 +109,7 @@ class DisciplineController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->updateDiscipline()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

@@ -2,7 +2,11 @@
 
 namespace app\models;
 
+use app\components\AppHtmlentitiesBehavior;
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "sets".
@@ -45,6 +49,19 @@ class Sets extends AppModel
             'user_id' => 'User ID',
             'name' => 'Name',
             'date' => 'Date',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => AppHtmlentitiesBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['name'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['name'],
+                ],
+            ],
         ];
     }
 

@@ -66,17 +66,24 @@ class AppAdminAsset extends AssetBundle
 
         $controller = Yii::$app->controller->id;
         $action = Yii::$app->controller->action->id;
+//
+//        if ( $controller == 'user' ) {
+//            if ($action == 'index'){
+//
+//                /*Data Tables*/
+//                $this->css[] = '/admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css';
+//
+//                $this->js[] = '/admin/bower_components/datatables.net/js/jquery.dataTables.min.js';
+//                $this->js[] = '/admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js';
+//                $this->js[] = '/admin/scripts/dataTablesScript.js';
+//            }
+//        }
 
-        if ( $controller == 'user' ) {
-            if ($action == 'index'){
+        if ($action == 'update' || $action == 'create'){
 
-                /*Data Tables*/
-                $this->css[] = '/admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css';
-
-                $this->js[] = '/admin/bower_components/datatables.net/js/jquery.dataTables.min.js';
-                $this->js[] = '/admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js';
-                $this->js[] = '/admin/scripts/dataTablesScript.js';
-            }
+            /*CK Editor*/
+            $this->js[] = '/admin/bower_components/ckeditor/ckeditor.js';
+            $this->js[] = '/admin/scripts/ckeditorScripts.js';
         }
 
 

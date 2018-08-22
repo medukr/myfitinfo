@@ -2,7 +2,11 @@
 
 namespace app\models;
 
+use app\components\AppHtmlentitiesBehavior;
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\web\IdentityInterface;
 
 /**
@@ -44,6 +48,29 @@ class User extends AppModel implements IdentityInterface
             [['user_name'], 'string', 'max' => 64],
             [['email'], 'unique'],
             [['user_name'], 'unique'],
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['create_at', 'update_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['update_at'],
+                ],
+                // если вместо метки времени UNIX используется datetime:
+                'value' => new Expression('NOW()'),
+
+            ],
+            [
+                'class' => AppHtmlentitiesBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['user_name'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['user_name'],
+                ],
+            ],
         ];
     }
 

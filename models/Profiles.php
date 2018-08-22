@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use app\components\AppHtmlentitiesBehavior;
 use Yii;
+use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 
@@ -29,6 +31,20 @@ class Profiles extends AppModel
         return 'profiles';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => AppHtmlentitiesBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['name', 'surname'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['name', 'surname'],
+                ],
+            ],
+        ];
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -38,7 +54,6 @@ class Profiles extends AppModel
             [['user_id'], 'required'],
             [['user_id', 'height', 'age'], 'integer'],
             [['name', 'surname'], 'string', 'max' => 64],
-            [['name', 'surname'], 'validateHtmlentities'],
             [['image'], 'file', 'extensions' => 'png, jpg'],
             [['user_id'], 'unique'],
         ];

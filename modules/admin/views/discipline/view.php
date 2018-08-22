@@ -30,8 +30,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'description:ntext',
-            'image',
+            'description:html',
+            [
+                    'attribute' => 'image',
+                'value' => function($data){
+                    return Html::img($data->getImage(),
+                        [
+                                'style' => 'width:500px'
+                        ]);
+                },
+                'format' => 'html'
+            ],
             'user_id',
         ],
     ]) ?>

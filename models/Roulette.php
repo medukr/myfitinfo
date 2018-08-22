@@ -2,9 +2,11 @@
 
 namespace app\models;
 
+use app\components\AppHtmlentitiesBehavior;
 use app\components\ChartDataWidget;
 use Yii;
 use yii\base\ViewRenderer;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "roulette".
@@ -47,6 +49,20 @@ class Roulette extends AppModel
             'name' => 'Name',
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => AppHtmlentitiesBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['name'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['name'],
+                ],
+            ],
+        ];
+    }
+
 
     public function getRouletteData()
     {

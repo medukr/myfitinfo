@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\AppHtmlentitiesBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -26,21 +27,28 @@ class Presets extends AppModel
         return 'presets';
     }
 
-//    public function behaviors()
-//    {
-//        return [
-//            [
-//                'class' => TimestampBehavior::className(),
-//                'attributes' => [
-//                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-//                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-//                ],
-//                // если вместо метки времени UNIX используется datetime:
-//                'value' => new Expression('NOW()'),
-//
-//            ],
-//        ];
-//    }
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['create_at', 'update_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['update_at'],
+                ],
+                // если вместо метки времени UNIX используется datetime:
+                'value' => new Expression('NOW()'),
+
+            ],
+            [
+                'class' => AppHtmlentitiesBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['name'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['name'],
+                ],
+            ],
+        ];
+    }
 
 
     /**
@@ -53,7 +61,6 @@ class Presets extends AppModel
             [['user_id'], 'integer'],
             [['create_at', 'update_at'], 'safe'],
             [['name'], 'string', 'max' => 64,],
-            [['name'], 'validateHtmlentities'],
         ];
     }
 

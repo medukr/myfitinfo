@@ -9,16 +9,22 @@
 namespace app\models;
 
 
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 
 class AppModel extends ActiveRecord
 {
 
-    public function validateHtmlentities($attribute)
-    {
-//        С данной реаализацией при сохраниии имени 123 или 337 ошибка, хз
-//        return $this->$attribute = htmlentities(trim($this->$attribute, ENT_QUOTES));
-        return $this->$attribute = Html::encode(trim($this->$attribute));
-    }
+//
+//    public function validateHtmlentities($attribute)
+//    {
+////        С данной реаализацией при сохраниии имени 123 или 337 ошибка, хз
+//        return $this->$attribute = htmlentities(trim($this->$attribute),ENT_QUOTES, 'utf-8', false);
+////        return $this->$attribute = Html::encode(trim($this->$attribute), '');
+//
+//    }
+
+
+
 }
