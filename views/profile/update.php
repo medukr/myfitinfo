@@ -40,9 +40,10 @@ use yii\widgets\ActiveForm;
                         <div class="mb-3 mx-auto">
                             <img class="rounded-circle" src="<?= $profile->getImage() ?>" alt="User Avatar" width="200"> </div>
                         <h4 class="mb-0"><?= ucfirst($profile->name) ?></h4>
+                    </div>
+                    <div class="card-footer mx-auto">
                         <span class="text-muted d-block mb-2"><?= $profile->age ?> см</span>
                     </div>
-                    <div class="card-footer"></div>
                 </div>
             </div>
             <div class="col-lg-8 p-1">

@@ -2,8 +2,7 @@
 
 namespace app\modules\admin;
 
-
-use app\modules\admin\models\User;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\HttpException;
@@ -11,7 +10,7 @@ use yii\web\HttpException;
 /**
  * admin module definition class
  */
-class AdminModule extends \yii\base\Module
+class Module extends \yii\base\Module
 {
     /**
      * {@inheritdoc}

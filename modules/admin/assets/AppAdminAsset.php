@@ -22,11 +22,11 @@ class AppAdminAsset extends AssetBundle
     public $baseUrl = '@web';
 
     public $css = [
-        '/admin/bower_components/bootstrap/dist/css/bootstrap.min.css',     // Bootstrap 3.3.7
-        '/admin/bower_components/font-awesome/css/font-awesome.min.css',    // Font Awesome
-        '/admin/bower_components/Ionicons/css/ionicons.min.css',            // Ionicons
-        '/admin/dist/css/AdminLTE.min.css',                                 // Theme style
-        '/admin/dist/css/skins/_all-skins.min.css',     // AdminLTE Skins. Choose a skin from the css/skins
+        '/adm/bower_components/bootstrap/dist/css/bootstrap.min.css',     // Bootstrap 3.3.7
+        '/adm/bower_components/font-awesome/css/font-awesome.min.css',    // Font Awesome
+        '/adm/bower_components/Ionicons/css/ionicons.min.css',            // Ionicons
+        '/adm/dist/css/AdminLTE.min.css',                                 // Theme style
+        '/adm/dist/css/skins/_all-skins.min.css',     // AdminLTE Skins. Choose a skin from the css/skins
                                                         // folder instead of downloading all of them to
                                                         // reduce the load.
     ];
@@ -34,18 +34,13 @@ class AppAdminAsset extends AssetBundle
     public $js = [
 //        Зависимость $depends [yii\bootstrap\BootstrapPluginAsset] подключает самостоятельно
 //    JQuery, Bootstrap css, Bootstrap js
-//        'js/jquery.js',
-//        'js/bootstrap.min.js',
 
-
-        '/admin/bower_components/jquery/dist/jquery.min.js',                    // jQuery 3
-        '/admin/bower_components/bootstrap/dist/js/bootstrap.min.js',           // Bootstrap 3.3.7
-
-
-        '/admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js',   // SlimScroll
-        '/admin/bower_components/fastclick/lib/fastclick.js',                   // FastClick
-        '/admin/dist/js/adminlte.min.js',                                       // AdminLTE App
-        '/admin/dist/js/demo.js',                                               // AdminLTE for demo purposes
+//        '/adm/bower_components/jquery/dist/jquery.min.js',                    // jQuery 3
+//        '/adm/bower_components/bootstrap/dist/js/bootstrap.min.js',           // Bootstrap 3.3.7
+        '/adm/bower_components/jquery-slimscroll/jquery.slimscroll.min.js',   // SlimScroll
+        '/adm/bower_components/fastclick/lib/fastclick.js',                   // FastClick
+        '/adm/dist/js/adminlte.min.js',                                       // AdminLTE App
+        '/adm/dist/js/demo.js',                                               // AdminLTE for demo purposes
 
     ];
 
@@ -70,20 +65,20 @@ class AppAdminAsset extends AssetBundle
 //        if ( $controller == 'user' ) {
 //            if ($action == 'index'){
 //
-//                /*Data Tables*/
-//                $this->css[] = '/admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css';
+//                /*----Data Tables----*/
+//                $this->css[] = '/adm/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css';
 //
-//                $this->js[] = '/admin/bower_components/datatables.net/js/jquery.dataTables.min.js';
-//                $this->js[] = '/admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js';
-//                $this->js[] = '/admin/scripts/dataTablesScript.js';
+//                $this->js[] = '/adm/bower_components/datatables.net/js/jquery.dataTables.min.js';
+//                $this->js[] = '/adm/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js';
+//                $this->js[] = '/adm/scripts/dataTablesScript.js';
 //            }
 //        }
 
         if ($action == 'update' || $action == 'create'){
 
-            /*CK Editor*/
-            $this->js[] = '/admin/bower_components/ckeditor/ckeditor.js';
-            $this->js[] = '/admin/scripts/ckeditorScripts.js';
+            /*----CK Editor----*/
+            $this->js[] = '/adm/bower_components/ckeditor/ckeditor.js';
+            $this->js[] = '/adm/scripts/ckeditorScripts.js';
         }
 
 

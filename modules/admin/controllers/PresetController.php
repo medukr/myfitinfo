@@ -2,19 +2,20 @@
 
 namespace app\modules\admin\controllers;
 
-use app\controllers\AppController;
+use app\models\Disciplines;
+use app\models\PresetsDisciplines;
 use Yii;
-use app\modules\admin\models\Disciplines;
-use app\modules\admin\models\DisciplinesSearch;
+use app\modules\admin\models\Presets;
+use app\modules\admin\models\PresetsSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DisciplineController implements the CRUD actions for Disciplines model.
+ * PresetController implements the CRUD actions for Presets model.
  */
-class DisciplineController extends AppController
+class PresetController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,16 +33,16 @@ class DisciplineController extends AppController
     }
 
     /**
-     * Lists all Disciplines models.
+     * Lists all Presets models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DisciplinesSearch();
+        $searchModel = new PresetsSearch();
 //        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Disciplines::find(),
+            'query' => Presets::find(),
             'pagination' => [
                 'pageSize' => 25,
             ],
@@ -54,10 +55,9 @@ class DisciplineController extends AppController
     }
 
 
-
     public function actionSearch()
     {
-        $searchModel = new DisciplinesSearch();
+        $searchModel = new PresetsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 
@@ -67,30 +67,41 @@ class DisciplineController extends AppController
         ]);
     }
 
-
     /**
-     * Displays a single Disciplines model.
+     * Displays a single Presets model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
+
+        $model = $this->findModel($id);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => \app\models\PresetsDisciplines::find()->where(['preset_id' => $model->id]),
+            'pagination' => [
+                'pageSize' => 25,
+            ],
+        ]);
+
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Creates a new Disciplines model.
+     * Creates a new Presets model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Disciplines();
+        $model = new Presets();
 
-        if ($model->load(Yii::$app->request->post()) && $model->updateDiscipline()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -100,7 +111,7 @@ class DisciplineController extends AppController
     }
 
     /**
-     * Updates an existing Disciplines model.
+     * Updates an existing Presets model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +121,7 @@ class DisciplineController extends AppController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->updateDiscipline()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -120,7 +131,7 @@ class DisciplineController extends AppController
     }
 
     /**
-     * Deletes an existing Disciplines model.
+     * Deletes an existing Presets model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -134,15 +145,15 @@ class DisciplineController extends AppController
     }
 
     /**
-     * Finds the Disciplines model based on its primary key value.
+     * Finds the Presets model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Disciplines the loaded model
+     * @return Presets the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Disciplines::findOne($id)) !== null) {
+        if (($model = Presets::findOne($id)) !== null) {
             return $model;
         }
 

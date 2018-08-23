@@ -15,10 +15,9 @@ $config = [
     ],
     'defaultRoute' => 'home/index',
     'modules' => [
-        'admin' => [
-            'class' => 'app\modules\admin\AdminModule',
+        $params['adminUrl'] => [
+            'class' => 'app\modules\admin\Module',
             'layout' => 'admin',
-            'defaultRoute' => 'default/index',
         ],
     ],
     'components' => [
@@ -67,6 +66,10 @@ $config = [
             'rules' => [
                 '/login' => 'site/login',
                 '/logout' => 'site/logout',
+
+                '/site/<action:\w+>' => 'site/error',
+                '/home/<action:\w+?>' => 'site/error',
+
                 '/start/<id:\d+>' => 'set/start',
                 '/training/<id:\d+>' => 'set/training',
                 '/set/<action:\w+>' => 'set/<action>',
@@ -74,10 +77,12 @@ $config = [
                 '/chart/<id:\d+>' => 'roulette/view',
                 '/profile' => 'profile/update',
                 '/stats/<name:(\w+\s?)+>' => 'stats/view',
+
                 '/<action:index|start|chart|program|journal|discipline>' => 'home/<action>',
 
                 /*---------Admin Module---------*/
-                '/admin' => 'admin/default/index',
+                '/'.$params['adminUrl'].'/<controller:\w+>' => $params['adminUrl'].'/<controller>/index',
+                '/'.$params['adminUrl'].'/<controller:\w+>/<action:\w+>/<id:\d+>' => $params['adminUrl'].'/<controller>/<action>',
             ],
         ],
 

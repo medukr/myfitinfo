@@ -42,5 +42,5 @@ tests/_support/_generated
 /web/uploads/*
 
 #AdminLTE components
-/web/admin/bower_components/*
-/web/admin/dist/*
+/web/adm/bower_components/*
+/web/adm/dist/*

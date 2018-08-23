@@ -98,9 +98,9 @@ class Presets extends AppModel
         return [
             'id' => 'ID',
             'name' => 'Название',
-            'user_id' => 'User ID',
-            'create_at' => 'Create At',
-            'update_at' => 'Update At',
+            'user_id' => 'ID пльзователя',
+            'create_at' => 'Создано',
+            'update_at' => 'Обновлено',
         ];
     }
 
