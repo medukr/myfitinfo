@@ -15,6 +15,7 @@ use yii\db\Expression;
  * @property int $user_id
  * @property string $name
  * @property string $date
+ * @property int preset_id
  */
 class Sets extends AppModel
 {
@@ -76,11 +77,10 @@ class Sets extends AppModel
         return $this->hasMany(Working::className(), ['set_id' => 'id'])->with('workingData');
     }
 
-    public function getLastWorking()
+    public function getOnlyWorking()
     {
-        return;
+        return $this->hasMany(Working::className(), ['set_id' => 'id']);
     }
-
 
     public static function findWhereIdAndUser($id)
     {
@@ -110,16 +110,15 @@ class Sets extends AppModel
             ->one();
     }
 
-    public static function findGroupUserSets()
+    public static function findUserSetsId()
     {
         return self::find()
-            ->select(['name', 'max(date) as d'])
+            ->select('preset_id, max(date) as date')
             ->where(['user_id' => Yii::$app->user->id])
-            ->groupBy('name')
-            ->orderBy(['d' => SORT_DESC])
+            ->groupBy('preset_id')
+            ->orderBy(['date' => SORT_DESC])
             ->all();
     }
-
 
 
     public function getDate()
@@ -130,6 +129,12 @@ class Sets extends AppModel
         $relative_time = Yii::$app->formatter->asRelativeTime($this->date);
 
         return $date . ' | ' . $relative_time;
+    }
+
+
+    public function countUserSets()
+    {
+        return self::findBySql('select count(id) as id from sets where user_id = '.Yii::$app->user->id)->one();
     }
 
 }

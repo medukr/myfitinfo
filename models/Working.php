@@ -55,6 +55,16 @@ class Working extends \yii\db\ActiveRecord
         return $this->hasMany(WorkingData::className(), ['working_id' => 'id']);
     }
 
+//    public function getSumWorkingData()
+//    {
+//        return WorkingData::find()
+//            ->select('sum(weight) as weight, sum(iteration) as iteration')
+//            ->where(['working_id' => $this->id])
+//            ->one();
+//    }
+
+
+
     /**
      * {@inheritdoc}
      */

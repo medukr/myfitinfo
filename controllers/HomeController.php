@@ -14,12 +14,72 @@ class HomeController extends AppController
 
     public function actionIndex()
     {
+        $presets_ids = Sets::findUserSetsId();
+        $count_sets = $this->countSets();
+        $data = $this->createStatsData($presets_ids);
 
-        $sets = Sets::findGroupUserSets();
-
-        return $this->render('index', compact('sets'));
+        return $this->render('index', compact('data', 'count_sets'));
     }
 
+
+    public function createStatsData($presets_ids)
+    {
+        $data = [];
+
+        foreach ($presets_ids as $presets_id){
+            $sets = Sets::find()
+                ->where('sets.preset_id = :id',[':id' => (int) $presets_id->preset_id ])
+                ->andWhere(['sets.user_id' => Yii::$app->user->id])
+                ->joinWith('workingWithoutDiscipline')
+                ->all();
+            $us = [];
+            foreach ( $sets as $set){
+                $s = [];
+                foreach ($set as $key => $item){
+                    $s[$key] = $item;
+                }
+                $us['name'] = $set->name;
+                $us['preset_id'] = $set->preset_id;
+                $sum = [];
+                $sum['weight'] = 0;
+                foreach ($set->workingWithoutDiscipline as $working){
+                    $wd = [];
+                    foreach ($working->workingData as $workingData){
+
+//                        debug($workingData);
+                        $wd[] = [
+                            'weight' => $workingData->weight,
+                            'iteration' => $workingData->iteration,
+                            'sum' => $workingData->weight * $workingData->iteration
+                            ];
+                        $sum['weight'] += $workingData->weight * $workingData->iteration;
+                    }
+                    $s['working_data'][] = $wd;
+                }
+                $s['sum'] = $sum;
+
+                $us['sets'][] = $s;
+
+            }
+            $us['last_result'] = $us['sets'][count($us['sets']) - 1]['sum']['weight'];
+            if ($us['sets'][count($us['sets']) - 2]){
+                $us['prelast_result'] = $us['sets'][count($us['sets']) - 2]['sum']['weight'];
+            }else{
+                $us['prelast_result'] = 0;
+            }
+
+            $data[] = $us;
+        }
+//        debug($data);
+//        die;
+        return $data;
+    }
+
+    public function countSets()
+    {
+        $count_sets = Sets::countUserSets();
+        return $count_sets->id;
+    }
 
     public function actionStart()
     {

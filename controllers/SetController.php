@@ -31,6 +31,7 @@ class SetController extends AppController
             $set = new Sets(); //формируем по пресету сет
             $set->name = $preset->name;
             $set->user_id = Yii::$app->user->id;
+            $set->preset_id = $preset->id;
             $set->date = date("Y-m-d H:i:s",time());
             if ($set->save()){
                 foreach ($preset->discipline as $discipline){
