@@ -21,7 +21,8 @@ class HomeController extends AppController
         return $this->render('index', compact('data', 'count_sets'));
     }
 
-
+/*Метод формирует массив из стетов по входящим preset_id, таким образом, чтобы из него
+можно было сформировать данные для графика, и заполнить поля верстки*/
     public function createStatsData($presets_ids)
     {
         $data = [];
@@ -38,6 +39,7 @@ class HomeController extends AppController
                 foreach ($set as $key => $item){
                     $s[$key] = $item;
                 }
+                /*Имя принимается по последнему сету*/
                 $us['name'] = $set->name;
                 $us['preset_id'] = $set->preset_id;
                 $sum = [];
@@ -61,12 +63,16 @@ class HomeController extends AppController
                 $us['sets'][] = $s;
 
             }
+
             $us['last_result'] = $us['sets'][count($us['sets']) - 1]['sum']['weight'];
-            if ($us['sets'][count($us['sets']) - 2]){
+
+            if (count($us['sets']) > 1 && $us['sets'][count($us['sets']) - 2]){
                 $us['prelast_result'] = $us['sets'][count($us['sets']) - 2]['sum']['weight'];
             }else{
                 $us['prelast_result'] = 0;
             }
+            /*Если пресет, по которому было создан сет не удален, то имя принимается по нему*/
+            if ($sets[0]->preset) $us['name'] = $sets[0]->preset->name;
 
             $data[] = $us;
         }

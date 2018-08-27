@@ -66,6 +66,11 @@ class Sets extends AppModel
         ];
     }
 
+    public function getPreset()
+    {
+        return $this->hasOne(Presets::className(), ['id' => 'preset_id']);
+    }
+
 
     public function getWorking()
     {

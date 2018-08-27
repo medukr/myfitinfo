@@ -9,13 +9,10 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
-
 ?>
-
 <!-- Main Sidebar-->
 <?= \app\components\MainSidebarWidget::widget() ?>
 <!-- End Main Sidebar-->
-
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
     <?= \app\components\MainNavbarWidget::widget() ?>
     <div class="main-content-container container-fluid px-4">
@@ -27,8 +24,8 @@ use yii\helpers\Url;
             </div>
         </div>
         <!-- End Page Header -->
-        <!-- Small Stats Blocks -->
         <div id="presets">
+            <?= \app\components\FlashMessageWidget::widget() ?>
             <?= \app\components\PresetsListWidget::widget(['presets' => $presets]) ?>
         </div>
         <div class="row">

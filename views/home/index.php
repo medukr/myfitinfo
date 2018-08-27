@@ -19,7 +19,7 @@ use yii\helpers\Url;
             </div>
         </div>
         <!-- End Page Header -->
-        <div class="page-header row no-gutters py-4">
+        <div class="page-header row no-gutters pb-3">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                 <span class="text-uppercase page-subtitle">Статистика по программам</span>
             </div>
@@ -30,7 +30,7 @@ use yii\helpers\Url;
                 <div class="col-lg-6 col-md-6 col-sm-6 mb-2 pl-1 pr-1">
                     <div class="stats-small stats-small--1 card card-small">
                         <div class="card-body p-0 d-flex">
-                            <a href="" class="d-flex flex-column m-auto">
+                            <div href="" class="d-flex flex-column m-auto">
                                 <div class="stats-small__data text-center">
                                     <span class="stats-small__label text-uppercase"><?= $set['name'] ?></span>
                                     <h6 class="stats-small__value count my-3"><?= $set['last_result']?> кг</h6>
@@ -42,7 +42,7 @@ use yii\helpers\Url;
                                         <span class="stats-small__percentage stats-small__percentage--decrease">-<?= $set['prelast_result'] - $set['last_result']?></span>
                                     <?php endif; ?>
                                 </div>
-                            </a>
+                            </div>
                             <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
                         </div>
                     </div>

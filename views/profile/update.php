@@ -15,17 +15,9 @@ use yii\widgets\ActiveForm;
 <!-- End Main Sidebar-->
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
     <?= \app\components\MainNavbarWidget::widget() ?>
-    <?php if(Yii::$app->session->hasFlash('success')): ?>
-        <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-            <i class="fa fa-check mx-2"></i>
-            <strong><?php echo Yii::$app->session->getFlash('success');?></strong>
-        </div>
-    <?php endif; ?>
     <div class="main-content-container container-fluid px-4">
         <!-- Page Header -->
+        <?= \app\components\FlashMessageWidget::widget() ?>
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                 <span class="text-uppercase page-subtitle">Профиль</span>
@@ -33,6 +25,7 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
         <!-- End Page Header -->
+
         <div class="row">
             <div class="col-lg-4 p-1">
                 <div class="card card-small mb-4 pt-3">

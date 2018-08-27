@@ -92,14 +92,19 @@ class SetController extends AppController
                     }
                 }
 
-                $set->delete();
+                if ($set->delete()) {
 
-                if (Yii::$app->request->post('submit')){
-                    return $this->redirect(['home/journal']);
+                    Yii::$app->session->setFlash('success', 'Тренировка успешно удалена');
+
+                    $sets = Sets::findWhereUser();
+
+                    if (Yii::$app->request->post('submit')) {
+                        return $this->redirect(['home/journal']);
+                    }
+
+                    $this->layout = false;
+                    return $this->render('setsList', compact('sets'));
                 }
-
-                $sets = Sets::findWhereUser();
-                return SetsListWidget::widget(['sets'=> $sets]);
             }
 
         }

@@ -14,10 +14,10 @@ use yii\widgets\ActiveForm;
 <?php foreach ($sets as $set): ?>
     <div class="row">
         <div class="col-lg col-sm-12 mb-2 p-0">
-            <div href="<?= Url::to(['set/view', 'id' => $set->id]) ?>" class="card card-small card-post card-post--aside card-post--1">
+            <div class="card card-small card-post card-post--aside card-post--1">
                 <div class="card-body d-flex pl-2 pt-2 pb-2">
                     <div class="col-lg p-0">
-                        <h5 class="card-title"><?= Html::decode($set->name) ?></h5>
+                        <h5 class="card-title"><?= $set->name ?></h5>
                         <p class="card-text text-muted mb-0"><?= $set->getDate() ?></p>
                     </div>
                     <?php $form = ActiveForm::begin(['action' => Url::to(['set/delete']), 'method' => 'delete']) ?>

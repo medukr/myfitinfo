@@ -7,6 +7,7 @@
  */
 ?>
 
+
 <!-- Main Sidebar-->
 <?= \app\components\MainSidebarWidget::widget() ?>
 <!-- End Main Sidebar-->
@@ -22,6 +23,7 @@
         </div>
         <!-- End Page Header -->
         <div id="sets-list">
+            <?= \app\components\FlashMessageWidget::widget() ?>
             <?= \app\components\SetsListWidget::widget(['sets' => $sets]) ?>
         </div>
     </div>

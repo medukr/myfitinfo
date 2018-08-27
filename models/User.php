@@ -20,6 +20,7 @@ use yii\web\IdentityInterface;
  * @property int $is_admin
  * @property string $create_at
  * @property string $update_at
+ * @property object $profile
  */
 class User extends AppModel implements IdentityInterface
 {

@@ -72,6 +72,9 @@ class PresetController extends AppController
 
             if ($preset) {
                 if ($preset->load(Yii::$app->request->post()) && $preset->save()) {
+
+                    Yii::$app->session->setFlash('success', 'Название программы успешно изменено :)');
+
                     return $this->redirect(Url::to(['/preset/edit', 'id' => $preset->id]));
                 }
             }
@@ -185,7 +188,10 @@ class PresetController extends AppController
                 if ($preset->delete()){
                     $presets = Presets::findWhereUserOrAdmin();
 
+                    Yii::$app->session->setFlash('success', 'Программа успешно удалена :)');
+
                     if (Yii::$app->request->post('submit')){
+
                         return $this->redirect(['home/program']);
                     }
 

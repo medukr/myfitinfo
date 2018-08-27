@@ -47,6 +47,7 @@ class RouletteController extends AppController
 
         if ($roulette){
 
+            Yii::$app->session->setFlash('error', 'Ошибка!');
              return $this->render('view', compact('roulette'));
         }
 

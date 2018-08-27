@@ -8,6 +8,7 @@
 
 namespace app\components;
 
+use app\models\Profiles;
 use yii\base\Widget;
 
 class MainNavbarWidget extends Widget
@@ -19,6 +20,11 @@ class MainNavbarWidget extends Widget
 
     public function run()
     {
-        return $this->render('mainNavbar');
+        $profile = \Yii::$app->user->identity->profile;
+        if (!$profile){
+            $profile = new Profiles();
+        }
+
+        return $this->render('mainNavbar', compact('profile'));
     }
 }

@@ -6,4 +6,5 @@
  * Time: 11:11
  */
 ?>
+<?= \app\components\FlashMessageWidget::widget() ?>
 <?= \app\components\PresetsListWidget::widget(['presets' => $presets]) ?>

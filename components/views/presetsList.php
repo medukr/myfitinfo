@@ -5,12 +5,12 @@
  * Date: 01.08.18
  * Time: 10:58
  */
-
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 ?>
+<?php if ($presets): ?>
 <?php foreach ($presets as $preset): ?>
     <div class="row">
         <div class="col-lg col-sm-12 mb-2 p-0">
@@ -60,3 +60,6 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 <?php endforeach; ?>
+<?php else: ?>
+<h3>У вас нет программ</h3>
+<?php endif; ?>

@@ -103,7 +103,7 @@ $('div#sets-list').on('click', 'button.delete-set', function (e) {
         _csrf: _csrf,
         "Sets[id]": set_id,
         }).done( function (data) {
-            $('div#sets-list').html(data)
+            $('#sets-list').html(data)
         }).fail(function () {
             alert('Error');
     });

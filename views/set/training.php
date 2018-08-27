@@ -25,6 +25,7 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
         <!-- End Page Header -->
+        <?php if ($set->working): ?>
         <?php $k = 0; ?>
         <?php foreach ($set->working as $working): ?>
             <div class="row">
@@ -135,5 +136,8 @@ use yii\widgets\ActiveForm;
             <?= \app\components\ModalDisciplineInfoWidget::widget(['discipline' => $working->discipline]) ?>
         <?php $k++; ?>
         <?php endforeach; ?>
+        <?php else: ?>
+        <h3>В этой программе нет упражнений :(</h3>
+        <?php endif; ?>
     </div>
 </main>
