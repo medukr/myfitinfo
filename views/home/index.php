@@ -27,7 +27,7 @@ use yii\helpers\Url;
         <?php $i = 1; ?>
         <?php foreach ($data as $set): ?>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 mb-2 pl-1 pr-1">
+                <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-0">
                     <div class="stats-small stats-small--1 card card-small">
                         <div class="card-body p-0 d-flex">
                             <div href="" class="d-flex flex-column m-auto">

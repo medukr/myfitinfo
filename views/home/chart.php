@@ -30,7 +30,7 @@ use yii\helpers\Url;
         <?php $i = 1; ?>
             <?php foreach ($roulettes as $roulette): ?>
                 <div class="row" >
-                    <div class="col-lg-6 col-md-6 col-sm-6 mb-2 pl-1 pr-1">
+                    <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-0">
                         <div class="stats-small stats-small--1 card card-small">
                             <div class="card-body p-0 d-flex">
                                 <a href="<?= Url::to(['roulette/view', 'id' => $roulette->id]) ?>" class="d-flex flex-column m-auto">
@@ -79,6 +79,8 @@ use yii\helpers\Url;
                 <!-- end addRouletteData modal -->
             <?php endforeach; ?>
             <?= \app\components\ChartDataWidget::widget(['roulettes' => $roulettes]) ?>
+        <?php else: ?>
+        <h3>Добавте свой первый замер. Например, вес :)</h3>
         <?php endif; ?>
         <div class="row">
             <div class="col-lg col-sm-12 mb-4 p-0">

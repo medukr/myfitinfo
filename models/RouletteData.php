@@ -29,7 +29,8 @@ class RouletteData extends AppModel
     {
         return [
             [['roulette_id', 'date'], 'required'],
-            [['roulette_id', 'measurement'], 'integer'],
+            [['roulette_id'], 'integer'],
+            [['measurement'], 'double'],
             [['date'], 'safe'],
         ];
     }

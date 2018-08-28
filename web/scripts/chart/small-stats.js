@@ -66,7 +66,7 @@
                         gridLines: false,
                         scaleLabel: false,
                         ticks: {
-                            display: true,
+                            display: false,
 
                         }
                     }],

@@ -112,6 +112,8 @@ class Roulette extends AppModel
                 }
             }
 
+            $result = round($result, 2);
+
             $html = "<span class=\"stats-small__percentage stats-small__percentage--increase\">+$result</span>";
 
             if ($result < 0) {

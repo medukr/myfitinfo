@@ -139,7 +139,7 @@ class Sets extends AppModel
 
     public function countUserSets()
     {
-        return self::findBySql('select count(id) as id from sets where user_id = '.Yii::$app->user->id)->one();
+        return self::findBySql('select count(`id`) as id from `sets` where `user_id` = '.Yii::$app->user->id)->one();
     }
 
 }

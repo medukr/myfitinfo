@@ -29,10 +29,13 @@ class HomeController extends AppController
 
         foreach ($presets_ids as $presets_id){
             $sets = Sets::find()
-                ->where('sets.preset_id = :id',[':id' => (int) $presets_id->preset_id ])
+                ->where('`sets`.`preset_id` = :id',[':id' => (int) $presets_id->preset_id ])
                 ->andWhere(['sets.user_id' => Yii::$app->user->id])
-                ->joinWith('workingWithoutDiscipline')
+                ->orderBy(['id' => SORT_DESC])
+                ->limit(20)
+                ->with('workingWithoutDiscipline')
                 ->all();
+            krsort($sets);
             $us = [];
             foreach ( $sets as $set){
                 $s = [];
