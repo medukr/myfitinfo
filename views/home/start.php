@@ -21,6 +21,7 @@ use yii\helpers\Url;
             </div>
         </div>
         <!-- End Page Header -->
+        <?php if ($presets): ?>
         <?php foreach ($presets as $preset): ?>
         <div class="row">
             <div class="col-lg col-sm-12 mb-2 p-0">
@@ -37,5 +38,8 @@ use yii\helpers\Url;
             </div>
         </div>
         <?php endforeach; ?>
+        <?php else: ?>
+        <h5>У тебя нет программ для выбора. Сначала создай ее...</h5>
+        <?php endif; ?>
     </div>
 </main>

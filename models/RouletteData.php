@@ -28,7 +28,7 @@ class RouletteData extends AppModel
     public function rules()
     {
         return [
-            [['roulette_id', 'date'], 'required'],
+            [['roulette_id', 'date', 'measurement'], 'required'],
             [['roulette_id'], 'integer'],
             [['measurement'], 'double'],
             [['date'], 'safe'],
@@ -46,6 +46,15 @@ class RouletteData extends AppModel
             'measurement' => 'Значение',
             'date' => 'Date',
         ];
+    }
+
+    public static function findLastWhereRolletteId($id)
+    {
+        return self::find()
+            ->where('roulette_id = :id',[':id' => $id])
+            ->orderBy(['date' => SORT_DESC])
+            ->limit(1)
+            ->one();
     }
 
 }

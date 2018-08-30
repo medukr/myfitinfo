@@ -68,6 +68,6 @@ class AppController extends Controller
 
     public function validateInputData($data)
     {
-        return htmlentities(trim($data), ENT_QUOTES);
+        return htmlentities(trim($data), ENT_QUOTES, 'utf-8', false);
     }
 }

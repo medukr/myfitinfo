@@ -45,8 +45,8 @@ class Roulette extends AppModel
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'name' => 'Name',
+            'user_id' => 'ID пользователя',
+            'name' => 'Название',
         ];
     }
 
@@ -124,4 +124,25 @@ class Roulette extends AppModel
         return $html;
     }
 
+
+    public function deleteDataFromIds($ids)
+    {
+        return RouletteData::deleteAll(['id' => $ids]);
+    }
+
+
+    public function deleteAllData()
+    {
+        $ids = [];
+        if ($this->rouletteData){
+
+            foreach ($this->rouletteData as $data) {
+                $ids[] += $data->id;
+            }
+
+            return RouletteData::deleteAll(['id' => $ids]) ? true : false;
+        }
+
+        return true;
+    }
 }

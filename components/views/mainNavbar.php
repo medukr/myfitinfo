@@ -58,7 +58,7 @@ use yii\helpers\Url;
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle mr-2" src="<?= $profile->getImage() ?>" alt="User Avatar">
-                    <span class="d-none d-md-inline-block">Sierra Brooks</span>
+                    <span class="d-none d-md-inline-block"><?= Yii::$app->user->identity->user_name ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
                     <a class="dropdown-item" href="<?= Url::to(['profile/update']) ?>">

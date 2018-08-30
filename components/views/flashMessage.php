@@ -26,7 +26,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <i class="fa fa-exclamation-triangle mx-2"></i>
+                <i class="fa fa-times mx-2"></i>
                 <strong><?php echo Yii::$app->session->getFlash('error'); ?></strong>
             </div>
         </div>
@@ -45,3 +45,17 @@
         </div>
     </div>
 <?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('warning')): ?>
+    <div class="row">
+        <div class="col-lg col-sm-12 p-0">
+            <div class="alert alert-warning alert-dismissible fade show my-2 with-shadows" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <i class="fa fa-exclamation-triangle mx-2"></i>
+                <strong><?php echo Yii::$app->session->getFlash('warning'); ?></strong>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+

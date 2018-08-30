@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 <?php if ($sets): ?>
 <?php foreach ($sets as $set): ?>
     <div class="row">
-        <div class="col-lg col-sm-12 mb-2 p-0">
+        <div class="col-lg col-sm-12 mb-2 px-0">
             <div class="card card-small card-post card-post--aside card-post--1">
                 <div class="card-body d-flex pl-2 pt-2 pb-2">
                     <div class="col-lg p-0">
@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
 <?php else: ?>
 <div class="row">
     <div class="col-lg col-sm-12 mb-2">
-        <h3>Нет занятий</h3>
+        <h5>У тебя пока нет тренировок. Создай совю первую программу, и начни тренирову :)</h5>
     </div>
 </div>
 <?php endif; ?>

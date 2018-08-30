@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\RegisterForm;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -10,7 +12,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller
+class SiteController extends AppController
 {
     /**
      * {@inheritdoc}
@@ -93,6 +95,59 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionResetPassword()
+    {
+        $model = new RegisterForm();
+            if ($model->load(Yii::$app->request->post())){
+
+                if ($model->validate()){
+
+                    $email = $this->validateInputData($model->email);
+                    $user = User::find()
+                        ->where('email = :email', [':email' => $email])
+                        ->one();
+                    return $this->sendAccessEmail($user);
+
+                }
+            }
+
+        return $this->render('resetPassword', compact('model'));
+    }
+
+    public function actionRegister()
+    {
+        $model = new RegisterForm();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->registerUser()){
+
+//                return $this->sendAccessEmail($user);
+
+                Yii::$app->session->setFlash('success', 'Вы успешно зарегестрированы');
+                return $this->redirect(['site/login']);
+            }
+        }
+
+        return $this->render('register', ['model' => $model,]);
+    }
+
+
+    public function sendAccessEmail($user)
+    {
+        //                Yii::$app->mailer->compose('access_registration', compact('user'))
+//                    ->setFrom(['andrii.demydyuk@gmail.com' => 'myfitinfo.loc'])
+//                    ->setTo($user->email)
+//                    ->setSubject('Подтвержение регистрации пользователя')
+//                    ->send();
+        return $this->render('registerSuccess', compact('user'));
+    }
+
+
+    public function actionAccess()
+    {
+
     }
 
 }

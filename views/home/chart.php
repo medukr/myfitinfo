@@ -22,71 +22,116 @@ use yii\helpers\Url;
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                 <span class="text-uppercase page-subtitle">Замеры</span>
-                <h3 class="page-title">Мои измерения</h3>
+                <h3 class="page-title">Мои графики</h3>
             </div>
         </div>
         <!-- End Page Header -->
         <?php if ($roulettes): ?>
-        <?php $i = 1; ?>
+            <?php $i = 1; ?>
+            <?php $k = 1; ?>
             <?php foreach ($roulettes as $roulette): ?>
-                <div class="row" >
-                    <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-0">
+                <?php if ($k % 2 != 0): ?>
+                    <div class="row" >
+                <?php endif; ?>
+                    <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-1">
                         <div class="stats-small stats-small--1 card card-small">
-                            <div class="card-body p-0 d-flex">
-                                <a href="<?= Url::to(['roulette/view', 'id' => $roulette->id]) ?>" class="d-flex flex-column m-auto">
+                            <div class="card-body d-flex">
+                                <div href="<?= Url::to(['roulette/view', 'id' => $roulette->id]) ?>" class="d-flex flex-column m-auto">
                                     <div class="stats-small__data text-center">
                                         <span class="stats-small__label text-uppercase"><?= $roulette->name ?></span>
-                                        <h6 class="stats-small__value count my-3"><?= $roulette->getLastData() ?></h6>
+                                        <h6 class="stats-small__value count my-3"><?= $roulette->getLastData() ?><?= Html::a('<i class="material-icons">edit</i>',
+                                                    '',
+                                                    [
+                                                        'class' => 'nav-link-icon mr-2',
+                                                        'data-toggle' => 'modal',
+                                                        'data-target' => '#addRouletteDataModal-' . $roulette->id,
+                                                    ]) ?>
+                                            </h6>
                                     </div>
                                     <div class="stats-small__data">
                                         <?= $roulette->getDifferenceOfLast() ?>
                                     </div>
-                                </a>
-                                <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
-                                <div class="row m-2">
-                                    <a href="" class="nav-link-icon" data-toggle="modal" data-target="#addRouletteDataModal-<?= $roulette->id ?>"><i class="material-icons">edit</i></a>
+                                </div>
+                            </div>
+                            <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
+                        </div>
+                    </div>
+                        <!-- Add addRouletteData Modal -->
+                        <div class="modal fade" id="addRouletteDataModal-<?= $roulette->id ?>" tabindex="-1" role="dialog" aria-labelledby="addRouletteDataTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addRouletteDataTitle">Изменить показание</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <?php $formDeleteLast = ActiveForm::begin(['action' => Url::to('/roulette/delete-last-data'), 'method' => 'post']); ?>
+                                    <?= $formDeleteLast->field($roulette, 'id',
+                                        [
+                                                'options' => [
+                                                        'class' => '',
+                                                ]
+                                        ])->hiddenInput()->label(false) ?>
+                                    <?php ActiveForm::end(); ?>
+                                    <?php $formDelete = ActiveForm::begin(['action' => Url::to(['/roulette/delete-roulette']), 'method' => 'post']); ?>
+                                    <?= $formDelete->field($roulette, 'id',
+                                        [
+                                            'options' => [
+                                                'class' => '',
+                                            ]
+                                        ])->hiddenInput()->label(false) ?>
+                                    <?php ActiveForm::end() ?>
+                                    <div class="modal-body">
+                                        <?php $form = ActiveForm::begin(['action' => Url::to('/roulette/add-data'), 'method' => 'post']); ?>
+                                        <?= $form->field($data_model, 'measurement')->textInput(['maxlength' => true]) ?>
+                                        <?= $form->field($roulette, 'id',
+                                            [
+                                                'options' => [
+                                                    'class' => '',
+                                                ]
+                                            ])->hiddenInput()->label(false) ?>
+                                        <?php ActiveForm::end(); ?>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="row d-flex">
+                                            <button type="button" class="btn btn-secondary mr-auto m-2" data-dismiss="modal">Отмена</button>
+                                            <?= Html::submitButton('Добавить',
+                                            [
+                                                'class' => 'btn btn-primary ml-auto m-2',
+                                                'form' => $form->id,
+                                            ]) ?>
+                                            <?= Html::submitButton('Удалить посленее значение',
+                                                [
+                                                    'class' => 'btn mx-auto m-2',
+                                                    'form' => $formDeleteLast->id,
+                                                ]) ?>
+                                            <?= Html::submitButton('Удалить график',
+                                                [
+                                                    'class' => 'btn btn-danger ml-auto m-2',
+                                                    'form' => $formDelete->id,
+                                                ]) ?>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+                        <!-- end addRouletteData modal -->
+                <?php if ($k % 2 == 0 || $k == count($roulettes)): ?>
                     </div>
-                </div>
-                <!-- Add addRouletteData Modal -->
-                <div class="modal fade" id="addRouletteDataModal-<?= $roulette->id ?>" tabindex="-1" role="dialog" aria-labelledby="addRouletteDataTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addRouletteDataTitle">Добавить показзания</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <?php $form = ActiveForm::begin(['action' => Url::to('/roulette/add-data'), 'method' => 'post']); ?>
-                            <div class="modal-body">
-                                <?= $form->field($data_model, 'measurement')->textInput(['maxlength' => true]) ?>
-                                <?= $form->field($roulette, 'id')->hiddenInput()->label(false) ?>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                                <?= Html::submitButton('Добавить',
-                                    [
-                                            'class' => 'btn btn-primary',
-                                    ]) ?>
-                            </div>
-                            <?php ActiveForm::end(); ?>
-                        </div>
-                    </div>
-                </div>
-                <!-- end addRouletteData modal -->
+                <?php endif; ?>
+                <?php $k++ ?>
             <?php endforeach; ?>
             <?= \app\components\ChartDataWidget::widget(['roulettes' => $roulettes]) ?>
         <?php else: ?>
-        <h3>Добавте свой первый замер. Например, вес :)</h3>
+        <h5>Добавь свой первый замер. Например, вес :)</h5>
         <?php endif; ?>
-        <div class="row">
-            <div class="col-lg col-sm-12 mb-4 p-0">
+        <div class="row align-content-center">
+            <div class="col-lg col-sm-12 mb-4 px-1">
                 <a href="" class="card card-small card-post card-post--aside card-post--1" data-toggle="modal"
                    data-target="#addChartModal">
-                    <div class="card-body d-flex">
+                    <div class="card-body d-flex ">
                         <h5 class="card-title">
                             <span class="text-fiord-blue flex-column d-flex">Добавить</span>
                         </h5>
@@ -102,7 +147,7 @@ use yii\helpers\Url;
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addChartModalTitle">Дабавить измерение</h5>
+                <h5 class="modal-title" id="addChartModalTitle">Добавить график</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

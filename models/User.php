@@ -42,7 +42,7 @@ class User extends AppModel implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'password', 'create_at'], 'required'],
+//            [['email', 'password', 'create_at'], 'required'],
             [['is_admin'], 'integer'],
             [['create_at', 'update_at'], 'safe'],
             [['email', 'password', 'auth_key'], 'string', 'max' => 255],
@@ -146,4 +146,16 @@ class User extends AppModel implements IdentityInterface
             'update_at' => 'Обновлено',
         ];
     }
+
+    public function setPassword($password){
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
 }
+
+

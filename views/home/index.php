@@ -19,15 +19,20 @@ use yii\helpers\Url;
             </div>
         </div>
         <!-- End Page Header -->
+        <?php if (!empty($data)): ?>
         <div class="page-header row no-gutters pb-3">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                 <span class="text-uppercase page-subtitle">Статистика по программам</span>
             </div>
         </div>
+
         <?php $i = 1; ?>
+        <?php $k = 1; ?>
         <?php foreach ($data as $set): ?>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-0">
+            <?php if ($k % 2 != 0): ?>
+                <div class="row">
+            <?php endif; ?>
+                <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-1">
                     <div class="stats-small stats-small--1 card card-small">
                         <div class="card-body p-0 d-flex">
                             <div href="" class="d-flex flex-column m-auto">
@@ -47,8 +52,14 @@ use yii\helpers\Url;
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php if ($k % 2 == 0 || $k >= count($data)): ?>
+                </div>
+            <?php endif; ?>
+        <?php $k++ ?>
         <?php endforeach; ?>
         <?= \app\components\StatsChartWidget::widget(['data' => $data]) ?>
+        <?php else: ?>
+        <h5>У тебя пока нет тренировок. Создай совю первую программу, и начни тренирову :)</h5>
+        <?php endif; ?>
     </div>
 </main>

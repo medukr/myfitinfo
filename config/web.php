@@ -48,6 +48,14 @@ $config = [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'andrii.demydyuk@gmail.com',
+                'password' => 'qwe123',
+                'port' => '465 ',
+                'encryption' => 'ssl',
+                ]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -66,6 +74,8 @@ $config = [
             'rules' => [
                 '/login' => 'site/login',
                 '/logout' => 'site/logout',
+                '/reset' => 'site/reset-password',
+                '/register' => 'site/register',
 
                 '/site/<action:\w+>' => 'site/error',
                 '/home/<action:\w+?>' => 'site/error',

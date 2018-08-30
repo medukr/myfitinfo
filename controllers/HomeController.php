@@ -104,6 +104,7 @@ class HomeController extends AppController
         $data_model = new RouletteData();
 
         $roulettes = Roulette::findWhereUser();
+        krsort($roulettes);
 
         return $this->render('chart', compact('roulettes','model', 'data_model'));
     }

@@ -28,7 +28,8 @@ class RouletteController extends AppController
 
                 if ($roulette->save()) {
                     Yii::$app->session->setFlash('success', 'Новое измерение успешно добавлено :)');
-                    return $this->redirect(['roulette/view', 'id' => $roulette->id]);
+//                    return $this->redirect(['roulette/view', 'id' => $roulette->id]);
+                    return $this->redirect(['home/chart']);
                 }
             }
         }
@@ -75,7 +76,7 @@ class RouletteController extends AppController
 
                     if ($roulette_data->save()) {
                         Yii::$app->session->setFlash('success', 'Показания успешно добавлены :)');
-                        return $this->redirect('/chart');
+                        return $this->redirect(['home/chart']);
                     }
                 }
 
@@ -83,5 +84,60 @@ class RouletteController extends AppController
         }
 
         return $this->throwAppException();
+    }
+
+    public function actionDeleteLastData()
+    {
+        $roulette = new Roulette();
+
+        if ($roulette->load(Yii::$app->request->post())){
+
+            $roulette_id = $this->validateId(Yii::$app->request->post('Roulette')['id']);
+
+            $model = Roulette::findWhereIdAndUser($roulette_id);
+
+            if ($model){
+
+                $data = RouletteData::findLastWhereRolletteId($model->id);
+
+                if ($data && $data->delete()){
+
+                    Yii::$app->session->setFlash('success', 'Показание успешно удалено');
+                    return $this->redirect(['home/chart']);
+                }
+
+                Yii::$app->session->setFlash('warning', 'Нечего удалять (:');
+                return $this->redirect(['home/chart']);
+            }
+
+        }
+
+        $this->throwAppException();
+    }
+
+    public function actionDeleteRoulette()
+    {
+        $roulette = new Roulette();
+        if ($roulette->load(Yii::$app->request->post())){
+
+            $roulette_id = $this->validateId(Yii::$app->request->post('Roulette')['id']);
+
+            $model = Roulette::findWhereIdAndUser($roulette_id);
+
+            if ($model){
+                if($model->deleteAllData()){
+
+                    if ($model->delete()){
+                        Yii::$app->session->setFlash('success', 'График успешно удален');
+                        return $this->redirect(['home/chart']);
+                    }
+
+                    Yii::$app->session->setFlash('warning', 'Упс... Что-то пошло не так :(. Попробуй еще раз');
+                    return $this->redirect(['home/chart']);
+                }
+            }
+        }
+
+        $this->throwAppException();
     }
 }

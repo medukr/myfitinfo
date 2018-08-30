@@ -23,9 +23,10 @@ use yii\helpers\Html;
         </div>
         <!-- End Page Header -->
         <!-- Small Stats Blocks -->
+        <?php if ($disciplines): ?>
         <?php foreach ($disciplines as $discipline): ?>
         <div class="row">
-            <div class="col-lg col-sm-12 mb-2 p-0">
+            <div class="col-lg col-sm-12 mb-2 px-0 ">
                 <div class="card card-small card-post card-post--aside card-post--1">
                     <div class="card-post__image" style="background-image: url('<?= $discipline->getImage()?>');">
                     </div>
@@ -52,25 +53,8 @@ use yii\helpers\Html;
         </div>
         <?= \app\components\ModalDisciplineInfoWidget::widget(compact('discipline')) ?>
         <?php endforeach; ?>
-
-<!--        <div class="row">-->
-<!--            <div class="col-lg col-sm-12 mb-4">-->
-<!--                <div class="card card-small card-post card-post--aside card-post--1">-->
-<!--                    <div class="card-post__image" style="background-image: url('images/content-management/5.jpeg');">-->
-<!--                        <a href="#" class="card-post__category badge badge-pill badge-info">Travel</a>-->
-<!--                        <div class="card-post__author d-flex">-->
-<!--                            <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('images/avatars/0.jpg');">Written by Anna Ken</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <h5 class="card-title">-->
-<!--                            <a class="text-fiord-blue" href="#">Attention he extremity unwilling on otherwise cars backwards yet</a>-->
-<!--                        </h5>-->
-<!--                        <p class="card-text d-inline-block mb-3">Conviction up partiality as delightful is discovered. Yet jennings resolved disposed exertion you off. Left did fond drew fat head poor jet pan flying over...</p>-->
-<!--                        <span class="text-muted">29 February 2019</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <?php else: ?>
+        <h3>Нет упражнений, и это печально...</h3>
+        <?php endif; ?>
     </div>
 </main>

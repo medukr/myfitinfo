@@ -80,6 +80,7 @@ class Presets extends AppModel
         return self::find()
             ->where(['user_id' => Yii::$app->user->id])
             ->orWhere(['user_id' => User::ADMIN_ID ])
+            ->orderBy(['id' => SORT_DESC])
             ->all();
     }
 
@@ -99,8 +100,8 @@ class Presets extends AppModel
             'id' => 'ID',
             'name' => 'Название',
             'user_id' => 'ID пльзователя',
-            'create_at' => 'Создано',
-            'update_at' => 'Обновлено',
+            'create_at' => 'Создан',
+            'update_at' => 'Обновлен',
         ];
     }
 

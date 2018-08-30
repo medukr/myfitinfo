@@ -74,7 +74,15 @@ use yii\widgets\ActiveForm;
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <?= $form->field($profile, 'image')->fileInput()->label('Обновить аватар') ?>
+                                            <?= $form->field($profile, 'image', [
+                                                    'options' => [
+                                                            'class' => 'form-group custom-file w-100 col-md-5 ml-1'
+                                                    ]
+                                            ])->fileInput([
+                                                    'class' => 'custom-file-input'
+                                            ])->label('Обновить аватар', [
+                                                    'class' => 'custom-file-label'
+                                            ]) ?>
                                         </div>
                                         <button type="submit" class="btn btn-accent">Update Account</button>
                                     <?php ActiveForm::end(); ?>
