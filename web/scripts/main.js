@@ -39,7 +39,7 @@ $('#add-to-preset').click(function (e) {
 //удаление программы
 $('div#presets').on('click', 'button.delete-preset', function (e) {
     e.preventDefault();
-    if (!confirm('Are you sure?')) return false;
+    if (!confirm('Ты уверен, что хочешь удалить программу? Это действие необратимо.')) return false;
 
     let form_id = $(this).data('form-id');
 
@@ -92,7 +92,7 @@ $('div#preset-items').on('click', 'button.delete-preset-item', function (e) {
 $('div#sets-list').on('click', 'button.delete-set', function (e) {
     e.preventDefault();
 
-    if (!confirm('Are you sure?')) return false;
+    if (!confirm('Ты уверен, что хочешь удалить свою тренировку? Это действие необратимо.')) return false;
 
     let form_id = $(this).data('form-id');
 

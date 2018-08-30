@@ -36,7 +36,7 @@ use yii\helpers\Url;
                         <div class="input-group">
                             <?= Html::input('text', 'Presets[name]', $preset->name, ['class' => 'form-control input-lg']) ?>
                             <div class="input-group-append">
-                                <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary']) ?>
+                                <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary btn-pill font-weight-bold']) ?>
                             </div>
                         </div>
                         <?php ActiveForm::end() ?>
@@ -56,7 +56,7 @@ use yii\helpers\Url;
                         <div class="input-group-append">
                             <?= Html::submitButton('Добавить',
                                 [
-                                    'class' => 'btn btn-primary',
+                                    'class' => 'btn btn-primary btn-pill font-weight-bold',
                                     'name' => 'submit',
                                     'id' => 'add-to-preset',
                                     'value' => 1,
@@ -90,8 +90,8 @@ use yii\helpers\Url;
                     <?= $form->field($preset, 'id')->hiddenInput()->label(false) ?>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Отмена</button>
-                    <?= Html::submitButton('Изменить', ['class' => 'btn btn-lg btn-primary']) ?>
+                    <button type="button" class="btn btn-secondary btn-pill font-weight-bold" data-dismiss="modal">Отмена</button>
+                    <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary btn-pill font-weight-bold']) ?>
                 </div>
             <?php ActiveForm::end(); ?>
         </div>

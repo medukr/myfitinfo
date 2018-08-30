@@ -95,21 +95,23 @@ use yii\helpers\Url;
                                     </div>
                                     <div class="modal-footer">
                                         <div class="row d-flex">
-                                            <button type="button" class="btn btn-secondary mr-auto m-2" data-dismiss="modal">Отмена</button>
+                                            <button type="button" class="btn btn-pill btn-secondary mr-auto m-2 font-weight-bold" data-dismiss="modal">Отмена</button>
                                             <?= Html::submitButton('Добавить',
                                             [
-                                                'class' => 'btn btn-primary ml-auto m-2',
+                                                'class' => 'btn btn-pill btn-primary ml-auto m-2 font-weight-bold',
                                                 'form' => $form->id,
                                             ]) ?>
                                             <?= Html::submitButton('Удалить посленее значение',
                                                 [
-                                                    'class' => 'btn mx-auto m-2',
+                                                    'class' => 'btn btn-pill mx-auto m-2 font-weight-bold',
                                                     'form' => $formDeleteLast->id,
                                                 ]) ?>
                                             <?= Html::submitButton('Удалить график',
                                                 [
-                                                    'class' => 'btn btn-danger ml-auto m-2',
+                                                    'class' => 'btn btn-pill btn-danger ml-auto m-2 font-weight-bold',
                                                     'form' => $formDelete->id,
+                                                    'onclick' => 'if(!confirm("Вы уверены, что хотите удалить этот график? Это действие необратимо.")) return false',
+
                                                 ]) ?>
                                         </div>
                                     </div>
@@ -133,7 +135,7 @@ use yii\helpers\Url;
                    data-target="#addChartModal">
                     <div class="card-body d-flex ">
                         <h5 class="card-title">
-                            <span class="text-fiord-blue flex-column d-flex">Добавить</span>
+                            <span class="text-fiord-blue flex-column d-flex ">Добавить</span>
                         </h5>
                     </div>
                 </a>
@@ -157,10 +159,10 @@ use yii\helpers\Url;
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-pill btn-secondary font-weight-bold" data-dismiss="modal">Отмена</button>
                 <?= Html::submitButton('Добавить',
                     [
-                            'class' => 'btn btn-primary'
+                            'class' => 'btn btn-pill btn-primary font-weight-bold'
                     ]) ?>
             </div>
             <?php ActiveForm::end(); ?>

@@ -117,14 +117,14 @@ use yii\widgets\ActiveForm;
                         <div class="card-footer p-2 border-top d-flex">
                             <?= Html::submitButton('Добавить',
                                 [
-                                    'class' => 'btn btn-lg btn-secondary add-iteration',
+                                    'class' => 'btn btn-lg btn-secondary add-iteration btn-pill font-weight-bold',
                                     'name' => 'submit',
                                     'value' => 1,
                                     'form' => $formAdd->id
                                 ]) ?>
                             <?= Html::submitButton('Удалить послеедний',
                                 [
-                                    'class' => 'btn btn-sm mt-3 ml-auto delete-iteration',
+                                    'class' => 'btn mt-3 ml-auto delete-iteration btn-pill font-weight-bold',
                                     'name' => 'submit',
                                     'value' => 1,
                                     'form' => $formDelete->id

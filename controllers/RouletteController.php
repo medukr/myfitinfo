@@ -27,7 +27,7 @@ class RouletteController extends AppController
                 $roulette->user_id = Yii::$app->user->id;
 
                 if ($roulette->save()) {
-                    Yii::$app->session->setFlash('success', 'Новое измерение успешно добавлено :)');
+                    Yii::$app->session->setFlash('success', 'Новый график успешно добавлен :)');
 //                    return $this->redirect(['roulette/view', 'id' => $roulette->id]);
                     return $this->redirect(['home/chart']);
                 }
@@ -75,7 +75,7 @@ class RouletteController extends AppController
                     $roulette_data->date = date("Y-m-d H:i:s",time());
 
                     if ($roulette_data->save()) {
-                        Yii::$app->session->setFlash('success', 'Показания успешно добавлены :)');
+                        Yii::$app->session->setFlash('success', 'Показание успешно добавлено :)');
                         return $this->redirect(['home/chart']);
                     }
                 }
