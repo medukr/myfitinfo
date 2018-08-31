@@ -15,6 +15,7 @@ use yii\db\ActiveRecord;
  * @property int $user_id
  * @property string $name
  * @property object|array $rouletteData
+ * @property object|array $rouletteDataLimit
  */
 class Roulette extends AppModel
 {
@@ -69,6 +70,11 @@ class Roulette extends AppModel
         return $this->hasMany(RouletteData::className(), ['roulette_id' => 'id'])->orderBy(['date' =>  SORT_DESC]);
     }
 
+    public function getRouletteDataLimit()
+    {
+        return $this->hasMany(RouletteData::className(), ['roulette_id' => 'id'])->orderBy(['date' =>  SORT_DESC])->limit(20);
+    }
+
 
     public static function findWhereIdAndUser($id)
     {
@@ -88,12 +94,22 @@ class Roulette extends AppModel
             ->all();
     }
 
+    public static function findWhereUserWithoutData()
+    {
+        return self::find()
+            ->where(['user_id' => Yii::$app->user->id])
+
+            ->all();
+    }
+
+
+
 
     public function getLastData()
     {
-        if ($this->rouletteData){
+        if ($this->rouletteDataLimit){
             //Выборка из БД уже должна быть отсортирована в обратном порядке
-            return $this->rouletteData[0]->measurement;
+            return $this->rouletteDataLimit[0]->measurement;
         }
         else return 0;
     }
@@ -103,12 +119,12 @@ class Roulette extends AppModel
         //Выборка из БД должна быть уже отсортирована в обратном порядке
         $html = "<span class=\"stats-small__percentage stats-small__percentage--increase\">Нет замеров</span>";
 
-        if ($this->rouletteData) {
-            if ($this->rouletteData[0]) {
-                if (isset($this->rouletteData[1])) {
-                    $result = $this->rouletteData[0]->measurement - $this->rouletteData[1]->measurement;
+        if ($this->rouletteDataLimit) {
+            if ($this->rouletteDataLimit[0]) {
+                if (isset($this->rouletteDataLimit[1])) {
+                    $result = $this->rouletteDataLimit[0]->measurement - $this->rouletteDataLimit[1]->measurement;
                 } else {
-                    $result = $this->rouletteData[0]->measurement;
+                    $result = $this->rouletteDataLimit[0]->measurement;
                 }
             }
 

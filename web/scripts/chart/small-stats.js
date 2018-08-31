@@ -115,17 +115,14 @@
                         label: 'chart',
                         fill: 'start',
                         data: el.data,
-                        lineTension: 0,
+
                         backgroundColor: el.backgroundColor,
                         borderColor: el.borderColor,
                         borderWidth: 1.5,
-                        // pointBorderColor: 'rgb(' + randColor() + ', ' + randColor() + ', ' + randColor() + ')',
                         pointBackgroundColor:  el.borderColor,
                         pointRadius: 2,
                         pointHoverRadius: 8,
                         pointHitRadius: 10,
-                        // pointBorderWidth: 2,
-                        // pointStyle: 'rectRounded',
                     }],
                 },
                 options: chartOptions

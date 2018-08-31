@@ -103,7 +103,7 @@ class HomeController extends AppController
         $model = new Roulette();
         $data_model = new RouletteData();
 
-        $roulettes = Roulette::findWhereUser();
+        $roulettes = Roulette::findWhereUserWithoutData();
         krsort($roulettes);
 
         return $this->render('chart', compact('roulettes','model', 'data_model'));

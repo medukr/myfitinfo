@@ -28,7 +28,7 @@ use yii\helpers\Url;
         <!-- End Page Header -->
 
         <div class="row">
-            <div class="col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-12 p-0 pr-2">
                     <strong class="text-muted d-block mb-2">Название программы</strong>
                     <div class="row ml-auto" id="edit-name">
                         <?php $form = ActiveForm::begin(['action' => Url::to('/preset/update-name')]); ?>

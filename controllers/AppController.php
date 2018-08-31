@@ -48,7 +48,7 @@ class AppController extends Controller
 
     public function throwAppException()
     {
-        throw new HttpException(404, 'Запрашиваемая страница не найдена.');
+        throw new HttpException(404, 'Страница не найдена.');
 
     }
 

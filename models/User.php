@@ -42,7 +42,7 @@ class User extends AppModel implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'password', 'create_at'], 'required'],
+            [['email', 'password'], 'required'],
             [['is_admin'], 'integer'],
             [['create_at', 'update_at'], 'safe'],
             [['email', 'password', 'auth_key'], 'string', 'max' => 255],

@@ -10,7 +10,6 @@ use yii\helpers\Html;
 <!-- Main Sidebar-->
 <?= \app\components\MainSidebarWidget::widget() ?>
 <!-- End Main Sidebar-->
-
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
     <?= \app\components\MainNavbarWidget::widget() ?>
     <div class="main-content-container container-fluid px-4">
@@ -30,7 +29,7 @@ use yii\helpers\Html;
                 <div class="card card-small card-post card-post--aside card-post--1">
                     <div class="card-post__image" style="background-image: url('<?= $discipline->getImage()?>');">
                     </div>
-                    <div class="card-body d-flex pl-2 pt-2 pb-2">
+                    <div class="card-body d-flex py-2">
                         <div class="col-lg p-0">
                         <h5 class="card-title">
                             <span class="text-fiord-blue flex-column d-flex" ><?= $discipline->name ?></span>

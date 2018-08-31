@@ -145,7 +145,7 @@ use yii\helpers\Url;
             <?php endforeach; ?>
             <?= \app\components\ChartDataWidget::widget(['roulettes' => $roulettes]) ?>
         <?php else: ?>
-        <h5>Добавь свой первый замер. Например, вес :)</h5>
+        <h5>Добавь свой первый график. Например, вес :)</h5>
         <?php endif; ?>
         <div class="row align-content-center">
             <div class="col-lg col-sm-12 mb-4 px-1">

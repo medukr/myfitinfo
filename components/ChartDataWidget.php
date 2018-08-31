@@ -35,8 +35,8 @@ class ChartDataWidget extends Widget
 
         foreach ($this->roulettes as $roulette){
             $arrayChild = [];
-            if ($roulette->rouletteData) {
-                foreach ($roulette->rouletteData as $data) {
+            if ($roulette->rouletteDataLimit) {
+                foreach ($roulette->rouletteDataLimit as $data) {
                     $arrayChild[] = $data->measurement;
                 }
 

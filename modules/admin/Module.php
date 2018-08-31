@@ -40,7 +40,7 @@ class Module extends \yii\base\Module
                             $user = Yii::$app->user->identity['is_admin'];
                             if ($user === User::IS_ADMIN) return true;
 
-                            throw new HttpException(404, 'The requested Item could not be found.');
+                            throw new HttpException(404, 'Страница не найдена.');
 
                         }
                     ],

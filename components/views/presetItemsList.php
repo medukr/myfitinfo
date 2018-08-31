@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
         <div class="col-lg col-sm-12 mb-2 p-0">
             <div class="card card-small card-post card-post--aside card-post--1">
                 <div class="card-post__image" style="background-image: url('<?= $discipline->getImage() ?>');"></div>
-                <div class="card-body d-flex pl-2 pt-2 pb-2">
+                <div class="card-body d-flex py-2">
                     <div class="col-lg p-0">
                         <h5 class="card-title">
                             <span class="text-fiord-blue flex-column d-flex"><?= $discipline->name ?></span>
