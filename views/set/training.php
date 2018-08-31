@@ -52,11 +52,7 @@ use yii\widgets\ActiveForm;
                         </div>
                         <?php if ($last_set): ?>
                         <?php if ($last_set->workingWithoutDiscipline[$k]->workingData): ?>
-                                <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
-                                    <p class="card-text text-muted mb-0">Может сюда еще график запилить?</p>
-                                    <p class="card-text text-muted mb-0">График последних 15 выполненых таких упражнений</p>
 
-                                </div>
                         <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
                             <p class="card-text text-muted mb-0">В прошлый раз:</p>
                         </div>
@@ -115,9 +111,9 @@ use yii\widgets\ActiveForm;
                             </div>
                         </div>
                         <div class="card-footer p-2 border-top d-flex">
-                            <?= Html::submitButton('Добавить',
+                            <?= Html::submitButton('<i class="fa fa-plus"></i> ДОБАВИТЬ',
                                 [
-                                    'class' => 'btn btn-lg btn-secondary add-iteration btn-pill font-weight-bold',
+                                    'class' => 'btn btn-secondary add-iteration btn-pill font-weight-bold',
                                     'name' => 'submit',
                                     'value' => 1,
                                     'form' => $formAdd->id

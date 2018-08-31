@@ -46,11 +46,26 @@
                 // Uncomment the following line in order to disable the animations.
                 // animation: false,
                 legend: {
-                    display: false
+                    display: false,
+
                 },
                 tooltips: {
-                    enabled: false,
-                    custom: false
+                    enabled: true,
+                    callbacks: {
+                        label: function(t,d){
+                            return d['datasets'][0]['data'][t['index']];
+                        },
+
+                        title: function (a) {
+                            return false;
+                        },
+
+                    },
+                    displayColors: false,
+
+
+
+
                 },
                 elements: {
                     point: {
@@ -68,19 +83,21 @@
                         ticks: {
                             display: false,
 
-                        }
+
+                        },
+
                     }],
                     yAxes: [{
                         gridLines: false,
                         scaleLabel: false,
-
                         ticks: {
                             display: false,
                             // Avoid getting the graph line cut of at the top of the canvas.
                             // Chart.js bug link: https://github.com/chartjs/Chart.js/issues/4790
                             suggestedMax: max,
 
-                        }
+                        },
+                        position: 'right',
                     }],
                 },
             };
@@ -95,12 +112,20 @@
                 data: {
                     labels: el.labels,
                     datasets: [{
-                        label: 'Today',
+                        label: 'chart',
                         fill: 'start',
                         data: el.data,
+                        lineTension: 0,
                         backgroundColor: el.backgroundColor,
                         borderColor: el.borderColor,
                         borderWidth: 1.5,
+                        // pointBorderColor: 'rgb(' + randColor() + ', ' + randColor() + ', ' + randColor() + ')',
+                        pointBackgroundColor:  el.borderColor,
+                        pointRadius: 2,
+                        pointHoverRadius: 10,
+                        pointHitRadius: 10,
+                        // pointBorderWidth: 2,
+                        // pointStyle: 'rectRounded',
                     }],
                 },
                 options: chartOptions

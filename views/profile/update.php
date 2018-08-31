@@ -84,7 +84,7 @@ use yii\widgets\ActiveForm;
                                                     'class' => 'custom-file-label'
                                             ]) ?>
                                         </div>
-                                        <button type="submit" class="btn btn-accent btn-pill font-weight-bold">Update Account</button>
+                                        <button type="submit" class="btn btn-accent btn-pill font-weight-bold">ОБНОВИТЬ ПРОФИЛЬ</button>
                                     <?php ActiveForm::end(); ?>
                                 </div>
                             </div>

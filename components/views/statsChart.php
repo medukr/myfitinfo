@@ -18,6 +18,7 @@
             borderColor: 'rgb(' + randColor() + ', ' + randColor() + ', ' + randColor() + ')',
             data: [<?php foreach ($sets['sets'] as $set) echo $set['sum']['weight'] . ','?>],
             labels: [<?php foreach ($sets['sets'] as $set) echo $set['sum']['weight'] . ','?>],
+
         },
         <?php endforeach;?>
     ];

@@ -22,10 +22,10 @@
             <div class="modal-footer">
                 <div class="text-muted border-top py-3">
                                 <span class="d-inline-block">By
-                                  <span class="text-fiord-blue" href="#">Admin</span>
+                                  <span class="text-fiord-blue" href="#">Администратор</span>
                                 </span>
                 </div>
-                <button type="button" class="btn btn-secondary btn-pill font-weight-bold" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary btn-pill font-weight-bold" data-dismiss="modal">ЗАКРЫТЬ</button>
             </div>
         </div>
     </div>

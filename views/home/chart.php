@@ -35,6 +35,7 @@ use yii\helpers\Url;
                 <?php endif; ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-1">
                         <div class="stats-small stats-small--1 card card-small">
+                            <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
                             <div class="card-body d-flex">
                                 <div href="<?= Url::to(['roulette/view', 'id' => $roulette->id]) ?>" class="d-flex flex-column m-auto">
                                     <div class="stats-small__data text-center">
@@ -53,7 +54,7 @@ use yii\helpers\Url;
                                     </div>
                                 </div>
                             </div>
-                            <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
+
                         </div>
                     </div>
                         <!-- Add addRouletteData Modal -->
@@ -94,13 +95,13 @@ use yii\helpers\Url;
                                         <?php ActiveForm::end(); ?>
                                     </div>
                                     <div class="modal-footer">
-                                        <div class="row d-flex">
-                                            <button type="button" class="btn btn-pill btn-secondary mr-auto m-2 font-weight-bold" data-dismiss="modal">Отмена</button>
-                                            <?= Html::submitButton('Добавить',
-                                            [
-                                                'class' => 'btn btn-pill btn-primary ml-auto m-2 font-weight-bold',
-                                                'form' => $form->id,
-                                            ]) ?>
+                                        <div class="row">
+                                                <?= Html::submitButton('<i class="fa fa-plus"></i> ДОБАВИТЬ',
+                                                    [
+                                                        'class' => 'btn btn-pill btn-primary  m-2 mr-auto font-weight-bold',
+                                                        'form' => $form->id,
+                                                    ]) ?>
+                                                <button type="button" class="btn btn-pill btn-secondary ml-auto m-2 font-weight-bold" data-dismiss="modal">ОТМЕНА</button>
                                             <?= Html::submitButton('Удалить посленее значение',
                                                 [
                                                     'class' => 'btn btn-pill mx-auto m-2 font-weight-bold',
@@ -108,14 +109,13 @@ use yii\helpers\Url;
                                                 ]) ?>
                                             <?= Html::submitButton('Удалить график',
                                                 [
-                                                    'class' => 'btn btn-pill btn-danger ml-auto m-2 font-weight-bold',
+                                                    'class' => 'btn btn-pill btn-danger mx-auto m-2 font-weight-bold',
                                                     'form' => $formDelete->id,
                                                     'onclick' => 'if(!confirm("Вы уверены, что хотите удалить этот график? Это действие необратимо.")) return false',
 
                                                 ]) ?>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -159,8 +159,8 @@ use yii\helpers\Url;
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-pill btn-secondary font-weight-bold" data-dismiss="modal">Отмена</button>
-                <?= Html::submitButton('Добавить',
+                <button type="button" class="btn btn-pill btn-secondary font-weight-bold" data-dismiss="modal">ОТМЕНА</button>
+                <?= Html::submitButton('<i class="fa fa-plus"></i> ДОБАВИТЬ',
                     [
                             'class' => 'btn btn-pill btn-primary font-weight-bold'
                     ]) ?>
