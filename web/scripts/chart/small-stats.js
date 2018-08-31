@@ -122,7 +122,7 @@
                         // pointBorderColor: 'rgb(' + randColor() + ', ' + randColor() + ', ' + randColor() + ')',
                         pointBackgroundColor:  el.borderColor,
                         pointRadius: 2,
-                        pointHoverRadius: 10,
+                        pointHoverRadius: 8,
                         pointHitRadius: 10,
                         // pointBorderWidth: 2,
                         // pointStyle: 'rectRounded',

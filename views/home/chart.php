@@ -35,12 +35,21 @@ use yii\helpers\Url;
                 <?php endif; ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-1">
                         <div class="stats-small stats-small--1 card card-small">
-                            <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
-                            <div class="card-body d-flex">
-                                <div href="<?= Url::to(['roulette/view', 'id' => $roulette->id]) ?>" class="d-flex flex-column m-auto">
+
+
+                            <div class="card-body d-flex pt-3 pb-0">
+                                <div class="d-flex flex-column m-auto">
                                     <div class="stats-small__data text-center">
                                         <span class="stats-small__label text-uppercase"><?= $roulette->name ?></span>
-                                        <h6 class="stats-small__value count my-3"><?= $roulette->getLastData() ?><?= Html::a('<i class="material-icons">edit</i>',
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="card-body d-flex">
+                                <div class="d-flex flex-column m-auto">
+                                    <div class="stats-small__data text-center">
+                                        <h6 class="stats-small__value count my-0"><?= $roulette->getLastData() ?><?= Html::a('<i class="material-icons">edit</i>',
                                                     '',
                                                     [
                                                         'class' => 'nav-link-icon mr-2',
@@ -49,12 +58,21 @@ use yii\helpers\Url;
                                                     ]) ?>
                                             </h6>
                                     </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="card-body d-flex pt-0 pb-3">
+                                <div class="d-flex flex-column m-auto">
                                     <div class="stats-small__data">
                                         <?= $roulette->getDifferenceOfLast() ?>
                                     </div>
                                 </div>
                             </div>
 
+
+                            <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
                         </div>
                     </div>
                         <!-- Add addRouletteData Modal -->

@@ -34,12 +34,25 @@ use yii\helpers\Url;
             <?php endif; ?>
                 <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-1">
                     <div class="stats-small stats-small--1 card card-small">
-                        <div class="card-body p-0 d-flex">
+
+                        <div class="card-body p-0 d-flex pt-3 pb-0">
                             <div href="" class="d-flex flex-column m-auto">
                                 <div class="stats-small__data text-center">
                                     <span class="stats-small__label text-uppercase"><?= $set['name'] ?></span>
-                                    <h6 class="stats-small__value count my-3"><?= $set['last_result']?> кг</h6>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-0 d-flex">
+                            <div href="" class="d-flex flex-column m-auto">
+                                <div class="stats-small__data text-center">
+                                    <h6 class="stats-small__value count my-0"><?= $set['last_result']?> кг</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-0 d-flex pb-3 pt-0">
+                            <div href="" class="d-flex flex-column m-auto">
                                 <div class="stats-small__data">
                                     <?php if ($set['last_result'] >= $set['prelast_result'] ): ?>
                                     <span class="stats-small__percentage stats-small__percentage--increase">+<?= $set['last_result'] - $set['prelast_result']?></span>
@@ -48,8 +61,10 @@ use yii\helpers\Url;
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
                         </div>
+
+                        <canvas height="70" class="blog-overview-stats-small-<?= $i++ ?>"></canvas>
+
                     </div>
                 </div>
             <?php if ($k % 2 == 0 || $k >= count($data)): ?>
