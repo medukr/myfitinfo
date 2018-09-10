@@ -53,7 +53,7 @@ use yii\helpers\Html;
         <?= \app\components\ModalDisciplineInfoWidget::widget(compact('discipline')) ?>
         <?php endforeach; ?>
         <?php else: ?>
-        <h3>Нет упражнений, и это печально...</h3>
+        <h5>Нет упражнений, и это печально...</h5>
         <?php endif; ?>
     </div>
 </main>

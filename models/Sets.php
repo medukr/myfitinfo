@@ -128,7 +128,6 @@ class Sets extends AppModel
 
     public function getDate()
     {
-
         $date = Yii::$app->formatter->asDate($this->date, 'd MMM yyyy, EEEE');
 
         $relative_time = Yii::$app->formatter->asRelativeTime($this->date);

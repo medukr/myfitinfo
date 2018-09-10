@@ -94,7 +94,12 @@ class Profiles extends AppModel
 
     public function getImage()
     {
-        return $this->image ? self::AVATARS_PATH . $this->image : '/images/no-user-image.png';
+        if  ($this->image && file_exists(Yii::getAlias('@webroot'). self::AVATARS_PATH . $this->image)){
+
+            return self::AVATARS_PATH . $this->image;
+        }
+
+        return '/images/no-user-image.png';
     }
 
 

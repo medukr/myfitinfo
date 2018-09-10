@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
                                 <h5 class="card-title">
                                     <span class="text-fiord-blue flex-column d-flex" ><?= $working->discipline->name ?></span>
                                 </h5>
-                                <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время и т.д</p>
+<!--                                <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время и т.д</p>-->
                             </div>
                             <form>
                                 <div class="row ml-auto">
@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
                                 </div>
                             </form>
                         </div>
-                        <?php if ($last_set): ?>
+                        <?php if ($last_set && $last_set->workingWithoutDiscipline): ?>
                         <?php if ($last_set->workingWithoutDiscipline[$k]->workingData): ?>
 
                         <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">

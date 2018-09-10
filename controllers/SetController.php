@@ -58,10 +58,10 @@ class SetController extends AppController
         $set_id = $this->validateId(Yii::$app->request->get('id'));
 
         $set = Sets::findWhereIdAndUser($set_id);
-        $last_set = Sets::findLastSet($set);
-        $workingData = new WorkingData();
 
         if ($set){
+            $last_set = Sets::findLastSet($set);
+            $workingData = new WorkingData();
             return $this->render('training', compact('set', 'last_set', 'workingData'));
         }
 

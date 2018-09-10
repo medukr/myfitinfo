@@ -37,6 +37,7 @@ $config = [
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
             'locale' => 'ru-RU',
+            'defaultTimeZone' => 'Europe/Kiev'
         ],
 
         'errorHandler' => [

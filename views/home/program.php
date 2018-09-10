@@ -57,8 +57,11 @@ use yii\helpers\Url;
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Отмена</button>
-                <?= Html::submitButton('Добавить', ['class' => 'btn btn-lg btn-primary']) ?>
+                <button type="button" class="btn btn-pill btn-secondary  font-weight-bold" data-dismiss="modal">ОТМЕНА</button>
+                <?= Html::submitButton('<i class="fa fa-plus"></i> ДОБАВИТЬ',
+                    [
+                            'class' => 'btn btn-pill btn-primary  font-weight-bold'
+                    ]) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

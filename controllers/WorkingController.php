@@ -63,6 +63,12 @@ class WorkingController extends AppController
                     }
 
                     return WorkingDataListWidget::widget(['working' => $working]);
+                } else {
+                    if (Yii::$app->request->post('submit')){
+                        return $this->redirect(['set/training', 'id' => $working->set_id]);
+                    }
+
+                    return WorkingDataListWidget::widget(['working' => $working]);
                 }
             }
 
