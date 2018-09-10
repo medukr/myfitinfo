@@ -56,9 +56,9 @@ class AppController extends Controller
     {
         $id = (int) Html::encode(trim($id));
 
-        if ($id >= 2) return $id;
-
-        return null;
+        return $id;
+//        if ($id >= 2) return $id;
+//        return null;
     }
 
     public function validateIntegerData($work_data)
