@@ -75,9 +75,9 @@ class ProfileController extends AppController
      */
     public function actionView($id)
     {
-        $id = (int) Html::encode(trim($id));
+        $id = $this->validateId($id);
 
-        $profile = Profiles::find()->where(['user_id' =>  $id])->limit(1)->one();
+        $profile = $this->findModel($id);
 
         return $this->render('view', [
             'model' => $profile,
@@ -149,6 +149,6 @@ class ProfileController extends AppController
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Страница не найдена.');
     }
 }

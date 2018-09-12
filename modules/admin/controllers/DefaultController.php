@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\User;
 use yii\web\Controller;
 
 /**
@@ -15,6 +16,8 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $count_users = User::countUsers();
+
+        return $this->render('index', compact('count_users'));
     }
 }

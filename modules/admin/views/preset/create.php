@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Presets */
 
-$this->title = 'Create Presets';
-$this->params['breadcrumbs'][] = ['label' => 'Presets', 'url' => ['index']];
+$this->title = 'Добваить программу';
+$this->params['breadcrumbs'][] = ['label' => 'Программы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="presets-create">

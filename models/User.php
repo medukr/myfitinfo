@@ -28,6 +28,8 @@ class User extends AppModel implements IdentityInterface
     const ADMIN_ID = 1;
     const IS_ADMIN = 1;
 
+    public $count_users;
+
     /**
      * {@inheritdoc}
      */
@@ -155,6 +157,11 @@ class User extends AppModel implements IdentityInterface
     public function generateAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    public static function countUsers()
+    {
+        return self::findBySql('select count(id) as count_users from users')->one();
     }
 
 }

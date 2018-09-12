@@ -54,11 +54,11 @@ class AppController extends Controller
 
     public function validateId($id)
     {
-        $id = (int) Html::encode(trim($id));
+        $identify = (int) Html::encode(trim($id));
 
-        return $id;
-//        if ($id >= 2) return $id;
-//        return null;
+        if ($identify == $id) return $identify;
+
+        return null;
     }
 
     public function validateIntegerData($work_data)

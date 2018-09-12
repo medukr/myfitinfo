@@ -143,4 +143,11 @@ class Profiles extends AppModel
 
         return false;
     }
+
+    public static function findWhereUserId($id)
+    {
+        return self::find()
+            ->where('user_id = :id', [':id' => (int) $id])
+            ->one();
+    }
 }

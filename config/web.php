@@ -92,6 +92,7 @@ $config = [
                 '/<action:index|start|chart|program|journal|discipline>' => 'home/<action>',
 
                 /*---------Admin Module---------*/
+                '/'.$params['adminUrl'].'/dashboard' => $params['adminUrl']. '/default/index',
                 '/'.$params['adminUrl'].'/<controller:\w+>' => $params['adminUrl'].'/<controller>/index',
                 '/'.$params['adminUrl'].'/<controller:\w+>/<action:\w+>/<id:\d+>' => $params['adminUrl'].'/<controller>/<action>',
             ],

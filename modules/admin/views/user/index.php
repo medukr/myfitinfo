@@ -9,7 +9,7 @@ use yii\widgets\ListView;
 /* @var $searchModel app\modules\admin\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить пользователя (но это пока не работает)', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -50,9 +50,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view} {link} {update} {delete} ',
                 'buttons' => [
                     'link' => function($url, $model, $key){
-                        return Html::a('<i class="fa fa-address-card"></i>',
-                            Url::to(['profile/view', 'id' => $model->id])
+                        if ($model->profile){
+                            return Html::a('<i class="fa fa-address-card"></i>',
+                                Url::to(['profile/view', 'id' => $model->profile['id']])
                             );
+                        }
                     }
                 ],
             ]

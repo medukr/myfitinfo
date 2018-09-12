@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\modules\admin\models\ProfilesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Profiles';
+$this->title = 'Профили';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profiles-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Profiles', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать профиль', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

@@ -25,8 +25,8 @@ use yii\widgets\ActiveForm;
         <!--    --><?php // echo $form->field($model, 'update_at') ?>
 
         <div class="form-group">
-            <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-            <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
+            <?= Html::resetButton('Сброс', ['class' => 'btn btn-default']) ?>
         </div>
         <?php ActiveForm::end(); ?>
     </div>

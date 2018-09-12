@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\modules\admin\models\PresetsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Presets';
+$this->title = 'Программы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="presets-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Presets', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить программу', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

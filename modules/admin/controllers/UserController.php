@@ -2,18 +2,19 @@
 
 namespace app\modules\admin\controllers;
 
+use app\controllers\AppController;
+use app\modules\admin\models\Profiles;
 use Yii;
 use app\modules\admin\models\User;
 use app\modules\admin\models\UserSearch;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * UserController implements the CRUD actions for User model.
  */
-class UserController extends Controller
+class UserController extends AppController
 {
     /**
      * {@inheritdoc}
@@ -73,6 +74,8 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        $id = $this->validateId($id);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -105,10 +108,20 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+        $id = $this->validateId($id);
+
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            if (Yii::$app->request->post('password') != null){
+                $model->setPassword(Yii::$app->request->post('password'));
+            }
+
+            if ($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+
+            }
         }
 
         return $this->render('update', [
@@ -125,7 +138,15 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $id = $this->validateId($id);
+
+        $user = $this->findModel($id);
+        if ($user){
+            $profile = Profiles::findWhereUserId($user->id);
+
+            if ($profile) $profile->delete();
+            $user->delete();
+        }
 
         return $this->redirect(['index']);
     }

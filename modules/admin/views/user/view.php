@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\admin\models\User */
 
 $this->title = 'Пользователь - ID:' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
@@ -15,9 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update User', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('To Profile', ['profile/view', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Delete User', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php if ($model->profile): ?>
+        <?= Html::a('К профилю', ['profile/view', 'id' => $model->profile->id], ['class' => 'btn btn-success']) ?>
+        <?php else: ?>
+        <?= Html::button('Нету профиля', ['class' => 'btn btn-warning']) ?>
+        <?php endif; ?>
+        <?= Html::a('Удалить пользователя', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',

@@ -34,7 +34,7 @@ use yii\helpers\Html;
                         <h5 class="card-title">
                             <span class="text-fiord-blue flex-column d-flex" ><?= $discipline->name ?></span>
                         </h5>
-                            <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время и т.д.</p>
+<!--                            <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время и т.д.</p>-->
                         </div>
                         <form>
                             <div class="row ml-auto">

@@ -6,6 +6,7 @@
  * Time: 15:50
  */
 use yii\helpers\Url;
+use app\controllers\AppController;
 ?>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -13,49 +14,38 @@ use yii\helpers\Url;
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="/adm/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?= Yii::$app->user->identity->profile->getImage() ?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p><?= Yii::$app->user->identity->user_name ?></p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
-        <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-        </form>
-        <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Навигация</li>
-            <li class="active">
+            <li class="<?= AppController::isSidebarActive('user', 'index')?>">
                 <a href="<?= Url::to(['user/index'])?>">
                     <i class="fa fa-dashboard"></i>
                     <span>Пользователи</span>
-                    <span class="pull-right-container">
-                        <span class="label label-primary pull-right">4</span>
-                    </span>
+<!--                    <span class="pull-right-container">-->
+<!--                        <span class="label label-primary pull-right">4</span>-->
+<!--                    </span>-->
                 </a>
             </li>
-            <li class="">
+            <li class="<?= AppController::isSidebarActive('profile', 'index')?>">
                 <a href="<?= Url::to(['profile/index']) ?>">
                     <i class="fa fa-files-o"></i>
                     <span>Профили</span>
                 </a>
             </li>
-            <li class="">
+            <li class="<?= AppController::isSidebarActive('discipline', 'index')?>">
                 <a href="<?= Url::to(['discipline/index']) ?>">
                     <i class="fa fa-files-o"></i>
-                    <span>Дисциплины</span>
+                    <span>Упражнения</span>
                 </a>
             </li>
-            <li class="">
+            <li class="<?= AppController::isSidebarActive('preset', 'index')?>">
                 <a href="<?= Url::to(['preset/index']) ?>">
                     <i class="fa fa-files-o"></i>
                     <span>Программы</span>

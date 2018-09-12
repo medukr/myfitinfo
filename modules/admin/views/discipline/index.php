@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\admin\models\DisciplinesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Disciplines';
+$this->title = 'Упражнения';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="disciplines-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Disciplines', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить упражнение', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
