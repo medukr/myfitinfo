@@ -3,10 +3,10 @@
 namespace app\controllers;
 
 use app\models\RegisterForm;
+use app\models\ResetPasswordForm;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -99,17 +99,27 @@ class SiteController extends AppController
 
     public function actionResetPassword()
     {
-        $model = new RegisterForm();
+        $model = new ResetPasswordForm();
             if ($model->load(Yii::$app->request->post())){
 
                 if ($model->validate()){
 
                     $email = $this->validateInputData($model->email);
-                    $user = User::find()
-                        ->where('email = :email', [':email' => $email])
-                        ->one();
-                    return $this->sendAccessEmail($user);
+                    $user = User::findByEmail($email);
 
+                    if ($user){
+
+                        $user->generateNewPassword();
+                        $user->setPassword($user->new_password);
+
+                        if ($user->save()){
+
+                            $this->sendEmail('reset_password', $user->email, 'Восстановление пароля', $user);
+                            Yii::$app->session->setFlash('success', 'Новый пароль отправлен на вашу почту.');
+                            return $this->redirect(['site/login']);
+                        }
+                    }
+                    Yii::$app->session->setFlash('warning', 'Пользователь не найден.');
                 }
             }
 
@@ -121,9 +131,7 @@ class SiteController extends AppController
         $model = new RegisterForm();
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->registerUser()){
-
-//                return $this->sendAccessEmail($user);
+            if ($model->registerUser()){
 
                 Yii::$app->session->setFlash('success', 'Вы успешно зарегестрированы');
                 return $this->redirect(['site/login']);
@@ -141,13 +149,14 @@ class SiteController extends AppController
 //                    ->setTo($user->email)
 //                    ->setSubject('Подтвержение регистрации пользователя')
 //                    ->send();
-        return $this->render('registerSuccess', compact('user'));
+//        return $this->render('registerSuccess', compact('user'));
     }
 
-
-    public function actionAccess()
+    public function actionAbout()
     {
-
+        return $this->render('about');
     }
+
+
 
 }

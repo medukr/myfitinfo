@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
             <div class="row">
                 <div class="col-lg col-sm-12 mb-2 p-0">
                     <div class="card card-small card-post <!--card-post--aside-->">
-                        <div class="card-post__image" style="background-image: url('<?= $working->discipline->getImage()?>');"></div>
+                        <div class="card-post__image" style="background-image: url('<?= $working->discipline->getImage()?>'); height: 150px"></div>
                         <div class="card-body d-flex pl-2 pt-2 pb-2">
                             <div class="col-lg p-0">
                                 <h5 class="card-title">
@@ -50,25 +50,24 @@ use yii\widgets\ActiveForm;
                                 </div>
                             </form>
                         </div>
-                        <?php if ($last_set && $last_set->workingWithoutDiscipline): ?>
-                        <?php if ($last_set->workingWithoutDiscipline[$k]->workingData): ?>
 
-                        <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
-                            <p class="card-text text-muted mb-0">В прошлый раз:</p>
-                        </div>
-                        <div class="card-footer d-flex pl-2 pt-2 pb-2">
-                            <div class="d-flex">
-                                <?php foreach ($last_set->workingWithoutDiscipline[$k]->workingData as $item): ?>
-                                    <div class="form-group mb-1 ml-2">
-                                        <h5 class="mt-0 mb-0 text-muted text-center"><?= $item->weight ?></h5>
-                                        <hr style="width: 90%; color: black; height: 1px; margin-top: 0.5em; margin-bottom: 0.5em; background: gray; ">
-                                        <h5 class="mt-0 mb-0 text-muted text-center"><?= $item->iteration ?></h5>
-                                    </div>
-                                <?php endforeach; ?>
+                        <?php if ($last_set && $working->findLastWorking($last_set->id, $working->discipline->id)): ?>
+                            <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
+                                <p class="card-text text-muted mb-0">В прошлый раз:</p>
                             </div>
-                        </div>
+                            <div class="card-footer d-flex pl-2 pt-2 pb-2">
+                                <div class="d-flex">
+                                    <?php foreach ($working->last_working->workingData as $item): ?>
+                                        <div class="form-group mb-1 ml-2">
+                                            <h5 class="mt-0 mb-0 text-muted text-center"><?= $item->weight ?></h5>
+                                            <hr style="width: 90%; color: black; height: 1px; margin-top: 0.5em; margin-bottom: 0.5em; background: gray; ">
+                                            <h5 class="mt-0 mb-0 text-muted text-center"><?= $item->iteration ?></h5>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
                         <?php endif; ?>
-                        <?php endif; ?>
+
                         <?php $formAdd = ActiveForm::begin(['action' => Url::to(['working/add']), 'method' => 'post']) ?><?php ActiveForm::end() ?>
                         <?php $formDelete = ActiveForm::begin(['action' => Url::to(['working/delete']), 'method' => 'delete']) ?><?php ActiveForm::end() ?>
                         <div class="card-footer border-top d-flex pl-2 pt-2 pb-2">
@@ -85,18 +84,23 @@ use yii\widgets\ActiveForm;
                                         'form' => $formAdd->id
                                     ]) ?>
                                 <?= Html::dropDownList('WorkingData[weight]',
-                                    0,
+
+                                    ($working->last_working && $working->last_working->workingData)
+                                        ?  $working->last_working->workingData[0]->weight
+                                        : 0,
                                     range(0, 350),
                                     [
-                                        'class' => 'form-control custom-select-lg',
+                                        'class' => 'form-control custom-select-lg text-danger',
                                         'form' => $formAdd->id
                                     ]) ?>
                                 <hr style="width: 90%; color: black; height: 1px; margin-top: 0.5em; margin-bottom: 0.5em; background: black; " >
                                 <?= Html::dropDownList('WorkingData[iteration]',
-                                    0,
+                                    ($working->last_working && $working->last_working->workingData)
+                                        ?  $working->last_working->workingData[0]->iteration
+                                        : 0,
                                     range(0, 150),
                                     [
-                                        'class' => 'form-control custom-select-lg',
+                                        'class' => 'form-control custom-select-lg text-info',
                                         'form' => $formAdd->id
                                     ]) ?>
                             </div>
@@ -106,7 +110,7 @@ use yii\widgets\ActiveForm;
                                 </div>
                                 <hr style="width: 0%; color: black; height: 1px; margin-top: 0.5em; margin-bottom: 0.5em; background: black; " >
                                 <div class="row ml-auto mt-2 mb-0">
-                                    <span class="nav-link-icon mr-0 mr-auto" ><i class="material-icons">refresh</i></span>
+                                    <span class="nav-link-icon mr-0 mr-auto" ><i class="material-icons">forward_10</i></span>
                                 </div>
                             </div>
                         </div>

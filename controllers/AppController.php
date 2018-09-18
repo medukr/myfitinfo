@@ -70,4 +70,14 @@ class AppController extends Controller
     {
         return htmlentities(trim($data), ENT_QUOTES, 'utf-8', false);
     }
+
+    public function sendEmail($view, $to, $subject = 'Без темы', $model = null)
+    {
+        $mailer = Yii::$app->mailer->compose($view, compact('model'))
+            ->setFrom([Yii::$app->params['mailer_transport']['username'] => Yii::$app->params['siteUrl']])
+            ->setTo($to)
+            ->setSubject($subject);
+
+         return $mailer->send();
+    }
 }

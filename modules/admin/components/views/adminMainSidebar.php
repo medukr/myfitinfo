@@ -24,9 +24,16 @@ use app\controllers\AppController;
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Навигация</li>
+            <li class="">
+                <a href="<?= Url::home()?>">
+                    <i class="fa fa-level-up"></i>
+                    <span>На сайт</span>
+                </a>
+            </li>
+            <hr>
             <li class="<?= AppController::isSidebarActive('user', 'index')?>">
                 <a href="<?= Url::to(['user/index'])?>">
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-users"></i>
                     <span>Пользователи</span>
 <!--                    <span class="pull-right-container">-->
 <!--                        <span class="label label-primary pull-right">4</span>-->
@@ -35,7 +42,7 @@ use app\controllers\AppController;
             </li>
             <li class="<?= AppController::isSidebarActive('profile', 'index')?>">
                 <a href="<?= Url::to(['profile/index']) ?>">
-                    <i class="fa fa-files-o"></i>
+                    <i class="fa fa-vcard"></i>
                     <span>Профили</span>
                 </a>
             </li>
@@ -49,6 +56,13 @@ use app\controllers\AppController;
                 <a href="<?= Url::to(['preset/index']) ?>">
                     <i class="fa fa-files-o"></i>
                     <span>Программы</span>
+                </a>
+            </li>
+            <hr>
+            <li class="">
+                <a href="<?= Url::to('/logout') ?>">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Выход</span>
                 </a>
             </li>
         </ul>

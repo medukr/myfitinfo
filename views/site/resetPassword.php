@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-md-1 mt-2 ">
     <div class="main-content-container container-fluid px-4">
+        <?= \app\components\FlashMessageWidget::widget() ?>
         <div class="row">
             <div class="col-lg col-sm-12 mb-2 px-0 ">
                 <div class="card card-post--aside card-post--1">

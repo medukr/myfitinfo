@@ -49,15 +49,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             ['class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {delete} ',
+                'template' => '{view}',
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
                         return Html::a('<i class="glyphicon glyphicon-eye-open"></i>',
-                            Url::to(['discipline/view', 'id' => $model->disciplines->id])
-                        );
-                    },
-                    'delete' => function ($url, $model, $key) {
-                        return Html::a('<i class="glyphicon glyphicon-trash"></i>',
                             Url::to(['discipline/view', 'id' => $model->disciplines->id])
                         );
                     },

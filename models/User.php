@@ -29,6 +29,7 @@ class User extends AppModel implements IdentityInterface
     const IS_ADMIN = 1;
 
     public $count_users;
+    public $new_password;
 
     /**
      * {@inheritdoc}
@@ -44,7 +45,7 @@ class User extends AppModel implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'password'], 'required'],
+            [['email', 'password', 'user_name'], 'required'],
             [['is_admin'], 'integer'],
             [['create_at', 'update_at'], 'safe'],
             [['email', 'password', 'auth_key'], 'string', 'max' => 255],
@@ -109,6 +110,14 @@ class User extends AppModel implements IdentityInterface
         return static::findOne(['user_name' => $username]);
     }
 
+    public static function findByEmail($email)
+    {
+        return static::find()
+            ->where('email = :email', [':email' => $email])
+            ->one();
+    }
+
+
     public function getId()
     {
         return $this->id;
@@ -150,7 +159,8 @@ class User extends AppModel implements IdentityInterface
         ];
     }
 
-    public function setPassword($password){
+    public function setPassword($password)
+    {
         $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
@@ -162,6 +172,17 @@ class User extends AppModel implements IdentityInterface
     public static function countUsers()
     {
         return self::findBySql('select count(id) as count_users from users')->one();
+    }
+
+    public function generateNewPassword()
+    {
+        $this->new_password = Yii::$app->security->generateRandomString(6);
+    }
+
+
+    public function getIsAdmin()
+    {
+        return $this->is_admin;
     }
 
 }

@@ -53,4 +53,11 @@ class PresetsDisciplines extends AppModel
             'discipline_id' => 'Discipline ID',
         ];
     }
+
+    public static function deleteAllWherePresetId($id)
+    {
+        return self::deleteAll('preset_id = :id',[':id' => $id]);
+    }
+
+
 }

@@ -50,8 +50,6 @@ class HomeController extends AppController
                 foreach ($set->workingWithoutDiscipline as $working){
                     $wd = [];
                     foreach ($working->workingData as $workingData){
-
-//                        debug($workingData);
                         $wd[] = [
                             'weight' => $workingData->weight,
                             'iteration' => $workingData->iteration,
@@ -79,8 +77,7 @@ class HomeController extends AppController
 
             $data[] = $us;
         }
-//        debug($data);
-//        die;
+
         return $data;
     }
 
@@ -129,6 +126,7 @@ class HomeController extends AppController
         $model = new Presets();
         return $this->render('program', compact('presets', 'model'));
     }
+
 
 
 }

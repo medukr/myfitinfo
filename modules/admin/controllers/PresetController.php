@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\controllers\AppController;
 use app\models\Disciplines;
 use app\models\PresetsDisciplines;
 use Yii;
@@ -15,7 +16,7 @@ use yii\filters\VerbFilter;
 /**
  * PresetController implements the CRUD actions for Presets model.
  */
-class PresetController extends Controller
+class PresetController extends AppController
 {
     /**
      * {@inheritdoc}
@@ -139,7 +140,15 @@ class PresetController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $id = $this->validateId($id);
+
+        $model = $this->findModel($id);
+        if ($model){
+            if (PresetsDisciplines::deleteAllWherePresetId($model->id)){
+                $model->delete();
+            }
+
+        }
 
         return $this->redirect(['index']);
     }

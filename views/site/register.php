@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]); ?>
                             <?= $form->field($model, 'user_name') ?>
                             <?= $form->field($model, 'password')->passwordInput() ?>
-                            <?= $form->field($model, 'secondPassword')->passwordInput()->label('Повторите пароль') ?>
+                            <?= $form->field($model, 'secondPassword')->passwordInput() ?>
                             <?= $form->field($model, 'email') ?>
                         <div class="form-group">
                             <div class="col-lg-offset-1 col-lg-11">

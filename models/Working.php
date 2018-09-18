@@ -15,6 +15,9 @@ use Yii;
  */
 class Working extends \yii\db\ActiveRecord
 {
+
+    public $last_working;
+
     /**
      * {@inheritdoc}
      */
@@ -55,14 +58,6 @@ class Working extends \yii\db\ActiveRecord
         return $this->hasMany(WorkingData::className(), ['working_id' => 'id']);
     }
 
-//    public function getSumWorkingData()
-//    {
-//        return WorkingData::find()
-//            ->select('sum(weight) as weight, sum(iteration) as iteration')
-//            ->where(['working_id' => $this->id])
-//            ->one();
-//    }
-
 
 
     /**
@@ -91,5 +86,15 @@ class Working extends \yii\db\ActiveRecord
     public function findLastData()
     {
         return WorkingData::findLastWhereWorkingId($this->id);
+    }
+
+    public function findLastWorking($last_set_id, $discipline_id)
+    {
+        $this->last_working = self::find()
+            ->where('set_id = :set_id', [':set_id' => $last_set_id])
+            ->andWhere('discipline_id = :discipline_id',[':discipline_id' => $discipline_id])
+            ->one();
+
+        return $this->last_working ? true : false;
     }
 }

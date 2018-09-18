@@ -11,7 +11,10 @@ use yii\helpers\Url;
     <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="<?= Url::home() ?>">Home</a>
+                <a class="nav-link" href="<?= Url::home() ?>">Домой</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= Url::to(['site/about']) ?>">О проекте</a>
             </li>
         </ul>
         <span class="copyright ml-auto my-auto mr-2">©

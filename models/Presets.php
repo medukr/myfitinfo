@@ -71,7 +71,7 @@ class Presets extends AppModel
 
     public function getDiscipline()
     {
-        return $this->hasMany(Disciplines::className(), ['id' => 'discipline_id'])->via('presetsDisciplines');
+        return $this->hasMany(Disciplines::className(), ['id' => 'discipline_id'])->via('presetsDisciplines')->orderBy('name');
 
     }
 

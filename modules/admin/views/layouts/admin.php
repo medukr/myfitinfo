@@ -6,7 +6,7 @@
  * Time: 10:00
  */
 use app\modules\admin\assets\AppAdminAsset;
-
+use yii\helpers\Url;
 ?>
 <?php AppAdminAsset::register($this) ?>
 <?php $this->beginPage() ?>
@@ -19,6 +19,7 @@ use app\modules\admin\assets\AppAdminAsset;
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <?php $this->registerCsrfMetaTags() ?>
+    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/ico', 'href' => Url::to('/adm/favicon-a.ico')]) ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -73,6 +73,7 @@ class Disciplines extends AppModel
         return self::find()
             ->where(['user_id' => Yii::$app->user->id])
             ->orWhere(['user_id' => User::ADMIN_ID ])
+            ->orderBy('name')
             ->all();
     }
 

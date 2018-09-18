@@ -72,6 +72,7 @@ class RegisterForm extends \yii\db\ActiveRecord
             'email' => 'Email',
             'user_name' => 'Логин',
             'password' => 'Пароль',
+            'secondPassword' => 'Повторите пароль',
             'auth_key' => 'Auth Key',
             'is_admin' => 'Администратор',
             'create_at' => 'Создано',
