@@ -88,13 +88,40 @@ class Working extends \yii\db\ActiveRecord
         return WorkingData::findLastWhereWorkingId($this->id);
     }
 
-    public function findLastWorking($last_set_id, $discipline_id)
+    public function findLastWorking($set)
     {
         $this->last_working = self::find()
-            ->where('set_id = :set_id', [':set_id' => $last_set_id])
-            ->andWhere('discipline_id = :discipline_id',[':discipline_id' => $discipline_id])
+            ->where('set_id = :set_id', [':set_id' => $set->id])
+            ->andWhere('discipline_id = :discipline_id',[':discipline_id' => $this->discipline_id])
             ->one();
 
         return $this->last_working ? true : false;
+    }
+
+//Рекурсивно ищем, где же у нас находятся данные.
+    public function findOldLastWorking($set)
+    {
+
+        $this->findLastWorking($set);
+
+        if (!$this->last_working->workingData){
+
+            $set = Sets::findLastSet($set);
+
+            $this->findOldLastWorking($set);
+        }
+
+        return true;
+
+    }
+
+
+    public function getRelativeDate()
+    {
+        $date = Yii::$app->formatter->asDate($this->date, 'd MMM yyyy, EEEE');
+
+        $relative_time = Yii::$app->formatter->asRelativeTime($this->date);
+
+        return $date . ' | ' . $relative_time;
     }
 }

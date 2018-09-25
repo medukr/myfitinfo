@@ -22,7 +22,7 @@ class AppAdminAsset extends AssetBundle
     public $baseUrl = '@web';
 
     public $css = [
-        '/adm/bower_components/bootstrap/dist/css/bootstrap.min.css',     // Bootstrap 3.3.7
+//        '/adm/bower_components/bootstrap/dist/css/bootstrap.min.css',     // Bootstrap 3.3.7
         '/adm/bower_components/font-awesome/css/font-awesome.min.css',    // Font Awesome
         '/adm/bower_components/Ionicons/css/ionicons.min.css',            // Ionicons
         '/adm/dist/css/AdminLTE.min.css',                                 // Theme style
@@ -40,7 +40,7 @@ class AppAdminAsset extends AssetBundle
         '/adm/bower_components/jquery-slimscroll/jquery.slimscroll.min.js',   // SlimScroll
         '/adm/bower_components/fastclick/lib/fastclick.js',                   // FastClick
         '/adm/dist/js/adminlte.min.js',                                       // AdminLTE App
-        '/adm/dist/js/demo.js',                                               // AdminLTE for demo purposes
+//        '/adm/dist/js/demo.js',                                               // AdminLTE for demo purposes
 
     ];
 
@@ -61,18 +61,6 @@ class AppAdminAsset extends AssetBundle
 
         $controller = Yii::$app->controller->id;
         $action = Yii::$app->controller->action->id;
-//
-//        if ( $controller == 'user' ) {
-//            if ($action == 'index'){
-//
-//                /*----Data Tables----*/
-//                $this->css[] = '/adm/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css';
-//
-//                $this->js[] = '/adm/bower_components/datatables.net/js/jquery.dataTables.min.js';
-//                $this->js[] = '/adm/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js';
-//                $this->js[] = '/adm/scripts/dataTablesScript.js';
-//            }
-//        }
 
         if ($action == 'update' || $action == 'create'){
 

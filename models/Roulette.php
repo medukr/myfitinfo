@@ -72,7 +72,7 @@ class Roulette extends AppModel
 
     public function getRouletteDataLimit()
     {
-        return $this->hasMany(RouletteData::className(), ['roulette_id' => 'id'])->orderBy(['date' =>  SORT_DESC])->limit(20);
+        return $this->hasMany(RouletteData::className(), ['roulette_id' => 'id'])->orderBy(['date' =>  SORT_DESC])->limit(25);
     }
 
 

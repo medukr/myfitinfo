@@ -107,7 +107,7 @@ class Sets extends AppModel
     public static function findLastSet($set)
     {
         return self::find()
-            ->where(['name' => $set->name])
+            ->where(['preset_id' => $set->preset_id])
             ->andWhere('date < :date',[':date' => $set->date])
             ->andWhere(['user_id' => Yii::$app->user->id])
             ->orderBy(['date' => SORT_DESC])

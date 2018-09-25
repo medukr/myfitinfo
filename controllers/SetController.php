@@ -34,14 +34,16 @@ class SetController extends AppController
             $set->preset_id = $preset->id;
             $set->date = date("Y-m-d H:i:s",time());
             if ($set->save()){
-                foreach ($preset->discipline as $discipline){
+                foreach ($preset->presetsDisciplines as $presetsDisciplines){
+                    $discipline = $presetsDisciplines->disciplines;
                     $work = new Working(); //формируем по дисциплинам из пресета ворки
                     $work->discipline_id = $discipline->id;
                     $work->user_id = $set->user_id;
                     $work->set_id = $set->id;
                     $work->date = $set->date;
                     if (!$work->save()){
-                        return 'Что-то пошло не так';
+                        Yii::$app->session->setFlash('error', 'Что-то пошло не так! :(');
+                        return $this->redirect(['home/start']);
                     }
                 }
 

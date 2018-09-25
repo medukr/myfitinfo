@@ -4,8 +4,9 @@
 
 use yii\helpers\Html;
 
-
 $this->title = 'О проекте';
+
+
 ?>
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-md-1 mt-2 ">
     <div class="main-content-container container-fluid px-2">
@@ -14,7 +15,7 @@ $this->title = 'О проекте';
                     <div class="card card-small card-post card-post--1">
                         <div class="card-post__image" style="background-image: url('/images/gym_disks_weight_bodybuilding_118105_2560x1600.jpg'); height: 200px">
                             <div class="card-post__author d-flex">
-                                <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/images/avatars/0.jpg');">Written by Anna Kunis</a>
+                                <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('/images/andrii_d.jpg');">Written by Anna Kunis</a>
                             </div>
                         </div>
                         <div class="card-body">

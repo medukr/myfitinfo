@@ -74,6 +74,12 @@ class Presets extends AppModel
         return $this->hasMany(Disciplines::className(), ['id' => 'discipline_id'])->via('presetsDisciplines')->orderBy('name');
 
     }
+//
+//    public function getDiscipline()
+//    {
+//        return $this->hasMany(Disciplines::className(), ['id' => 'discipline_id'])->viaTable('presetDisciplines', [ 'preset_id' => 'id']);
+//
+//    }
 
     public static function findWhereUserOrAdmin()
     {

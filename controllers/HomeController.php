@@ -32,7 +32,7 @@ class HomeController extends AppController
                 ->where('`sets`.`preset_id` = :id',[':id' => (int) $presets_id->preset_id ])
                 ->andWhere(['sets.user_id' => Yii::$app->user->id])
                 ->orderBy(['id' => SORT_DESC])
-                ->limit(20)
+                ->limit(25)
                 ->with('workingWithoutDiscipline')
                 ->all();
             krsort($sets);

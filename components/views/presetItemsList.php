@@ -11,7 +11,8 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 ?>
-<?php foreach ($preset->discipline as $discipline): ?>
+<?php foreach ($preset->presetsDisciplines as $presetsDisciplines): ?>
+<?php $discipline = $presetsDisciplines->disciplines ?>
     <div class="row" id="discipline-list">
         <div class="col-lg col-sm-12 mb-2 p-0">
             <div class="card card-small card-post card-post--aside card-post--1">

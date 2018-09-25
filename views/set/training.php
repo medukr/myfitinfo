@@ -9,7 +9,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-
 ?>
 <!-- Main Sidebar-->
 <?= \app\components\MainSidebarWidget::widget() ?>
@@ -22,6 +21,7 @@ use yii\widgets\ActiveForm;
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                 <span class="text-uppercase page-subtitle">Тренировка</span>
                 <h3 class="page-title"><?= $set->name ?></h3>
+                <p class="card-text text-muted mb-0"><?= $set->getdate() ?></p>
             </div>
         </div>
         <!-- End Page Header -->
@@ -51,7 +51,8 @@ use yii\widgets\ActiveForm;
                             </form>
                         </div>
 
-                        <?php if ($last_set && $working->findLastWorking($last_set->id, $working->discipline->id)): ?>
+                        <?php if ($last_set && $working->findLastWorking($last_set)): ?>
+                        <?php if($working->last_working->workingData): ?>
                             <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
                                 <p class="card-text text-muted mb-0">В прошлый раз:</p>
                             </div>
@@ -66,6 +67,22 @@ use yii\widgets\ActiveForm;
                                     <?php endforeach; ?>
                                 </div>
                             </div>
+                        <?php elseif ($last_set && $working->findOldLastWorking($last_set)): ?>
+                            <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
+                                <p class="card-text text-muted mb-0"><?= $working->last_working->getRelativeDate() ?></p>
+                            </div>
+                            <div class="card-footer d-flex pl-2 pt-2 pb-2">
+                                <div class="d-flex">
+                                    <?php foreach ($working->last_working->workingData as $item): ?>
+                                        <div class="form-group mb-1 ml-2">
+                                            <h5 class="mt-0 mb-0 text-muted text-center"><?= $item->weight ?></h5>
+                                            <hr style="width: 90%; color: black; height: 1px; margin-top: 0.5em; margin-bottom: 0.5em; background: gray; ">
+                                            <h5 class="mt-0 mb-0 text-muted text-center"><?= $item->iteration ?></h5>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                         <?php endif; ?>
 
                         <?php $formAdd = ActiveForm::begin(['action' => Url::to(['working/add']), 'method' => 'post']) ?><?php ActiveForm::end() ?>
