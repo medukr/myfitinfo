@@ -9,7 +9,7 @@ use yii\helpers\Url;
 <!-- End Main Sidebar-->
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
     <?= \app\components\MainNavbarWidget::widget() ?>
-    <div class="main-content-container container-fluid px-4">
+    <div class="main-content-container container-fluid px-3">
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -32,7 +32,7 @@ use yii\helpers\Url;
             <?php if ($k % 2 != 0): ?>
                 <div class="row">
             <?php endif; ?>
-                <div class="col-lg-6 col-md-6 col-sm-6 mb-2 px-1">
+                <div class="col-lg-6 col-md-12 col-sm-12 mb-2 px-1">
                     <div class="stats-small stats-small--1 card card-small">
 
                         <div class="card-body p-0 d-flex pt-3 pb-0">

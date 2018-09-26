@@ -33,6 +33,16 @@ use yii\helpers\Url;
                                 <span class="text-fiord-blue flex-column d-flex" ><?= $preset->name ?></span>
                             </h5>
 <!--                            <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время и т.д.</p>-->
+                            <?php if   ($preset->discipline): ?>
+                                <p class="card-text text-muted mb-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Подробнее</p>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <?php foreach ($preset->discipline as $discipline): ?>
+                                        <span class="dropdown-item"><?= $discipline->name ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php else: ?>
+                                <p class="card-text text-muted mb-0">Нет упражнений</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </a>

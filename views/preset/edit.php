@@ -42,6 +42,7 @@ use yii\helpers\Url;
                         <?php ActiveForm::end() ?>
                     </div>
                     <strong class="text-muted d-block mb-2">Добавить упражнение</strong>
+                    <strong class="text-muted d-block mb-2">Порядок упражнений во время тренировки будет аналогичен порядку добавления.</strong>
                 <?php $form = ActiveForm::begin([
                         'action' => Url::to(['/preset/add-item']),
                         'method' => 'post'

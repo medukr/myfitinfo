@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 <!-- End Main Sidebar-->
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
     <?= \app\components\MainNavbarWidget::widget() ?>
-    <div class="main-content-container container-fluid px-4">
+    <div class="main-content-container container-fluid px-3">
         <!-- Page Header -->
         <?= \app\components\FlashMessageWidget::widget() ?>
         <div class="page-header row no-gutters py-4">
@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
         </div>
         <!-- End Page Header -->
 
-        <div class="row">
+        <div class="row px-1">
             <div class="col-lg-4 p-1">
                 <div class="card card-small mb-4 pt-3">
                     <div class="card-header border-bottom text-center">

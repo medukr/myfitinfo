@@ -28,13 +28,7 @@ class HomeController extends AppController
         $data = [];
 
         foreach ($presets_ids as $presets_id){
-            $sets = Sets::find()
-                ->where('`sets`.`preset_id` = :id',[':id' => (int) $presets_id->preset_id ])
-                ->andWhere(['sets.user_id' => Yii::$app->user->id])
-                ->orderBy(['id' => SORT_DESC])
-                ->limit(25)
-                ->with('workingWithoutDiscipline')
-                ->all();
+            $sets = Sets::getSetsWithDataLimit($presets_id);
             krsort($sets);
             $us = [];
             foreach ( $sets as $set){

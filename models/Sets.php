@@ -141,4 +141,15 @@ class Sets extends AppModel
         return self::findBySql('select count(`id`) as id from `sets` where `user_id` = '.Yii::$app->user->id)->one();
     }
 
+    public static function getSetsWithDataLimit($presets_id)
+    {
+        return self::find()
+            ->where('`sets`.`preset_id` = :id',[':id' => (int) $presets_id->preset_id ])
+            ->andWhere(['sets.user_id' => Yii::$app->user->id])
+            ->orderBy(['id' => SORT_DESC])
+            ->limit(30)
+            ->with('workingWithoutDiscipline')
+            ->all();
+    }
+
 }
