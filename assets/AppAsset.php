@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
         'styles/bootstrap.min.css',
         'styles/shards-dashboards.1.0.0.css',
+//        'styles/shards-dashboards.1.2.0.min.css',
     ];
     public $js =
         [
@@ -32,6 +33,7 @@ class AppAsset extends AssetBundle
         "scripts/bootstrap.min.js",
         "scripts/Chart.min.js",
         "scripts/shards-dashboards.1.0.0.min.js",
+//        "scripts/shards-dashboards.1.2.0.min.js",
         "scripts/main.js",
     ];
 

@@ -25,6 +25,24 @@
         <div id="sets-list">
             <?= \app\components\FlashMessageWidget::widget() ?>
             <?= \app\components\SetsListWidget::widget(['sets' => $sets]) ?>
+            <?= \yii\widgets\LinkPager::widget([
+                'pagination' => $pages,
+                'prevPageLabel' => 'Пред.',
+                'prevPageCssClass' => 'paginate_button previous',
+                'disabledPageCssClass' => 'disabled',
+                'activePageCssClass' => 'current',
+                'pageCssClass' => 'paginate_button',
+                'nextPageCssClass' => 'paginate_button next',
+                'nextPageLabel' => 'След.',
+                'options' => [
+                        'class' => 'dataTables_paginate paging_simple_numbers',
+                        'tag' => 'div'
+                ],
+                'linkContainerOptions' => [
+                        'tag' => 'button',
+                ],
+                'maxButtonCount' => 5,
+                ]) ?>
         </div>
     </div>
 </main>

@@ -8,6 +8,7 @@ use app\models\Roulette;
 use app\models\RouletteData;
 use app\models\Sets;
 use Yii;
+use yii\data\Pagination;
 
 class HomeController extends AppController
 {
@@ -102,9 +103,20 @@ class HomeController extends AppController
 
     public function actionJournal()
     {
-        $sets = Sets::findWhereUser();
+        $query = Sets::find()
+            ->where(['user_id' => Yii::$app->user->id])
+            ->orderBy(['date' => SORT_DESC]);
 
-        return $this->render('journal', compact('sets'));
+        $countQuery =clone $query;
+
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 30]);
+
+        $sets = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+
+        return $this->render('journal', compact('sets', 'pages'));
     }
 
     public function actionDiscipline()
