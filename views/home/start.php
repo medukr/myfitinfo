@@ -34,7 +34,7 @@ use yii\helpers\Url;
                             </h5>
 <!--                            <p class="card-text text-muted mb-0">Теги или краткое описание, дата, время и т.д.</p>-->
                             <?php if   ($preset->discipline): ?>
-                                <p class="card-text text-muted mb-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Подробнее</p>
+                                <span class="badge badge-info dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Подробнее</span>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <?php foreach ($preset->discipline as $discipline): ?>
                                         <span class="dropdown-item"><?= $discipline->name ?></span>
