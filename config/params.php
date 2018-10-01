@@ -1,13 +1,13 @@
 <?php
 return [
-    'adminEmail' => 'team.myfitinfo@gmail.com',
-    'teamEmail' => 'team.myfitinfo@gmail.com',
+    'adminEmail' => '@@@',
+    'teamEmail' => '@@@',
 
     /*Адресс админки*/
-    'adminUrl' => 'zzz',
+    'adminUrl' => 'dem',
 
     /*Адресс сайта*/
-    'siteUrl' => 'myfitinfo.loc',
+    'siteUrl' => 'sparrow.in.ua',
 
     /*Настойки для отправки писем*/
     'mailer_transport' => [

@@ -7,9 +7,9 @@
  */
 use yii\helpers\Url;
 ?>
-<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0">
+<main class="main-content col-lg-12 col-md-12 col-sm-12 p-0">
     <footer class="main-footer d-flex p-2 px-3 bg-white border-top ">
-        <ul class="nav offset-lg-3 offset-md-3">
+        <ul class="nav offset-lg-2 offset-md-2">
             <li class="nav-item">
                 <a class="nav-link" href="<?= Url::home() ?>">Домой</a>
             </li>
