@@ -74,7 +74,7 @@ use yii\helpers\Url;
         <?php endforeach; ?>
         <?= \app\components\StatsChartWidget::widget(['data' => $data]) ?>
         <?php else: ?>
-        <h5>У тебя пока нет тренировок. Создай совю первую программу, и начни тренирову :)</h5>
+        <h5>У тебя пока нет тренировок. Создай свою первую программу, и начни тренировку :)</h5>
         <?php endif; ?>
     </div>
 </main>
