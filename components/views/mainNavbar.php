@@ -20,14 +20,14 @@ use app\models\User;
                 <div class="dropdown-menu dropdown-menu-small">
                     <?php if (Yii::$app->user->identity->getIsAdmin() === User::IS_ADMIN): ?>
                         <a class="dropdown-item" href="<?= Url::to([Yii::$app->params['adminUrl'].'/default/index']) ?>">
-                            <i class="material-icons">&#xE7FD;</i> AdminKA</a>
+                            <i class="material-icons">&#xE7FD;</i> АдминКа</a>
                         <div class="dropdown-divider"></div>
                     <?php endif; ?>
                     <a class="dropdown-item" href="<?= Url::to(['profile/update']) ?>">
-                        <i class="material-icons">&#xE7FD;</i> Profile</a>
+                        <i class="material-icons">&#xE7FD;</i> Профиль</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="<?= Url::to(['site/logout']) ?>">
-                        <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                        <i class="material-icons text-danger">&#xE879;</i> Выход</a>
                 </div>
             </li>
         </ul>
