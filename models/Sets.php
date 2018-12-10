@@ -152,4 +152,28 @@ class Sets extends AppModel
             ->all();
     }
 
+    public static function findLastSetWhereWorkingNotNull($set, $working)
+    {
+
+        $preset_id = $set->preset_id;
+        $date = $set->date;
+        $discipline_id = $working->discipline_id;
+
+        return self::findBySql('SELECT ' . self::tableName() . '.* FROM ' . self::tableName() . ' 
+        INNER JOIN working ON working.set_id = ' . self::tableName() . '.id 
+        INNER JOIN working_data ON working_data.working_id = working.id 
+        WHERE ' . self::tableName() . '.user_id = ' . Yii::$app->user->id . '
+        AND ' . self::tableName() . '.preset_id = ' . $preset_id . '
+        AND working.discipline_id = ' . $discipline_id . '
+        AND ' . self::tableName() . '.date < \'' . $date . '\'
+        ORDER BY sets.date DESC 
+        ')
+            ->one()
+            ;
+
+
+//        GROUP BY ' . self::tableName() .'.id
+
+    }
+
 }

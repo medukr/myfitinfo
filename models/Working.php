@@ -102,16 +102,28 @@ class Working extends \yii\db\ActiveRecord
     public function findOldLastWorking($set)
     {
 
-        $this->findLastWorking($set);
 
-        if (!$this->last_working->workingData){
+        $set = Sets::findLastSetWhereWorkingNotNull($set, $this);
 
-            $set = Sets::findLastSet($set);
-
-            $this->findOldLastWorking($set);
+        if ($set) {
+            $this->findLastWorking($set);
         }
 
-        return true;
+//Рабочий вариант, но потенциально может быть ОЧЕНЬ моного запросов в БД. Необходимо либо написать новую выборку из БД, либо переписать Sets::findLastSet();
+//        $this->findLastWorking($set);
+//
+//        if ($this->last_working && !$this->last_working->workingData){
+//
+//            $set = Sets::findLastSet($set);
+//
+//            if ($set){
+//                $this->findOldLastWorking($set);
+//
+//            }
+//        }
+
+
+        return $this->last_working ? true : false;
 
     }
 

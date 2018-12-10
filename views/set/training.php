@@ -52,6 +52,7 @@ use yii\widgets\ActiveForm;
                         </div>
 
                         <?php if ($last_set && $working->findLastWorking($last_set)): ?>
+
                         <?php if($working->last_working->workingData): ?>
                             <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
                                 <p class="card-text text-muted mb-0">В прошлый раз:</p>
@@ -67,12 +68,14 @@ use yii\widgets\ActiveForm;
                                     <?php endforeach; ?>
                                 </div>
                             </div>
-                        <?php elseif ($last_set && $working->findOldLastWorking($last_set)): ?>
+                        <?php elseif ($working->findOldLastWorking($last_set)): ?>
+                                <?php if (!empty($working->last_working->workingData)): ?>
                             <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
                                 <p class="card-text text-muted mb-0"><?= $working->last_working->getRelativeDate() ?></p>
                             </div>
                             <div class="card-footer d-flex pl-2 pt-2 pb-2">
                                 <div class="d-flex">
+
                                     <?php foreach ($working->last_working->workingData as $item): ?>
                                         <div class="form-group mb-1 ml-2">
                                             <h5 class="mt-0 mb-0 text-muted text-center"><?= $item->weight ?></h5>
@@ -80,9 +83,16 @@ use yii\widgets\ActiveForm;
                                             <h5 class="mt-0 mb-0 text-muted text-center"><?= $item->iteration ?></h5>
                                         </div>
                                     <?php endforeach; ?>
+
                                 </div>
                             </div>
+                            <?php else: ?>
+                                    <div class="card-footer border-top pl-3 pt-2 pb-0 mb-0">
+                                        <p class="card-text text-muted mb-0">Вы еще не выполняли это упражнение</p>
+                                    </div>
+                            <?php endif; ?>
                         <?php endif; ?>
+
                         <?php endif; ?>
 
                         <?php $formAdd = ActiveForm::begin(['action' => Url::to(['working/add']), 'method' => 'post']) ?><?php ActiveForm::end() ?>
