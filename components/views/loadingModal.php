@@ -1,4 +1,4 @@
-<!-- Modal-->
+<!-- Loading Modal Begin-->
 <div class="modal" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-sm" role="document">
         <div class="cssload-container">
@@ -29,3 +29,5 @@
         100%{ transform: rotate(360deg); transform: rotate(360deg); }
     }
 </style>
+
+<!-- Loading Modal END-->
