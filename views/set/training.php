@@ -14,8 +14,10 @@ use yii\widgets\ActiveForm;
 <?= \app\components\MainSidebarWidget::widget() ?>
 <!-- End Main Sidebar-->
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+
     <?= \app\components\MainNavbarWidget::widget() ?>
     <div class="main-content-container container-fluid px-4">
+        <?= \app\components\LoadingModalWidget::widget() ?>
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -167,4 +169,10 @@ use yii\widgets\ActiveForm;
         <h3>В этой программе нет упражнений :(</h3>
         <?php endif; ?>
     </div>
+
+
+
+
+
+
 </main>

@@ -125,7 +125,7 @@ $('.add-iteration').click(function (e) {
     let working_id = $("input[name*='WorkingData[working_id]'][form*='" + form_id + "']").val();
     let weight = $("select[name*='WorkingData[weight]'][form*='" + form_id + "']").val();
     let iteration = $("select[name*='WorkingData[iteration]'][form*='" + form_id + "']").val();
-
+    // $('#loadingModal').modal().show();
 
     $.post('/working/add', {
         _csrf: _csrf,
@@ -134,6 +134,7 @@ $('.add-iteration').click(function (e) {
         "WorkingData[iteration]": iteration,
     }).done(function (data) {
         $('.working-data-list-' + working_id).html(data);
+        // $('#loadingModal').modal().hide();
     }).fail(function () {
         alert('Error');
     })
@@ -164,3 +165,10 @@ $('.delete-iteration').click(function (e) {
 
 });
 
+
+//For Loading Modal Widget
+$(document).ajaxStart(function () {
+    $('#loadingModal').modal('show');
+}).ajaxStop(function () {
+    $('#loadingModal').modal('hide');
+});
