@@ -79,7 +79,6 @@ use app\components\PresetsListWidget;
                             </div>
                         <?php endif; ?>
 
-
                     <?php elseif ($purpose == PresetsListWidget::PURPOSE_START): ?>
 
                         <div class="row ml-auto">
