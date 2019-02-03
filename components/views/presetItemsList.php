@@ -46,6 +46,6 @@ use yii\widgets\ActiveForm;
                 </div>
             </div>
         </div>
+        <?= \app\components\ModalDisciplineInfoWidget::widget(compact('discipline')) ?>
     </div>
-    <?= \app\components\ModalDisciplineInfoWidget::widget(compact('discipline')) ?>
 <?php endforeach; ?>

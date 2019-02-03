@@ -26,7 +26,9 @@ $('#add-to-preset').click(function (e) {
         "PresetsDisciplines[discipline_id]": discipline_id,
 
     }).done(function (data) {
-        $('div#preset-items').html(data);
+
+        showResponseAddNew(data, "div#preset-items");
+
     })
 
 });
@@ -69,8 +71,11 @@ $('div#preset-items').on('click', 'button.delete-preset-item', function (e) {
             "PresetsDisciplines[preset_id]": preset_id,
             "PresetsDisciplines[discipline_id]": discipline_id
         })
-        .done(function (result) {
-            $('div#preset-items').html(result);
+        .done(function (data) {
+
+            showResponseRemoveOld(data, 'div#preset-items', function () {
+                return  $("form#" + form_id).parents('div#discipline-list');
+            })
         })
 
 });
@@ -114,25 +119,9 @@ $('.add-iteration').click(function (e) {
         "WorkingData[weight]": weight,
         "WorkingData[iteration]": iteration,
     }).done(function (data) {
-        //Создаем новый элемнт
-        let div = document.createElement('div');
 
-        //Заполняем его ответом с сервера
-        div.innerHTML = data;
+        showResponseAddNew(data, '.working-data-list-' + working_id);
 
-        //Скрываем последний вложенный елемент
-        div.lastElementChild.style.display = 'none';
-        div.lastElementChild.style.opacity = '0';
-
-        //Вставляем новые данные
-        let elementChild = $('.working-data-list-' + working_id)
-            .html(div.innerHTML)
-            .children();
-
-        //Анимированно показываем последний скрытый элемент
-        $(elementChild[elementChild.length - 1])
-            .show(100)
-            .animate({opacity:'1'},200)
     })
 
 });
@@ -153,18 +142,13 @@ $('.delete-iteration').click(function (e) {
         _csrf: _csrf,
         "Working[id]": working_id,
     }).done(function (data) {
+
         // Анимированно скрываем последний элемент, а после вставляем новые данные
-        let element =  $('.working-data-list-' + working_id);
+        showResponseRemoveOld(data, '.working-data-list-' + working_id, function () {
+            let elementChild = $('.working-data-list-' + working_id).children();
+            return $(elementChild[elementChild.length - 1])
+        });
 
-        let elementChild = element.children();
-
-        $(elementChild[elementChild.length - 1])
-            .animate(
-                {opacity: '0'},
-                {duration: 200})
-            .hide(100, function () {
-                element.html(data);
-            })
     })
 
 });
@@ -197,3 +181,38 @@ $(document).ajaxStart(function () {
             $('#errorModal').modal('hide');
         }, 2000)
     });
+
+
+function showResponseAddNew(data, queryElement){
+    let div = document.createElement('div');
+
+    //Заполняем его ответом с сервера
+    div.innerHTML = data;
+
+    //Скрываем последний вложенный елемент
+    div.lastElementChild.style.display = 'none';
+    div.lastElementChild.style.opacity = '0';
+
+    //Вставляем новые данные
+    let elementChild = $(queryElement)
+        .html(div.innerHTML)
+        .children();
+
+    //Анимированно показываем последний скрытый элемент
+    $(elementChild[elementChild.length - 1])
+        .show(100)
+        .animate({opacity:'1'},200)
+}
+
+//Скрытие элемента, который неоходимо вернуть из callReturnJQuery,
+//далее, по окончанию анимации вставка новых данных data в родитель queryBodyElement
+function showResponseRemoveOld(data, queryBodyElement, callReturnJQuery){
+
+    callReturnJQuery()
+        .animate(
+            {opacity: '0'},
+            {duration: 200})
+        .hide(100, function () {
+            $(queryBodyElement).html(data);
+        })
+}
