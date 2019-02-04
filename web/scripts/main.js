@@ -5,9 +5,63 @@
     let name = $("div#edit-name input[name*='Presets[name]']").val();
 
     let html = "<h3 class=\"page-title\">" + name + "</h3><a href=\"\" class=\"nav-link-icon ml-2\" data-toggle=\"modal\" data-target=\"#editName\"><i class=\"material-icons\">edit</i></a>";
-
     $('#edit-name').html(html);
+
+   /* //Родительский элемнт
+    let html = $(document.createElement('div'));
+
+    let h3 = $(document.createElement('h3')).attr({
+        'class':'page-title'
+    }).text(name);
+
+    let i = $(document.createElement('i')).attr({
+        'class':'material-icons'
+    }).text('edit');
+
+    let a = $(document.createElement('a')).attr({
+        'href':'',
+        'class': 'nav-link-icon ml-2',
+        'data-toggle': 'modal',
+        'data-target': '#editName'
+    }).append(i);
+
+    //Формируем наполнение родительского элемента
+    html.append(h3).append(a);
+    
+    $('#edit-name').html(html.html());*/
 }(jQuery));
+
+
+//Изменения имени пресета
+$('button#submitEditPresetName').on('click',function (e) {
+    e.preventDefault();
+    $('#editName').modal('hide');
+
+    let form_id = $(this).data('form-id');
+
+    let _csrf = $("form#" + form_id + " input[name*='_csrf']").val();
+    let preset_id = $("form#" + form_id + " input[name*='Presets[id]']").val();
+    let preset_name = $("form#" + form_id + " input[name*='Presets[name]']").val();
+
+    $.post('/preset/update-name',{
+        '_csrf': _csrf,
+        'Presets[name]': preset_name,
+        'Presets[id]': preset_id
+    }).done(function (data) {
+        $('#edit-name')
+            .children('h3')
+                .animate({
+                    'opacity': '0',
+                    'width':'toggle'
+                },{
+                    'duration':200,
+                    'complete': function () {
+                        $(this).html(data)
+                    }})
+                .animate({'opacity': '1','width':'toggle'}, 200);
+
+    })
+});
 
 
 // Добавление упражнения в программу
@@ -159,13 +213,20 @@ $(document).ajaxStart(function () {
         $('#loadingModal').modal('show');
     })
     .ajaxStop(function () {
-        $('#loadingModal').modal('hide');
+        let element = $('#loadingModal');
+        element.modal('hide');
 
         //В случае, когда анимация "show" еще не закончилась - вызов "hide" не срабатывает.
         //Поэтому вызываем повторно с отстрочкой чуть больше установленнго в стиле .fade (0.3с)
         setTimeout(function () {
-            $('#loadingModal').modal('hide');
-        }, 380)
+            element.modal('hide');
+
+            setTimeout(function () {
+                element.modal('hide');
+            }, 300)
+
+        }, 380);
+
     })
     .ajaxError(function () {
 
@@ -181,6 +242,7 @@ $(document).ajaxStart(function () {
             $('#errorModal').modal('hide');
         }, 2000)
     });
+
 
 
 function showResponseAddNew(data, queryElement){
@@ -216,3 +278,5 @@ function showResponseRemoveOld(data, queryBodyElement, callReturnJQuery){
             $(queryBodyElement).html(data);
         })
 }
+
+

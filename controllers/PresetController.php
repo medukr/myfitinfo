@@ -73,9 +73,12 @@ class PresetController extends AppController
             if ($preset) {
                 if ($preset->load(Yii::$app->request->post()) && $preset->save()) {
 
-                    Yii::$app->session->setFlash('success', 'Название программы успешно изменено :)');
+                    if (Yii::$app->request->post('submit')){
+                        Yii::$app->session->setFlash('success', 'Название программы успешно изменено :)');
+                        return $this->redirect(['preset/edit', 'id' => $preset->id]);
+                    }
 
-                    return $this->redirect(Url::to(['/preset/edit', 'id' => $preset->id]));
+                    return $preset->name;
                 }
             }
         }

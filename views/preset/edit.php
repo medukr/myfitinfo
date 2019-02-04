@@ -93,7 +93,12 @@ use yii\helpers\Url;
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-pill font-weight-bold" data-dismiss="modal">ОТМЕНА</button>
-                    <?= Html::submitButton('ИЗМЕНИТЬ', ['class' => 'btn btn-primary btn-pill font-weight-bold']) ?>
+                    <?= Html::submitButton('ИЗМЕНИТЬ', [
+                            'class' => 'btn btn-primary btn-pill font-weight-bold',
+                            'id' => 'submitEditPresetName',
+                            'data-form-id' => $form->id,
+                            'name' => 'submit',
+                        ]) ?>
                 </div>
             <?php ActiveForm::end(); ?>
         </div>
