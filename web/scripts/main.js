@@ -50,15 +50,16 @@ $('button#submitEditPresetName').on('click',function (e) {
     }).done(function (data) {
         $('#edit-name')
             .children('h3')
-                .animate({
-                    'opacity': '0',
-                    'width':'toggle'
-                },{
-                    'duration':200,
+            .css({'height':'2.25rem'})
+                .animate({'opacity': '0'},150)
+                .animate({'width':'toggle'},
+                    {
+                    'duration':150,
                     'complete': function () {
                         $(this).html(data)
                     }})
-                .animate({'opacity': '1','width':'toggle'}, 200);
+                .animate({'width':'toggle'}, 150)
+                .animate({'opacity': '1'},150)
 
     })
 });
@@ -102,7 +103,10 @@ $('div#presets').on('click', 'button.delete-preset', function (e) {
             _csrf:_csrf,
             "Presets[id]": preset_id,
         }).done(function (data) {
-                $('#presets').html(data);
+            successMessageModal('Программа успешно удалена!');
+            showResponseRemoveOld(data, '#presets', function () {
+                return  $("form#" + form_id).parents('div#preset-' + preset_id);
+            });
         })
 
     });
@@ -150,7 +154,12 @@ $('div#sets-list').on('click', 'button.delete-set', function (e) {
         _csrf: _csrf,
         "Sets[id]": set_id,
         }).done( function (data) {
-            $('#sets-list').html(data)
+            // $('#sets-list').html(data)
+
+        successMessageModal('Тренировка успешно удалена!');
+        showResponseRemoveOld(data, '#sets-list', function () {
+                return  $("form#" + form_id).parents('div#set-' + set_id);
+            });
         })
 });
 
@@ -243,6 +252,17 @@ $(document).ajaxStart(function () {
         }, 2000)
     });
 
+//Модальное окно успешного выполнения
+function successMessageModal(message) {
+    if (message !== null)  $('#successTextModal').text(message);
+
+    $('#successModal').modal('show');
+
+    setTimeout(function () {
+        $('#successModal').modal('hide');
+    }, 2000)
+
+}
 
 
 function showResponseAddNew(data, queryElement){
@@ -265,6 +285,7 @@ function showResponseAddNew(data, queryElement){
         .show(100)
         .animate({opacity:'1'},200)
 }
+
 
 //Скрытие элемента, который неоходимо вернуть из callReturnJQuery,
 //далее, по окончанию анимации вставка новых данных data в родитель queryBodyElement

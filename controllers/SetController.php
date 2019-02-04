@@ -9,7 +9,6 @@
 namespace app\controllers;
 
 
-use app\components\SetsListWidget;
 use app\models\Presets;
 use app\models\Sets;
 use app\models\Working;
@@ -95,12 +94,10 @@ class SetController extends AppController
                 }
 
                 if ($set->delete()) {
-
-                    Yii::$app->session->setFlash('success', 'Тренировка успешно удалена');
-
                     $sets = Sets::findWhereUser();
 
                     if (Yii::$app->request->post('submit')) {
+                        Yii::$app->session->setFlash('success', 'Тренировка успешно удалена');
                         return $this->redirect(['home/journal']);
                     }
 
@@ -110,7 +107,6 @@ class SetController extends AppController
             }
 
         }
-
 
         $this->throwAppException();
 

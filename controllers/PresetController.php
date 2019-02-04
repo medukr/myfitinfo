@@ -8,10 +8,8 @@
 
 namespace app\controllers;
 
-use Codeception\Util\Debug;
-use yii\helpers\Html;
+use app\components\PresetsListWidget;
 use yii\helpers\Url;
-use yii\web\HttpException;
 use app\models\Disciplines;
 use app\models\Presets;
 use app\models\PresetsDisciplines;
@@ -191,15 +189,12 @@ class PresetController extends AppController
                 if ($preset->delete()){
                     $presets = Presets::findWhereUserOrAdmin();
 
-                    Yii::$app->session->setFlash('success', 'Программа успешно удалена :)');
-
                     if (Yii::$app->request->post('submit')){
-
+                        Yii::$app->session->setFlash('success', 'Программа успешно удалена :)');
                         return $this->redirect(['home/program']);
                     }
 
-                    $this->layout = false;
-                    return $this->render('presetsList', compact('presets'));
+                    return PresetsListWidget::widget(['presets' => $presets]);
                 }
             }
 

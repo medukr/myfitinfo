@@ -15,6 +15,8 @@
     <?= \app\components\MainNavbarWidget::widget() ?>
     <div class="main-content-container container-fluid px-4">
         <!-- Page Header -->
+        <?= \app\components\FlashMessageWidget::widget() ?>
+        <?= \app\components\LoadingModalWidget::widget() ?>
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                 <span class="text-uppercase page-subtitle">Журнал</span>
@@ -23,7 +25,6 @@
         </div>
         <!-- End Page Header -->
         <div id="sets-list">
-            <?= \app\components\FlashMessageWidget::widget() ?>
             <?= \app\components\SetsListWidget::widget(['sets' => $sets]) ?>
             <?= \yii\widgets\LinkPager::widget([
                 'pagination' => $pages,

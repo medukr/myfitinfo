@@ -6,5 +6,4 @@
  * Time: 15:22
  */
 ?>
-<?= \app\components\FlashMessageWidget::widget() ?>
 <?= \app\components\SetsListWidget::widget(['sets' => $sets]) ?>

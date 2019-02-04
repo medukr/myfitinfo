@@ -1,7 +1,7 @@
 <!-- Loading Modal Begin-->
 <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog  modal-sm" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="cssload-container">
             <div class="cssload-speeding-wheel"></div>
         </div>
@@ -11,18 +11,34 @@
 <!-- Error Modal Begin-->
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-body p-3">
-                <div class="text-danger text-center">
+            <div class="card alert-danger p-3">
+                <div class="text-center">
                     <i class="fa fa-times mx-2"></i>
-                    <strong id="errorText">Упс...Ошибочка!</strong>
+                    <strong id="errorTextModal">Упс...Ошибочка!</strong>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Error Modal END-->
+<!-- Success Modal Begin-->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card alert-success p-3">
+                <div class="text-center">
+                    <i class="fa fa-check mx-2"></i>
+                    <strong id="successTextModal">Успешно!</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Success Modal END-->
+
 <!-- Loading Modal Style Begin-->
 <style>
     .cssload-container {
