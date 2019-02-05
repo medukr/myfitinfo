@@ -219,10 +219,28 @@ $('.delete-iteration').click(function (e) {
 
 //Анимация загрузки Loading Modal Widget, вывод сообщения о ошибке
 $(document).ajaxStart(function () {
-        $('#loadingModal').modal('show');
+        loadingModal('show');
     })
     .ajaxStop(function () {
-        let element = $('#loadingModal');
+        loadingModal('hide');
+    })
+    .ajaxError(function () {
+        errorMessageModal();
+
+        //Принудительное скрытие анимации загрузки
+        setTimeout(function () {
+                $('#loadingModal').modal('hide');
+            },2500);
+
+
+    });
+
+function loadingModal(state) {
+    let element = $('#loadingModal');
+
+    if (state === 'show' || state === true){
+        element.modal('show');
+    } else if (state === 'hide' || state === false) {
         element.modal('hide');
 
         //В случае, когда анимация "show" еще не закончилась - вызов "hide" не срабатывает.
@@ -235,35 +253,36 @@ $(document).ajaxStart(function () {
             }, 300)
 
         }, 380);
+    }
 
-    })
-    .ajaxError(function () {
+    return element;
+}
 
-        $('#errorModal').modal('show');
-
-        //Принудительное скрытие анимации загрузки
-        setTimeout(function () {
-                $('#loadingModal').modal('hide');
-            },2500);
-
-        //Автоматическое скрытие сообщения
-        setTimeout(function () {
-            $('#errorModal').modal('hide');
-        }, 2000)
-    });
 
 //Модальное окно успешного выполнения
 function successMessageModal(message) {
-    if (message !== null)  $('#successTextModal').text(message);
-
-    $('#successModal').modal('show');
-
-    setTimeout(function () {
-        $('#successModal').modal('hide');
-    }, 2000)
-
+    return showModalMessage('#successModal', '#successTextModal', message);
 }
 
+//Модальное окно ошибки
+function errorMessageModal(message) {
+    return showModalMessage('#errorModal', '#errorTextModal', message);
+}
+
+function showModalMessage(modalQuery, textModalQuery, message, showTime = 2000){
+    //Перезаписываем сообщение, если неебоходимо
+    if (textModalQuery !== null && message !== null) $(textModalQuery).text(message);
+
+    let modalElement = $(modalQuery);
+    modalElement.modal('show');
+
+    //Автоматическое скрытие сообщения
+    setTimeout(function () {
+        modalElement.modal('hide');
+    }, showTime);
+
+    return modalElement;
+}
 
 function showResponseAddNew(data, queryElement){
     let div = document.createElement('div');

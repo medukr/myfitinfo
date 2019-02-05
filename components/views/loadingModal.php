@@ -1,7 +1,7 @@
 <!-- Loading Modal Begin-->
 <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="cssload-container">
             <div class="cssload-speeding-wheel"></div>
         </div>
@@ -10,8 +10,8 @@
 <!-- Loading Modal END-->
 <!-- Error Modal Begin-->
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+     aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog" role="document" data-dismiss="modal">
         <div class="modal-content">
             <div class="card alert-danger p-3">
                 <div class="text-center">
@@ -25,11 +25,11 @@
 <!-- Error Modal END-->
 <!-- Success Modal Begin-->
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+     aria-hidden="true" data-backdrop="false" >
+    <div class="modal-dialog" role="document" data-dismiss="modal">
         <div class="modal-content">
             <div class="card alert-success p-3">
-                <div class="text-center">
+                <div class="text-center" >
                     <i class="fa fa-check mx-2"></i>
                     <strong id="successTextModal">Успешно!</strong>
                 </div>
