@@ -2,10 +2,7 @@
 
 /* @var $this yii\web\View */
 
-use yii\helpers\Html;
-
 $this->title = 'О проекте';
-
 
 ?>
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-md-1 mt-2 ">
@@ -19,15 +16,20 @@ $this->title = 'О проекте';
                             </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">
+                            <h5 class="card-title mb-4">
                                 <a class="text-fiord-blue" href="#"><?= $this->title ?></a>
                             </h5>
-                            <p class="card-text d-inline-block mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam architecto asperiores at, commodi consequatur debitis deserunt enim est, eum excepturi fugit id ipsa magnam natus officia quae rerum sapiente. Ad, distinctio expedita! Architecto molestiae nesciunt quod sapiente sequi tenetur. Accusantium corporis dicta eligendi laborum neque non nostrum, reprehenderit similique.</p>
+                            <div class="text-justify">
+                                <p>Это онлайн сервис для тех, кто занимается бодибилдингом, пауэрлифтингом, фитнесом, а также другими силовыми и аэробными видами спорта.</p>
+                                <p>Вы получите много полезных возможностей. Ваши записи тренировок больше никогда не потеряются, а дневник будет доступен в любом месте и в любое время!</p>
+                                <p>У вас в руках появится мощный инструмент, который содержит в себе <span class="text-accent">журнал тренировок</span>, <span class="text-accent">программы тренировок</span>, большой <span class="text-accent">каталог упражнений</span>, <span class="text-accent">замеры</span>, <span class="text-accent">статистику</span></p>
+                                <p>Благодаря статистике, можно контролировать любые отклонения в вашем прогрессе, вовремя корректировать программу тренировок и двигаться точно к цели!</p>
+                                <p> А функционал замеров поможет следить за внешними изменениями и оценить эффективность тренировочного процесса</p>
+                            </div>
                             <span class="text-muted">Команда <?= Yii::$app->params['siteUrl'] ?>.</span>
                             <br>
                             <p class="card-text text-muted d-inline-block mb-3">Связаться: <?= Yii::$app->params['teamEmail'] ?></p>
                         </div>
-                    </div>
                 </div>
 
         </div>

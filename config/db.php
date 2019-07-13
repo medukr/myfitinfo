@@ -3,8 +3,8 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=myfitinfo',
-    'username' => 'root',
-    'password' => 'andryuxa4159486',
+    'username' => 'medukr',
+    'password' => 'JdiJQuXGAMBvb2q',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

@@ -4,9 +4,7 @@ namespace app\models;
 
 use app\components\AppHtmlentitiesBehavior;
 use Yii;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\db\Expression;
 
 /**
  * This is the model class for table "sets".
@@ -136,7 +134,7 @@ class Sets extends AppModel
     }
 
 
-    public function countUserSets()
+    public static function countUserSets()
     {
         return self::findBySql('select count(`id`) as id from `sets` where `user_id` = '.Yii::$app->user->id)->one();
     }
